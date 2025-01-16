@@ -1,10 +1,9 @@
 --
 -- Estructura de tabla para la tabla `provincias`
 --
-
 CREATE TABLE `provincias` (
-  `cod` char(2) NOT NULL DEFAULT '00' PRIMARY KEY AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL DEFAULT ''
+  `cod` char(2) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL
 ) 
 
 --
@@ -25,20 +24,22 @@ CREATE TABLE `tareas` (
   `provincia` varchar(100) DEFAULT NULL,
   `estado` enum('C','P','R','B') DEFAULT NULL,
   `fecha_creacion` date NOT NULL,
-  `operario` varchar(50) NOT NULL,
+  `operario` int(11) NOT NULL,
   `fecha_realizacion` date NOT NULL,
   `anotaciones_anteriores` text DEFAULT NULL,
   `anotaciones_posteriores` text DEFAULT NULL,
   `fichero` varchar(100) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
-  FOREIGN KEY (`operario`) REFERENCES `empleados`(`id`)
+  `cliente_id` int(11) DEFAULT NULL
+   FOREIGN KEY (`operario`) REFERENCES `usuarios`(`id`),
+   FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
 )
 
 --
--- Estructura de tabla para la tabla `empleados`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `empleados`(
+CREATE TABLE `usuarios`(
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `dni` varchar(9) NOT NULL,
   `nombre` varchar(50) NOT NULL,
@@ -53,9 +54,10 @@ CREATE TABLE `empleados`(
 -- Estructura de tabla para la tabla `cartera_clientes`
 --
 
-CREATE TABLE `cartera_clientes`(
+CREATE TABLE `clientes`(
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cif` varchar(9) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `telefono` varchar(16) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `pais` varchar(50) NOT NULL,
@@ -68,14 +70,16 @@ CREATE TABLE `cartera_clientes`(
 -- Estructura de tabla para la tabla `cargos`
 --
 
-CREATE TABLE `cargos`(
+CREATE TABLE `cuota`(
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `concepto` varchar(150),
   `fecha_emision` DATE NOT NULL,
   `importe` DECIMAL(19,4) NOT NULL,
   `pagada` boolean DEFAULT 0,
   `fecha_pago` DATE NOT NULL,
-  `notas` varchar(150)
+  `notas` varchar(150),
+  `cliente_id` int(11) NOT NULL,
+   FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
 )
 
 
