@@ -31,7 +31,7 @@ CREATE TABLE `tareas` (
   `anotaciones_posteriores` text DEFAULT NULL,
   `fichero` varchar(100) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
-  FOREIGN KEY (`operario`) REFERENCES `empleados`(`dni`)
+  FOREIGN KEY (`operario`) REFERENCES `empleados`(`id`)
 )
 
 --
