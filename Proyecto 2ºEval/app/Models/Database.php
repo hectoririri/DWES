@@ -2,8 +2,7 @@
 namespace App\Models;
 use PDO;
 
-class DataBase
-{ 
+class DataBase{
     public $conn;
     private static $dns = "mysql:host=localhost;dbname=albanileria"; 
     private static $user = "root";

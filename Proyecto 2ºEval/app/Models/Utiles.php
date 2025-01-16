@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\Usuarios;
 use App\Models\Tareas;
 
-class utiles
+class Utiles
 {
     /**
      * Clase para realizar validaciones de formularios y otras utilidades
@@ -24,7 +25,7 @@ class utiles
         $this->usuarios = new Usuarios();
     }
 
-   /**
+    /**
      * Comprueba si el campo existe o no y devuelve su valor si es así. Vacío si no
      *
      * @param string $campo
@@ -38,7 +39,6 @@ class utiles
             return '';
     }
 
-    
     /**
      * Validar DNI (NIF), CIF, NIE
      *
@@ -154,7 +154,6 @@ class utiles
         // Comprobación de email usando Filter.
         if (!filter_var(trim($_POST['correo']), FILTER_VALIDATE_EMAIL))
             $errores->AnotaError('correo', 'Formato incorrecto de email. Ej: hola@gmail.com');
-
 
         // Comprobación fecha de realización y fecha creación
         $fecha_realizacion = explode("-", $_POST['fecha_realizacion']);
