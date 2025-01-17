@@ -19,7 +19,6 @@
     <main class="container mt-3">
         <div class="row">
             <div class="col-md-2">
-                @if (!isset($mostrarMenu) || $mostrarMenu)
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -32,29 +31,23 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{!! miurl('mostrar/tareas') !!}">Mostrar Tareas</a>
                                 </li>
-                                @if (\App\Models\SesionUsuario::getInstance()->isAdmin())
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{!! miurl('formulario/alta/tarea') !!}">Añadir Tarea</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{!! miurl('mostrar/usuarios') !!}">Mostrar usuarios</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{!! miurl('formulario/alta/usuario') !!}">Añadir usuario</a>
-                                    </li>
-                                @endif
-                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! miurl('formulario/alta/tarea') !!}">Añadir Tarea</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! miurl('mostrar/usuarios') !!}">Mostrar usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! miurl('formulario/alta/usuario') !!}">Añadir usuario</a>
+                                </li>                                
                             </ul>
                         </div>
                     </nav>
-                @endif
             </div>
             <div class="col-md-10">
-                @if (!isset($mostrarMenu) || $mostrarMenu)
                 <div class="d-flex justify-content-end">
                     <a href="{!! miurl('loggout') !!}">Cerrar sesión</a>
                 </div>
-                @endif
                 @yield('cuerpo')
             </div>
         </div>

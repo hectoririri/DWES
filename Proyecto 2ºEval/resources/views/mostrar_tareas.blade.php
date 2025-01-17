@@ -1,13 +1,7 @@
-@extends('layout/plantilla')
+@extends('layout.plantilla')
 @section('title', 'Listado de Tareas')
 @section('cuerpo')
 <h1>Lista de Tareas</h1>
-
-@if (!empty($_GET['error']))
-    <div class="text-center my-4">
-        <h3 class="alert alert-info d-inline-block">La tarea no existe</h3>
-    </div>
-@endif
 
 <table class="table table-striped table-bordered">
     <thead class="thead-dark">
@@ -21,25 +15,22 @@
             <th>Fecha de Creación</th>
             <th>Fecha de Realización</th>
             <th>Detalles</th>
-            @if (\App\Models\SesionUsuario::getInstance()->isAdmin())
-                <th>Modificar</th>
-                <th>Eliminar</th>
-            @else
-                <th>Completar</th>
-            @endif
+            <th>Modificar</th>
+            <th>Eliminar</th>
+            <th>Completar</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($tareas as $tarea)
             <tr class="text-center">
-                <td>{{ $tarea['descripcion'] }}</td>
-                <td>{{ $tarea['operario'] }}</td>
-                <td>{{ $tarea['estado'] }}</td>
-                <td>{{ $tarea['anotaciones_anteriores'] }}</td>
-                <td>{{ $tarea['anotaciones_posteriores'] }}</td>
-                <td>{{ $tarea['provincia'] }}</td>
-                <td>{{ $tarea['fecha_creacion'] }}</td>
-                <td>{{ $tarea['fecha_realizacion'] }}</td>
+                <td>{{ $tarea->descripcion }}</td>
+                <td>{{ $tarea->operario }}</td>
+                <td>{{ $tarea->estado }}</td>
+                <td>{{ $tarea->anotaciones_anteriores }}</td>
+                <td>{{ $tarea->anotaciones_posteriores }}</td>
+                <td>{{ $tarea->provincia }}</td>
+                <td>{{ $tarea->fecha_creacion }}</td>
+                <td>{{ $tarea->fecha_realizacion }}</td>
                 <td>
                     <a href="{!! miurl("mostrar/tarea/{$tarea['id']}") !!}" class="btn btn-outline-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
@@ -48,7 +39,6 @@
                         </svg>
                     </a>
                 </td>
-                @if (\App\Models\SesionUsuario::getInstance()->isAdmin())
                     <td>
                         <a href="{!! miurl("modificar/tarea/{$tarea['id']}") !!}" class="btn btn-outline-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -65,8 +55,6 @@
                             </svg>
                         </a>
                     </td>
-                @endif
-                @if (!\App\Models\SesionUsuario::getInstance()->isAdmin() && ($tarea['estado'] == 'P' || $tarea['estado'] == 'B'))
                 <td>
                     <a href="{!! miurl("completar/tarea/{$tarea['id']}") !!}" class="btn btn-outline-success">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
@@ -76,29 +64,10 @@
                         </svg>
                     </a>
                 </td>
-                @endif
             </tr>
         @endforeach
     </tbody>
 </table>
-
-<p>{{$paginaActual}}/{{$totalPaginas}}</p>
-
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item {{ $paginaActual == 1 ? 'disabled' : '' }}">
-            <a class="page-link" href="?pagina={{ $paginaActual - 1 }}">Anterior</a>
-        </li>
-        @for ($i = 1; $i <= $totalPaginas; $i++)
-            <li class="page-item {{ $paginaActual == $i ? 'active' : '' }}">
-                <a class="page-link" href="?pagina={{ $i }}">{{ $i }}</a>
-            </li>
-        @endfor
-        <li class="page-item {{ $paginaActual == $totalPaginas ? 'disabled' : '' }}">
-            <a class="page-link" href="?pagina={{ $paginaActual + 1 }}">Siguiente</a>
-        </li>
-    </ul>
-</nav>
 
 <a href="{!! miurl('mostrar/tareas/pendientes') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Listar tareas pendientes</a>
 <a href="{!! miurl('mostrar/tareas') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Mostrar por defecto</a>

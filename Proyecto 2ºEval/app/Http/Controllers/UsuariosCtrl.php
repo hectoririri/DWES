@@ -38,11 +38,6 @@ class UsuariosCtrl extends Controller
      */
     public function mostrarUsuarios()
     {
-        $this->sesion_usuario->onlyLogged();
-        if (!$this->sesion_usuario->isAdmin()) {
-            header('Location: ' . miurl('home'));
-            exit();
-        }
         $usuarios = $this->usuarios->recogerUsuarios();
         return view('mostrar_usuarios', ['usuarios' => $usuarios,]);
     }
@@ -54,11 +49,6 @@ class UsuariosCtrl extends Controller
      */
     public function mostrarUsuario(int $id)
     {
-        $this->sesion_usuario->onlyLogged();
-        if (!$this->sesion_usuario->isAdmin()) {
-            header('Location: ' . miurl('home'));
-            exit();
-        }
         // Comprueba si el usuario existe y redirige a la página de error si no
         $this->utiles->emptyUsuario($this->usuarios->recogerUsuario($id));
         // Recoge el usuario y lo muestra
@@ -72,11 +62,6 @@ class UsuariosCtrl extends Controller
      */
     public function formularioUsuario(int $id = null)
     {
-        $this->sesion_usuario->onlyLogged();
-        if (!$this->sesion_usuario->isAdmin()) {
-            header('Location: ' . miurl('home'));
-            exit();
-        }
         $tipo = $id ? "modificar" : "alta";
         // Usuario a modificar o vacío si es alta
         $usuario = $id ? $this->usuarios->recogerUsuario($id) : [];
@@ -119,11 +104,6 @@ class UsuariosCtrl extends Controller
      */
     public function borrarUsuario(int $id)
     {
-        $this->sesion_usuario->onlyLogged();
-        if (!$this->sesion_usuario->isAdmin()) {
-            header('Location: ' . miurl('home'));
-            exit();
-        }
         if ($_POST) {
             // Borra el usuario y redirige a la página de usuarios
             $this->usuarios->borrarUsuario($id);

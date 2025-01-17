@@ -6,15 +6,15 @@ Dentro de esa petición, se reciben los datos del modelo y se envían a la vista
 En esa vista se trabajan los datos y se muestran, mediante el controlador, al usuario utilizando el return view().
 */
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 
 include 'helpers.php';
 // Rutas de login y home
-Route::any('/', [Login::class, 'login']);
+Route::get('/pruebaTareas', [TareasCtrlR::class, 'index']);
 Route::any('/home', function () {
     return view('home')->with('mostrarMenu', true);
 });
-Route::any('/loggout', [Login::class, 'loggout']);
 
 // Rutas de tareas
 Route::any('/formulario/alta/tarea', [TareasCtrl::class, 'formularioTarea']);
