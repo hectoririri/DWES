@@ -15,9 +15,18 @@ class Tareas extends Model
     const CREATED_AT = 'fecha_alta';
     const UPDATED_AT = 'fecha_actualizado';
     
+    public function __construct()
+    {
+    }
+
     public function mostrarTareas(){
         $tareas = Tareas::get();
         return $tareas;
+    }
+
+    public function mostrarTarea(int $id){
+        $tarea = Tareas::where('id', $id)->first();
+        return $tarea;
     }
 
     // /**

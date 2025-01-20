@@ -29,7 +29,6 @@ class UsuariosCtrl extends Controller
         $this->utiles = new Utiles();
         $this->gestorErrores = new GestorErrores();
         $this->usuarios = new Usuarios();
-        $this->sesion_usuario = SesionUsuario::getInstance();
     }
 
     /**

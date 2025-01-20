@@ -7,12 +7,22 @@ use Illuminate\Http\Request;
 
 class TareasCtrlR extends Controller
 {
+    private $tareas;
+
+    /**
+     * Constructor. Instancia los modelos necesarios.
+     */
+    public function __construct()
+    {
+        $this->tareas = new Tareas();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tareas = Tareas::get();
+        $tareas = $this->tareas->mostrarTareas();
         return view('mostrar_tareas', compact('tareas'));
     }
 
@@ -35,9 +45,10 @@ class TareasCtrlR extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $tarea = $this->tareas->mostrarTarea($id);
+        return view('mostrar_tarea', compact('tarea'));
     }
 
     /**
