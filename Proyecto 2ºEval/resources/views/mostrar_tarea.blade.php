@@ -12,13 +12,16 @@
             </tr>
             @endif
         @endforeach
-        
         <tr>
             <td colspan="3" class="text-center">
-                <a href="{!! miurl("mostrar/tareas") !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Volver atrás</a>
-                    <a href="{!! miurl("modificar/tarea/{$tarea->id}") !!}" class="btn btn-outline-primary d-inline-flex align-items-center">Modificar</a>
-                    <a href="{!! miurl("borrar/tarea/{$tarea->id}") !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Borrar</a>
-                    <a href="{!! miurl("completar/tarea/{$tarea->id}") !!}" class="btn btn-outline-success">Completar tarea</a>
+                <a href="{!! route('mostrar_tareas') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Volver atrás</a>
+                {{-- @if (\App\Models\SesionUsuario::getInstance()->isAdmin()) --}}
+                    {{-- <a href="{{ route('modificar_tarea', ['id' => $tarea->id]) }}" class="btn btn-outline-primary d-inline-flex align-items-center">Modificar</a> --}}
+                    <a href="{!! route('confirmar_eliminar_tarea', ['id' => $tarea->id]) !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Borrar</a>
+                {{-- @endif --}}
+                {{-- @if (\App\Models\SesionUsuario::getInstance()->isAdmin() && ($tarea['estado'] == 'P' || $tarea['estado'] == 'B')) --}}
+                    {{-- <a href="{!! route('completar_tarea', ['id' => $tarea->id]) !!}" class="btn btn-outline-success">Completar tarea</a> --}}
+                {{-- @endif --}}
             </td>
         </tr>
     </tbody>

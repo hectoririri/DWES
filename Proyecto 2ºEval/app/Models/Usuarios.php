@@ -13,6 +13,44 @@ class Usuarios extends Model
     const CREATED_AT = 'fecha_alta';
     const UPDATED_AT = 'fecha_actualizado';
 
+    /**
+     * Declaramos la relación uno a muchos con la tabla tareas
+     *
+     * @return void
+     */
+    public function tareas()
+    {
+        return $this->hasMany(Tareas::class);
+    }
+
+
+    /**
+     * Constructor vacío
+     */ 
+    public function __construct()
+    {
+    }
+
+    /**
+     * Devuelve una colección con todos los usuarios
+     *
+     * @return void
+     */
+    public function mostrarUsuarios(){
+        $usuarios = Usuarios::get();
+        return $usuarios;
+    }
+
+    /**
+     * Devuelve una colección con un usuario
+     *
+     * @return void
+     * @param int $id id del usuario
+     */
+    public function mostrarUsuario(int $id){
+        $usuario = usuarios::where('id', $id)->first();
+        return $usuario;
+    }
 
     // /**
     //  * Clase que se encarga de las ordenes SQL de los usuarios

@@ -5,11 +5,11 @@
     <form method="POST" action="{{ miurl('') }}" class="bg-light p-4 rounded">
         <div class="form-group">
             <label for="usuario">Nombre usuario:</label>
-            <input type="text" class="form-control" name="usuario" id="usuario" value="{{ isset($_COOKIE['usuario']) ? $_COOKIE['usuario'] : $utiles->valorPost('usuario') }}">
+            <input type="text" class="form-control" name="usuario" id="usuario" value="">
         </div>
         <div class="form-group">
             <label for="passwd">Contraseña:</label>
-            <input type="password" class="form-control" name="passwd" id="passwd" value="{{ ($_POST) ? '' : (isset($_COOKIE['passwd']) ? $_COOKIE['passwd'] : '') }}">
+            <input type="password" class="form-control" name="passwd" id="passwd" value="">
         </div>
         <div class="form-group">
             <span class="text-danger">

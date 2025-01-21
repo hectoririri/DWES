@@ -2,38 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tareas;
+use App\Models\Usuarios;
 use Illuminate\Http\Request;
 
-class TareasCtrlR extends Controller
+class UsuariosCtrlR extends Controller
 {
-    private $tareas;
+    private $usuarios;
 
     /**
      * Constructor. Instancia los modelos necesarios.
      */
     public function __construct()
     {
-        $this->tareas = new Tareas();
+        $this->usuarios = new Usuarios();
     }
-
     /**
-     * Muestra una vista con todas las tareas
-     */
-    public function index()
-    {
-        $tareas = $this->tareas->mostrarTareas();
-        return view('mostrar_tareas', compact('tareas'));
-    }
-
-    /**
-     * Muestra una vista con las tareas pendientes
+     * Muestra todos los usuarios de la base de datos.
      *
      * @return void
      */
-    public function mostrarTareasPendientes(){
-        $tareas = $this->tareas->mostrarTareasPendientes();
-        return view('mostrar_tareas_pendientes', compact('tareas'));
+    public function index()
+    {
+        $usuarios = $this->usuarios->mostrarUsuarios();
+        return view('mostrar_usuarios', compact('usuarios'));
     }
 
     /**
@@ -53,12 +44,13 @@ class TareasCtrlR extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra los detalles del usuario seleccionado.
+     * @param int $id, id del usuario
      */
     public function show(int $id)
     {
-        $tarea = $this->tareas->mostrarTarea($id);
-        return view('mostrar_tarea', compact('tarea'));
+        $usuario = $this->usuarios->mostrarUsuario($id);
+        return view('mostrar_usuario', compact('usuario'));
     }
 
     /**
@@ -86,13 +78,13 @@ class TareasCtrlR extends Controller
     }
 
     /**
-     * Muestra una vista para confirmar el borrado de una tarea
+     * Muestra una vista para confirmar el borrado de un usuario
      *
-     * @param integer $id id de la tarea a borrar
+     * @param integer $id id del usuario a borrar
      * @return void
      */
-    public function confirmarBorrarTarea(int $id){
-        $tarea = $this->tareas->mostrarTarea($id);
-        return view('confirmar_borrar_tarea', compact('tarea'));
+    public function confirmarBorrarUsuario(int $id){
+        $usuario = $this->usuarios->mostrarUsuario($id);
+        return view('confirmar_borrar_usuario', compact('usuario'));
     }
 }

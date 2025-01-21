@@ -16,7 +16,7 @@
     <header class="text-center my-4">
         <h1>Albañilería Bunglebuild S.L. </h1>
     </header>
-    <main class="container mt-3">
+    <main class="container-fluid mt-3">
         <div class="row">
             <div class="col-md-2">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -60,3 +60,30 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    header {
+        background-color: #343a40;
+        color: #ffffff;
+        padding: 20px 0;
+    }
+    footer {
+        background-color: #343a40;
+        color: #ffffff;
+        padding: 10px 0;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        color: #343a40;
+    }
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #007bff;
+    }
+    .container-fluid {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
