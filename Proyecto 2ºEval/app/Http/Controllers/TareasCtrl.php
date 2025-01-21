@@ -51,7 +51,8 @@ class TareasCtrl extends Controller
      */
     public function create()
     {
-        //
+        $titulo = "Crear ";
+        return view('formulario_tarea', compact('titulo'));
     }
 
     /**

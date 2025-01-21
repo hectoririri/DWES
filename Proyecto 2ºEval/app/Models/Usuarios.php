@@ -37,7 +37,7 @@ class Usuarios extends Model
      * @return void
      */
     public function getUsuarios(){
-        $usuarios = Usuarios::get();
+        $usuarios = Usuarios::paginate(5);
         return $usuarios;
     }
 

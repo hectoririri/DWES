@@ -76,6 +76,13 @@
     </tbody>
 </table>
 
+<div class="d-flex justify-content-center mt-4">
+    {{ $tareas->links('pagination::bootstrap-4') }}
+</div>
+<div class="d-flex justify-content-center mt-4">
+    <p>Página {{ $tareas->currentPage() }} de {{ $tareas->lastPage() }}</p>
+</div>
+
 <a href="{!! route('tareas.pendientes') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Listar tareas pendientes</a>
 <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Mostrar por defecto</a>
 

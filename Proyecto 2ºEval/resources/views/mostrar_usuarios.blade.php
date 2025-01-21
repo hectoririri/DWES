@@ -65,6 +65,12 @@
                 </tbody>
             </table>
         </div>
+        <div class="d-flex justify-content-center mt-4">
+            {{ $usuarios->links('pagination::bootstrap-4') }}
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <p>Página {{ $usuarios->currentPage() }} de {{ $usuarios->lastPage() }}</p>
+        </div>
     </div>
 </div>
 @endsection

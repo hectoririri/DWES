@@ -36,7 +36,7 @@ class Tareas extends Model
      */
     public function getTareas()
     {
-        $tareas = Tareas::get();
+        $tareas = Tareas::paginate(5);
         return $tareas;
     }
 
@@ -59,7 +59,7 @@ class Tareas extends Model
      */
     public function getTareasPendientes()
     {
-        $tareas = Tareas::where('estado', 'P')->get();
+        $tareas = Tareas::where('estado', 'P')->paginate(5);
         return $tareas;
     }
 
