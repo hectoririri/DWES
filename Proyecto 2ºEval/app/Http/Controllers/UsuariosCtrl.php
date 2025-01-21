@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuarios;
 use Illuminate\Http\Request;
+use App\Models\Usuarios;
 
-class UsuariosCtrlR extends Controller
+class UsuariosCtrl extends Controller
 {
     private $usuarios;
 
@@ -23,7 +23,7 @@ class UsuariosCtrlR extends Controller
      */
     public function index()
     {
-        $usuarios = $this->usuarios->mostrarUsuarios();
+        $usuarios = $this->usuarios->getUsuarios();
         return view('mostrar_usuarios', compact('usuarios'));
     }
 
@@ -49,7 +49,7 @@ class UsuariosCtrlR extends Controller
      */
     public function show(int $id)
     {
-        $usuario = $this->usuarios->mostrarUsuario($id);
+        $usuario = $this->usuarios->getUsuario($id);
         return view('mostrar_usuario', compact('usuario'));
     }
 
@@ -84,7 +84,7 @@ class UsuariosCtrlR extends Controller
      * @return void
      */
     public function confirmarBorrarUsuario(int $id){
-        $usuario = $this->usuarios->mostrarUsuario($id);
+        $usuario = $this->usuarios->getUsuario($id);
         return view('confirmar_borrar_usuario', compact('usuario'));
     }
 }

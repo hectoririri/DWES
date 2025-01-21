@@ -34,7 +34,7 @@ class Tareas extends Model
      *
      * @return void
      */
-    public function mostrarTareas()
+    public function getTareas()
     {
         $tareas = Tareas::get();
         return $tareas;
@@ -46,7 +46,7 @@ class Tareas extends Model
      * @param integer $id id de la tarea
      * @return void
      */
-    public function mostrarTarea(int $id)
+    public function getTarea(int $id)
     {
         $tarea = Tareas::where('id', $id)->first();
         return $tarea;
@@ -57,7 +57,7 @@ class Tareas extends Model
      *
      * @return void
      */
-    public function mostrarTareasPendientes()
+    public function getTareasPendientes()
     {
         $tareas = Tareas::where('estado', 'P')->get();
         return $tareas;

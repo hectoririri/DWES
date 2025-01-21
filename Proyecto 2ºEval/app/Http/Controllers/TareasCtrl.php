@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tareas;
 use Illuminate\Http\Request;
+use App\Models\Tareas;
 
-class TareasCtrlR extends Controller
+class TareasCtrl extends Controller
 {
     private $tareas;
 
@@ -22,7 +22,7 @@ class TareasCtrlR extends Controller
      */
     public function index()
     {
-        $tareas = $this->tareas->mostrarTareas();
+        $tareas = $this->tareas->getTareas();
         return view('mostrar_tareas', compact('tareas'));
     }
 
@@ -32,8 +32,18 @@ class TareasCtrlR extends Controller
      * @return void
      */
     public function mostrarTareasPendientes(){
-        $tareas = $this->tareas->mostrarTareasPendientes();
-        return view('mostrar_tareas_pendientes', compact('tareas'));
+        $tareas = $this->tareas->getTareasPendientes();
+        return view('mostrar_tareas', compact('tareas'));
+    }
+
+    /**
+     * Muestra una vista con las tareas pendientes
+     *
+     * @return void
+     */
+    public function completarTarea(int $tarea){
+        $tarea = $this->tareas->getTarea($tarea);
+        return view('completar_tarea', compact('tarea'));
     }
 
     /**
@@ -57,7 +67,7 @@ class TareasCtrlR extends Controller
      */
     public function show(int $id)
     {
-        $tarea = $this->tareas->mostrarTarea($id);
+        $tarea = $this->tareas->getTarea($id);
         return view('mostrar_tarea', compact('tarea'));
     }
 
@@ -92,7 +102,7 @@ class TareasCtrlR extends Controller
      * @return void
      */
     public function confirmarBorrarTarea(int $id){
-        $tarea = $this->tareas->mostrarTarea($id);
+        $tarea = $this->tareas->getTarea($id);
         return view('confirmar_borrar_tarea', compact('tarea'));
     }
 }

@@ -29,16 +29,16 @@
                                     <a class="nav-link" href="{!! miurl('home') !!}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! miurl('mostrar/tareas') !!}">Mostrar Tareas</a>
+                                    <a class="nav-link" href="{!! route('tareas.index') !!}">Mostrar Tareas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! miurl('formulario/alta/tarea') !!}">Añadir Tarea</a>
+                                    <a class="nav-link" href="{!! route('tareas.create') !!}">Añadir Tarea</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! miurl('mostrar/usuarios') !!}">Mostrar usuarios</a>
+                                    <a class="nav-link" href="{!! route('usuarios.index') !!}">Mostrar usuarios</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! miurl('formulario/alta/usuario') !!}">Añadir usuario</a>
+                                    <a class="nav-link" href="{!! route('usuarios.create') !!}">Añadir usuario</a>
                                 </li>                                
                             </ul>
                         </div>

@@ -27,7 +27,7 @@
             </tr>
         </tbody>
     </table>
-    <a href="{!! route('mostrar_usuarios') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>
+    <a href="{!! route('usuarios.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>
     <button type="submit" name="boton" class="btn btn-danger d-inline-flex align-items-center">Eliminar</button>
 </form>
 @endsection

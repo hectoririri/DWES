@@ -1,0 +1,22 @@
+global scope. funciones que devuelven una condición que se utiliza mucho en el codigo (bbdd)
+
+->withMiddleware(function (Middleware $Middleware)){
+	// Middleware que afecta a todo
+}
+
+->withMiddleware(function (Middleware $Middleware)){
+	// Middleware que afecta a todo
+}
+
+bootstrap/app.php -> rutas que afectan globalmente a la aplicacion
+
+get = create 
+post = store
+store = almacena los datos 
+show = mostrar detalle de una tarea
+edit = formulario de edicion de tarea (get)
+update = guardar tarea al editarla (put)
+
+rutas registradas en web.php -> php artisan route:list
+
+al terminar de guardar o actualizar mostrar la ruta de esa tarea

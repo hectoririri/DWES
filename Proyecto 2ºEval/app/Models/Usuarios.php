@@ -36,7 +36,7 @@ class Usuarios extends Model
      *
      * @return void
      */
-    public function mostrarUsuarios(){
+    public function getUsuarios(){
         $usuarios = Usuarios::get();
         return $usuarios;
     }
@@ -47,7 +47,7 @@ class Usuarios extends Model
      * @return void
      * @param int $id id del usuario
      */
-    public function mostrarUsuario(int $id){
+    public function getUsuario(int $id){
         $usuario = usuarios::where('id', $id)->first();
         return $usuario;
     }

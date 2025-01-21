@@ -1,20 +1,20 @@
 @extends('layout/plantilla')
 @section('title', 'Formulario para completar tarea')
 @section('cuerpo')
-<form method="post" enctype="multipart/form-data">
-    <h2>Completar tarea</h2>
+<h2>Completar tarea</h2>
 
 <table class="table table-striped table-bordered">
     <tbody>
         @foreach($tarea as $key => $value)
-            <tr>
-                <th>{!! $key !!}</th>
-                <td>{!! $value !!}</td>
-            </tr>
+        <tr>
+            <th>{!! $key !!}</th>
+            <td>{!! $value !!}</td>
+        </tr>
         @endforeach
     </tbody>
 </table>
 
+<form method="post" enctype="multipart/form-data">
     <label for="estado">Estado de la tarea</label>
     <span>{!! $errores->Error('estado') !!}</span>
     <input type="radio" name="estado" value="R" id="estado" checked {!! $utiles->valorPost('estado') == 'R' ? 'checked' : '' !!}>R (Realizada)
@@ -33,7 +33,7 @@
     <br> <br>
 
 
-    <a href="{!! miurl('mostrar/tareas') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>
+    <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>
     <button type="submit" class="btn btn-primary d-inline-flex align-items-center">Completar</button>
     <br> <br>
 </form>
