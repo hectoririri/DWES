@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Provincias;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
+use App\Models\Usuarios;
 
 class TareasCtrl extends Controller
 {
     private $tareas;
+    private $usuarios;
+    private $provincias;
 
     /**
      * Constructor. Instancia los modelos necesarios.
@@ -15,6 +20,8 @@ class TareasCtrl extends Controller
     public function __construct()
     {
         $this->tareas = new Tareas();
+        $this->usuarios = new Usuarios();
+        $this->provincias = new Provincias();
     }
 
     /**
@@ -47,24 +54,41 @@ class TareasCtrl extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear una nueva tarea
      */
     public function create()
     {
         $titulo = "Crear ";
-        return view('formulario_tarea', compact('titulo'));
+        $method = "post";
+        $action = "tareas.store";
+        $operarios = $this->usuarios->getOperarios();
+        $provincias = $this->provincias->getProvincias();
+        return view('formulario_tarea', compact(
+            'titulo', 'method', 'action', 'operarios', 'provincias'
+        ));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una nueva tarea en la base de datos
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nif_cif' => 'required',
+        ]);
+        echo "Tarea creada";
+        // como ha pasado ya creamos la tarea
+        // $tarea = new Tareas();
+        // $tarea->operario = $request->input('operario');
+        // $tarea->provincia = $request->input('provincia');
+        // $tarea->save();
+        // return redirect()->route('tareas.show', $tarea->id);
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la vista con una tarea en concreto
+     * @param integer $id id de la tarea a mostrar
+     * @return void
      */
     public function show(int $id)
     {

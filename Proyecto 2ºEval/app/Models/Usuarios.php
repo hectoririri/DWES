@@ -52,6 +52,16 @@ class Usuarios extends Model
         return $usuario;
     }
 
+    /**
+     * Devuelve una colección con los operarios
+     *
+     * @return void
+     */
+    public function getOperarios(){
+        $operarios = Usuarios::where('rol', 'O')->get();
+        return $operarios;
+    }
+
     // /**
     //  * Clase que se encarga de las ordenes SQL de los usuarios
     //  * @param String $nombre, nombre del usuario

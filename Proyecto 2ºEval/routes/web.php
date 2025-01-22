@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 include 'helpers.php';
 
+// https://laravel.com/docs/11.x/controllers#restful-localizing-resource-uris
+
 Route::get('/', function () {
     return view('home')->with('mostrarMenu', true);
 });
