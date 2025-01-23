@@ -2,6 +2,11 @@
 @section('title', 'Detalles de la tarea')
 @section('cuerpo')
 <h1 class="text-center">Detalles de la tarea Nº{{$tarea->id}}</h1>
+@if (session('mensaje'))
+    <div class="alert alert-success">
+        {{ session('mensaje') }}
+    </div>
+@endif
 <table class="table table-striped table-bordered text-center">
     <tbody>
         @foreach($tarea->toArray() as $index => $valor)

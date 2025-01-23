@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TareasRequestCtrl;
 use App\Models\Provincias;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -48,8 +49,7 @@ class TareasCtrl extends Controller
      *
      * @return void
      */
-    public function completarTarea(int $tarea){
-        $tarea = $this->tareas->getTarea($tarea);
+    public function completarTarea(Tareas $tarea){
         return view('completar_tarea', compact('tarea'));
     }
 
@@ -58,41 +58,30 @@ class TareasCtrl extends Controller
      */
     public function create()
     {
-        $titulo = "Crear ";
-        $method = "post";
-        $action = "tareas.store";
         $operarios = $this->usuarios->getOperarios();
         $provincias = $this->provincias->getProvincias();
-        return view('formulario_tarea', compact(
-            'titulo', 'method', 'action', 'operarios', 'provincias'
-        ));
+        $tarea = new Tareas();
+        return view('formulario_tarea', compact('operarios', 'provincias', 'tarea'));
     }
 
     /**
      * Guarda una nueva tarea en la base de datos
      */
-    public function store(Request $request)
+    public function store(TareasRequestCtrl $request)
     {
-        $request->validate([
-            'nif_cif' => 'required',
-        ]);
-        echo "Tarea creada";
-        // como ha pasado ya creamos la tarea
-        // $tarea = new Tareas();
-        // $tarea->operario = $request->input('operario');
-        // $tarea->provincia = $request->input('provincia');
-        // $tarea->save();
-        // return redirect()->route('tareas.show', $tarea->id);
+        $validated = $request->validated();
+        // como ha pasado ya creamos la tarea con los campos que estemos validando ->
+        $tarea = Tareas::create($validated);
+        return redirect()->route('tareas.show', $tarea)->with('mensaje', 'Tarea creada correctamente');
     }
 
     /**
      * Muestra la vista con una tarea en concreto
-     * @param integer $id id de la tarea a mostrar
+     * @param Tareas tarea a mostrar
      * @return void
      */
-    public function show(int $id)
+    public function show(Tareas $tarea)
     {
-        $tarea = $this->tareas->getTarea($id);
         return view('mostrar_tarea', compact('tarea'));
     }
 
@@ -126,8 +115,7 @@ class TareasCtrl extends Controller
      * @param integer $id id de la tarea a borrar
      * @return void
      */
-    public function confirmarBorrarTarea(int $id){
-        $tarea = $this->tareas->getTarea($id);
+    public function confirmarBorrarTarea(Tareas $tarea){
         return view('confirmar_borrar_tarea', compact('tarea'));
     }
 }

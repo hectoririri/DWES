@@ -2,8 +2,8 @@
 -- Estructura de tabla para la tabla `provincias`
 --
 CREATE TABLE `provincias` (
-  `cod` char(2) NOT NULL PRIMARY KEY,
-  `nombre` varchar(50) NOT NULL
+  `cod` char(2) PRIMARY KEY,
+  `nombre` varchar(50)
 );
 
 --
@@ -11,14 +11,15 @@ CREATE TABLE `provincias` (
 --
 
 CREATE TABLE `usuarios`(
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `dni` varchar(9) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  `telefono` varchar(16) NOT NULL,
-  `direccion` varchar(100) NOT NULL,
-  `rol` enum('O','A') NOT NULL,
-  `fecha_alta` DATE NOT NULL,
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `dni` varchar(9),
+  `contrasena` varchar(255),
+  `nombre` varchar(50),
+  `correo` varchar(50),
+  `telefono` varchar(16),
+  `direccion` varchar(100),
+  `rol` enum('O','A'),
+  `fecha_alta` DATE,
   `fecha_actualizado` DATE DEFAULT NULL
 );
 
@@ -27,16 +28,16 @@ CREATE TABLE `usuarios`(
 --
 
 CREATE TABLE `clientes`(
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `cif` varchar(9) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `telefono` varchar(16) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  `pais` varchar(50) NOT NULL,
-  `cuenta_corriente` varchar(100) NOT NULL,
-  `moneda` varchar(50) NOT NULL,
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `cif` varchar(9),
+  `nombre` varchar(30),
+  `telefono` varchar(16),
+  `correo` varchar(50),
+  `pais` varchar(50),
+  `cuenta_corriente` varchar(100),
+  `moneda` varchar(50),
   `importe_mensual` DECIMAL(19,4) DEFAULT NULL,
-  `fecha_alta` DATE NOT NULL,
+  `fecha_alta` DATE,
   `fecha_actualizado` DATE DEFAULT NULL
 );
 
@@ -45,14 +46,14 @@ CREATE TABLE `clientes`(
 --
 
 CREATE TABLE `cuota`(
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `concepto` varchar(150),
-  `fecha_emision` DATE NOT NULL,
-  `importe` DECIMAL(19,4) NOT NULL,
+  `fecha_emision` DATE,
+  `importe` DECIMAL(19,4),
   `pagada` boolean DEFAULT 0,
   `fecha_pago` DATE DEFAULT NULL,
   `notas` varchar(150),
-  `cliente_id` int(11) NOT NULL,
+  `cliente_id` int(11),
    FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
 );
 
@@ -61,27 +62,28 @@ CREATE TABLE `cuota`(
 --
 
 CREATE TABLE `tareas` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `nombre` varchar(40) NOT NULL,
-  `apellidos` varchar(60) NOT NULL,
-  `nif_cif` varchar(9) NOT NULL,
-  `telefono` varchar(16) NOT NULL,
-  `descripcion` text NOT NULL,
-  `correo` varchar(100) NOT NULL,
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `nombre` varchar(40),
+  `apellidos` varchar(60),
+  `nif_cif` varchar(9),
+  `telefono` varchar(16),
+  `descripcion` text,
+  `correo` varchar(100),
   `direccion` varchar(100) DEFAULT NULL,
   `poblacion` varchar(100) DEFAULT NULL,
-  `cod_postal` char(5) NOT NULL,
+  `cod_postal` char(5),
   `provincia` varchar(100) DEFAULT NULL,
   `estado` enum('C','P','R','B','A') DEFAULT NULL,
   -- B=Esperando ser aprobada, P=Pendiente, R=Realizada, C=Cancelada, A=Esperando ser asignada por administrador
-  `fecha_creacion` date NOT NULL,
+  `fecha_creacion` date,
+  `fecha_realizacion` date DEFAULT NULL,
+  `fecha_actualizacion` date DEFAULT NULL,
   `operario` int(11),
-  `fecha_realizacion` date NOT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
   `anotaciones_anteriores` text DEFAULT NULL,
   `anotaciones_posteriores` text DEFAULT NULL,
   `fichero` varchar(100) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
-  `cliente_id` int(11) DEFAULT NULL,
    FOREIGN KEY (`operario`) REFERENCES `usuarios`(`id`),
    FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
 );
@@ -130,17 +132,17 @@ INSERT INTO `cuota` (`concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pa
 ('Cuota Mayo', '2023-05-01', 900.00, 0, '2023-05-15', 'Pago pendiente', 5),
 ('Cuota Junio', '2023-06-01', 1000.00, 1, '2023-06-15', 'Pago realizado', 6),
 ('Cuota Julio', '2023-07-01', 1100.00, 0, '2023-07-15', 'Pago pendiente', 7),
-('Cuota Agosto', '2023-08-01', 1200.00, 1, '2023-08-15', 'Pago realizado', 8);
+('Cuota Agosto', '2023-08-01', 1200.00, 1, '2023-08-15', 'Pago realizado', 1);
 
-INSERT INTO `tareas` (`nombre`, `apellidos`, `nif_cif`, `telefono`, `descripcion`, `correo`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `operario`, `fecha_realizacion`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`, `cliente_id`) VALUES
-('Carlos', 'Lopez', '12345678C', '600345678', 'Reparación de tejado', 'carlos.lopez@example.com', 'Calle Luna 789', 'Madrid', '28001', 'Madrid', 'C', '2023-01-01', 1, '2023-01-10', 'Ninguna', 'Reparación completada', NULL, NULL, 1),
-('Maria', 'Martinez', '23456789D', '600456789', 'Instalación de ventanas', 'maria.martinez@example.com', 'Avenida Sol 101', 'Barcelona', '08001', 'Barcelona', 'P', '2023-02-01', 2, '2023-02-10', 'Ninguna', 'Instalación en proceso', NULL, NULL, 2),
-('Javier', 'Hernandez', '34567890E', '600789123', 'Pintura de fachada', 'javier.hernandez@example.com', 'Calle Mar 606', 'Valencia', '46001', 'Valencia', 'C', '2023-03-01', 3, '2023-03-10', 'Ninguna', 'Pintura completada', NULL, NULL, 3),
-('Elena', 'Diaz', '45678901F', '600890234', 'Reforma de baño', 'elena.diaz@example.com', 'Avenida Sol 707', 'Sevilla', '41001', 'Sevilla', 'P', '2023-04-01', 4, '2023-04-10', 'Ninguna', 'Reforma en proceso', NULL, NULL, 4),
-('Raul', 'Gonzalez', '56789012G', '600901345', 'Instalación de aire acondicionado', 'raul.gonzalez@example.com', 'Calle Luna 808', 'Bilbao', '48001', 'Vizcaya', 'R', '2023-05-01', 5, '2023-05-10', 'Ninguna', 'Instalación completada', NULL, NULL, 5),
-('Isabel', 'Moreno', '67890123H', '600012456', 'Reparación de tuberías', 'isabel.moreno@example.com', 'Avenida Estrella 909', 'Zaragoza', '50001', 'Zaragoza', 'B', '2023-06-01', 6, '2023-06-10', 'Ninguna', 'Reparación completada', NULL, NULL, 6),
-('David', 'Ramirez', '78901234I', '600123567', 'Cambio de ventanas', 'david.ramirez@example.com', 'Calle Rio 1010', 'Granada', '18001', 'Granada', 'C', '2023-07-01', 7, '2023-07-10', 'Ninguna', 'Cambio completado', NULL, NULL, 7),
-('Patricia', 'Santos', '89012345J', '600234678', 'Reforma de cocina', 'patricia.santos@example.com', 'Avenida Montaña 1111', 'Murcia', '30001', 'Murcia', 'P', '2023-08-01', 8, '2023-08-10', 'Ninguna', 'Reforma en proceso', NULL, NULL, 8);
+INSERT INTO `tareas` (`nombre`, `apellidos`, `nif_cif`, `telefono`, `descripcion`, `correo`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `fecha_realizacion`, `fecha_actualizacion`, `operario`, `cliente_id`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`) VALUES
+('Carlos', 'Gomez', '12345678A', '600123456', 'Reparación de tejado', 'carlos.gomez@example.com', 'Calle Falsa 123', 'Madrid', '28001', 'Madrid', 'P', '2023-01-01', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
+('Ana', 'Lopez', '23456789B', '600234567', 'Pintura de fachada', 'ana.lopez@example.com', 'Avenida Siempre Viva 456', 'Barcelona', '08001', 'Barcelona', 'R', '2023-02-01', '2023-02-10', NULL, 2, 2, NULL, NULL, NULL, NULL),
+('Luis', 'Martinez', '34567890C', '600345678', 'Instalación de ventanas', 'luis.martinez@example.com', 'Calle Sol 789', 'Valencia', '46001', 'Valencia', 'C', '2023-03-01', NULL, NULL, 3, 3, NULL, NULL, NULL, NULL),
+('Laura', 'Sanchez', '45678901D', '600456789', 'Reforma de baño', 'laura.sanchez@example.com', 'Avenida Luna 101', 'Sevilla', '41001', 'Sevilla', 'B', '2023-04-01', NULL, NULL, 4, 4, NULL, NULL, NULL, NULL),
+('Pedro', 'Fernandez', '56789012E', '600567890', 'Construcción de piscina', 'pedro.fernandez@example.com', 'Calle Estrella 202', 'Bilbao', '48001', 'Vizcaya', 'A', '2023-05-01', NULL, NULL, 5, 5, NULL, NULL, NULL, NULL),
+('Marta', 'Lopez', '67890123F', '600678901', 'Reparación de tuberías', 'marta.lopez@example.com', 'Avenida Mar 303', 'Zaragoza', '50001', 'Zaragoza', 'P', '2023-06-01', NULL, NULL, 6, 6, NULL, NULL, NULL, NULL),
+('Jose', 'Garcia', '78901234G', '600789012', 'Instalación de aire acondicionado', 'jose.garcia@example.com', 'Calle Rio 404', 'Malaga', '29001', 'Málaga', 'R', '2023-07-01', '2023-07-15', NULL, 7, 7, NULL, NULL, NULL, NULL);
+
 
 --
 -- Volcado de datos para la tabla `provincias`
@@ -150,7 +152,7 @@ INSERT INTO `provincias` (`cod`, `nombre`) VALUES
 ('01', 'Alava'),
 ('02', 'Albacete'),
 ('03', 'Alicante'),
-('04', 'Almera'),
+('04', 'Almería'),
 ('33', 'Asturias'),
 ('05', 'Avila'),
 ('06', 'Badajoz'),
@@ -169,7 +171,7 @@ INSERT INTO `provincias` (`cod`, `nombre`) VALUES
 ('17', 'Girona'),
 ('18', 'Granada'),
 ('19', 'Guadalajara'),
-('20', 'Guipzcoa'),
+('20', 'Guipúzcoa'),
 ('21', 'Huelva'),
 ('22', 'Huesca'),
 ('23', 'Jaén'),

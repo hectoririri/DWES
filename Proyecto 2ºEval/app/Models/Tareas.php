@@ -12,8 +12,9 @@ class Tareas extends Model
 {
     protected $table = "tareas";
     protected $primaryKey = "id";
-    const CREATED_AT = 'fecha_alta';
-    const UPDATED_AT = 'fecha_actualizado';
+    const CREATED_AT = 'fecha_creacion';
+    const UPDATED_AT = 'fecha_actualizacion';
+    protected $fillable = ['nombre', 'apellidos', 'nif_cif', 'telefono', 'descripcion', 'correo', 'direccion', 'poblacion', 'cod_postal', 'provincia', 'estado', 'fecha_creacion', 'operario', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'id_usuario'];
     
     /**
      * Declaramos la relación muchos a uno con la tabla usuarios
