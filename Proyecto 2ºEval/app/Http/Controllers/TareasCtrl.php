@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TareasRequestCtrl;
+use App\Http\Requests\TareasRequestCreate;
 use App\Models\Provincias;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
 use App\Models\Usuarios;
@@ -67,7 +66,7 @@ class TareasCtrl extends Controller
     /**
      * Guarda una nueva tarea en la base de datos
      */
-    public function store(TareasRequestCtrl $request)
+    public function store(TareasRequestCreate $request)
     {
         $validated = $request->validated();
         // como ha pasado ya creamos la tarea con los campos que estemos validando ->

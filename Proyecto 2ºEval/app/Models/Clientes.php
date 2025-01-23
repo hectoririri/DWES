@@ -38,4 +38,13 @@ class Clientes extends Model
     public function __construct()
     {
     }
+
+    public function isClienteRegistered(string $tel, string $nif_cif){
+        $cliente = Clientes::where('telefono', $tel)->where('nif_cif', $nif_cif)->first();
+        if($cliente){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
