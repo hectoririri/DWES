@@ -5,7 +5,7 @@
     <h2 class="text-secondary">Creando tarea tarea</h2>
 
     @dump($tarea->toArray())
-    @include('formulario_tarea_campos')
+    @include('tareas.form_tarea_campos')
     {{-- hacer lo mismo con otro formulario de edicion de tarea --}}
     <a href="{{ route('tareas.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     <button type="submit" class="btn btn-primary">Enviar</button>

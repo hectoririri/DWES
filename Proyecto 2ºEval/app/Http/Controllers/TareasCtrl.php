@@ -30,7 +30,7 @@ class TareasCtrl extends Controller
     public function index()
     {
         $tareas = $this->tareas->getTareas();
-        return view('mostrar_tareas', compact('tareas'));
+        return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
     /**
@@ -40,7 +40,7 @@ class TareasCtrl extends Controller
      */
     public function mostrarTareasPendientes(){
         $tareas = $this->tareas->getTareasPendientes();
-        return view('mostrar_tareas', compact('tareas'));
+        return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
     /**
@@ -49,7 +49,7 @@ class TareasCtrl extends Controller
      * @return void
      */
     public function completarTarea(Tareas $tarea){
-        return view('completar_tarea', compact('tarea'));
+        return view('tareas.completar_tarea', compact('tarea'));
     }
 
     /**
@@ -60,7 +60,7 @@ class TareasCtrl extends Controller
         $operarios = $this->usuarios->getOperarios();
         $provincias = $this->provincias->getProvincias();
         $tarea = new Tareas();
-        return view('formulario_tarea', compact('operarios', 'provincias', 'tarea'));
+        return view('tareas.form_tarea', compact('operarios', 'provincias', 'tarea'));
     }
 
     /**
@@ -81,7 +81,7 @@ class TareasCtrl extends Controller
      */
     public function show(Tareas $tarea)
     {
-        return view('mostrar_tarea', compact('tarea'));
+        return view('tareas.mostrar_tarea', compact('tarea'));
     }
 
     /**
