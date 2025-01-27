@@ -66,9 +66,9 @@ class TareasCtrl extends Controller
     /**
      * Guarda una nueva tarea en la base de datos
      */
-    public function store(TareasRequestCreate $request)
+    public function store(TareasRequestCreate $requestTarea)
     {
-        $validated = $request->validated();
+        $validated = $requestTarea->validated();
         // como ha pasado ya creamos la tarea con los campos que estemos validando ->
         $tarea = Tareas::create($validated);
         return redirect()->route('tareas.show', $tarea)->with('mensaje', 'Tarea creada correctamente');

@@ -34,7 +34,5 @@ class TareasRequestCreate extends FormRequest
             'nif_cif.max' => 'El campo NIF/CIF no puede tener más de 9 caracteres.',
         ];
     }
-
-    // https://jorgerosa.dev/posts/funcion-para-validar-nif-nie-cif-con-php/ funcion validar dni
 }
 

@@ -4,7 +4,6 @@
 <form method="POST" action="{{route('tareas.store')}}" enctype="multipart/form-data" class="bg-light p-4 rounded">
     <h2 class="text-secondary">Creando tarea tarea</h2>
 
-    @dump($tarea->toArray())
     @include('tareas.form_tarea_campos')
     {{-- hacer lo mismo con otro formulario de edicion de tarea --}}
     <a href="{{ route('tareas.index') }}" class="btn btn-outline-secondary">Cancelar</a>
