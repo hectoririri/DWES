@@ -30,10 +30,11 @@ class TareasRequestCreate extends FormRequest
     public function messages()
     {
         return [
-            'nif_cif.required' => 'El campo NIF/CIF es obligatorio.',
             'nif_cif.string' => 'El campo NIF/CIF debe ser una cadena de texto.',
             'nif_cif.max' => 'El campo NIF/CIF no puede tener más de 9 caracteres.',
         ];
     }
+
+    // https://jorgerosa.dev/posts/funcion-para-validar-nif-nie-cif-con-php/ funcion validar dni
 }
 
