@@ -1,36 +1,148 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2024 a las 09:25:46
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `albanileria`
---
-
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `provincias`
 --
-
 CREATE TABLE `provincias` (
-  `cod` char(2) NOT NULL DEFAULT '00' COMMENT 'Código de la provincia de dos digitos',
-  `nombre` varchar(50) NOT NULL DEFAULT '' COMMENT 'Nombre de la provincia'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='Provincias de españa; 99 para seleccionar a Nacional';
+  `cod` char(2) PRIMARY KEY,
+  `nombre` varchar(50)
+);
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios`(
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `dni` varchar(9),
+  `contrasena` varchar(255),
+  `nombre` varchar(50),
+  `correo` varchar(50),
+  `telefono` varchar(16),
+  `direccion` varchar(100),
+  `rol` enum('O','A'),
+  `fecha_alta` DATE,
+  `fecha_actualizado` DATE DEFAULT NULL
+);
+
+--
+-- Estructura de tabla para la tabla `cartera_clientes`
+--
+
+CREATE TABLE `clientes`(
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `cif` varchar(9),
+  `nombre` varchar(30),
+  `telefono` varchar(16),
+  `correo` varchar(50),
+  `pais` varchar(50),
+  `cuenta_corriente` varchar(100),
+  `moneda` varchar(50),
+  `importe_mensual` DECIMAL(19,4) DEFAULT NULL,
+  `fecha_alta` DATE,
+  `fecha_actualizado` DATE DEFAULT NULL
+);
+
+--
+-- Estructura de tabla para la tabla `cargos`
+--
+
+CREATE TABLE `cuota`(
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `concepto` varchar(150),
+  `fecha_emision` DATE,
+  `importe` DECIMAL(19,4),
+  `pagada` boolean DEFAULT 0,
+  `fecha_pago` DATE DEFAULT NULL,
+  `notas` varchar(150),
+  `cliente_id` int(11),
+   FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
+);
+
+--
+-- Estructura de tabla para la tabla `tareas`
+--
+
+CREATE TABLE `tareas` (
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+  `nombre` varchar(40),
+  `apellidos` varchar(60),
+  `nif_cif` varchar(9),
+  `telefono` varchar(16),
+  `descripcion` text,
+  `correo` varchar(100),
+  `direccion` varchar(100) DEFAULT NULL,
+  `poblacion` varchar(100) DEFAULT NULL,
+  `cod_postal` char(5),
+  `provincia` varchar(100) DEFAULT NULL,
+  `estado` enum('C','P','R','B','A') DEFAULT NULL,
+  -- B=Esperando ser aprobada, P=Pendiente, R=Realizada, C=Cancelada, A=Esperando ser asignada por administrador
+  `fecha_creacion` date,
+  `fecha_realizacion` date DEFAULT NULL,
+  `fecha_actualizacion` date DEFAULT NULL,
+  `operario` int(11),
+  `cliente_id` int(11) DEFAULT NULL,
+  `anotaciones_anteriores` text DEFAULT NULL,
+  `anotaciones_posteriores` text DEFAULT NULL,
+  `fichero` varchar(100) DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+   FOREIGN KEY (`operario`) REFERENCES `usuarios`(`id`),
+   FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
+);
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`dni`, `nombre`, `correo`, `telefono`, `direccion`, `rol`, `fecha_alta`, `fecha_actualizado`) VALUES
+('12345678A', 'Juan Perez', 'juan.perez@example.com', '600123456', 'Calle Falsa 123', 'O', '2023-01-01', NULL),
+('23456789B', 'Ana Gomez', 'ana.gomez@example.com', '600234567', 'Avenida Siempre Viva 456', 'A', '2023-02-01', NULL),
+('34567890C', 'Luis Martinez', 'luis.martinez@example.com', '600345678', 'Calle Sol 789', 'O', '2023-03-01', NULL),
+('45678901D', 'Laura Sanchez', 'laura.sanchez@example.com', '600456789', 'Avenida Luna 101', 'A', '2023-04-01', NULL),
+('56789012E', 'Pedro Fernandez', 'pedro.fernandez@example.com', '600567890', 'Calle Estrella 202', 'O', '2023-05-01', NULL),
+('67890123F', 'Marta Lopez', 'marta.lopez@example.com', '600678901', 'Avenida Mar 303', 'A', '2023-06-01', NULL),
+('78901234G', 'Jose Garcia', 'jose.garcia@example.com', '600789012', 'Calle Rio 404', 'O', '2023-07-01', NULL),
+('89012345H', 'Sara Ruiz', 'sara.ruiz@example.com', '600890123', 'Avenida Montaña 505', 'A', '2023-08-01', NULL),
+('90123456I', 'Carlos Ortega', 'carlos.ortega@example.com', '600901234', 'Calle Verde 606', 'O', '2023-09-01', NULL),
+('01234567J', 'Lucia Torres', 'lucia.torres@example.com', '600012345', 'Avenida Azul 707', 'A', '2023-10-01', NULL),
+('11234567K', 'Alberto Nunez', 'alberto.nunez@example.com', '600112345', 'Calle Blanca 808', 'O', '2023-11-01', NULL),
+('22345678L', 'Beatriz Suarez', 'beatriz.suarez@example.com', '600223456', 'Avenida Roja 909', 'A', '2023-12-01', NULL),
+('33456789M', 'Carmen Diaz', 'carmen.diaz@example.com', '600334567', 'Calle Verde 1010', 'O', '2024-01-01', NULL),
+('44567890N', 'Daniel Perez', 'daniel.perez@example.com', '600445678', 'Avenida Azul 1111', 'A', '2024-02-01', NULL),
+('55678901O', 'Elena Garcia', 'elena.garcia@example.com', '600556789', 'Calle Amarilla 1212', 'O', '2024-03-01', NULL),
+('66789012P', 'Fernando Lopez', 'fernando.lopez@example.com', '600667890', 'Avenida Negra 1313', 'A', '2024-04-01', NULL),
+('77890123Q', 'Gloria Martinez', 'gloria.martinez@example.com', '600778901', 'Calle Rosa 1414', 'O', '2024-05-01', NULL),
+('88901234R', 'Hector Sanchez', 'hector.sanchez@example.com', '600889012', 'Avenida Naranja 1515', 'A', '2024-06-01', NULL),
+('99012345S', 'Irene Fernandez', 'irene.fernandez@example.com', '600990123', 'Calle Morada 1616', 'O', '2024-07-01', NULL),
+('10123456T', 'Javier Ruiz', 'javier.ruiz@example.com', '600101234', 'Avenida Celeste 1717', 'A', '2024-08-01', NULL);
+
+INSERT INTO `clientes` (`cif`, `nombre`, `telefono`, `correo`, `pais`, `cuenta_corriente`, `moneda`, `importe_mensual`, `fecha_alta`, `fecha_actualizado`) VALUES
+('A12345678', 'Empresa S.A.', '900123456', 'contacto@empresa.com', 'España', 'ES7620770024003102575766', 'EUR', 1000.00, '2023-01-01', NULL),
+('B23456789', 'Compañía SL', '900234567', 'info@compania.com', 'España', 'ES9121000418450200051332', 'EUR', 2000.00, '2023-02-01', NULL),
+('C34567890', 'Negocio SL', '900345678', 'contacto@negocio.com', 'España', 'ES7620770024003102575767', 'EUR', 1500.00, '2023-03-01', NULL),
+('D45678901', 'Industria SA', '900456789', 'info@industria.com', 'España', 'ES9121000418450200051333', 'EUR', 2500.00, '2023-04-01', NULL),
+('E56789012', 'Servicios SL', '900567890', 'contacto@servicios.com', 'España', 'ES7620770024003102575768', 'EUR', 3000.00, '2023-05-01', NULL),
+('F67890123', 'Comercio SA', '900678901', 'info@comercio.com', 'España', 'ES9121000418450200051334', 'EUR', 3500.00, '2023-06-01', NULL),
+('G78901234', 'Consultoria SL', '900789012', 'contacto@consultoria.com', 'España', 'ES7620770024003102575769', 'EUR', 4000.00, '2023-07-01', NULL),
+('H89012345', 'Tecnologia SA', '900890123', 'info@tecnologia.com', 'España', 'ES9121000418450200051335', 'EUR', 4500.00, '2023-08-01', NULL);
+
+INSERT INTO `cuota` (`concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `cliente_id`) VALUES
+('Cuota Enero', '2023-01-01', 500.00, 0, '2023-01-15', 'Pago pendiente', 1),
+('Cuota Febrero', '2023-02-01', 600.00, 1, '2023-02-15', 'Pago realizado', 2),
+('Cuota Marzo', '2023-03-01', 700.00, 0, '2023-03-15', 'Pago pendiente', 3),
+('Cuota Abril', '2023-04-01', 800.00, 1, '2023-04-15', 'Pago realizado', 4),
+('Cuota Mayo', '2023-05-01', 900.00, 0, '2023-05-15', 'Pago pendiente', 5),
+('Cuota Junio', '2023-06-01', 1000.00, 1, '2023-06-15', 'Pago realizado', 6),
+('Cuota Julio', '2023-07-01', 1100.00, 0, '2023-07-15', 'Pago pendiente', 7),
+('Cuota Agosto', '2023-08-01', 1200.00, 1, '2023-08-15', 'Pago realizado', 1);
+
+INSERT INTO `tareas` (`nombre`, `apellidos`, `nif_cif`, `telefono`, `descripcion`, `correo`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `fecha_realizacion`, `fecha_actualizacion`, `operario`, `cliente_id`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`) VALUES
+('Carlos', 'Gomez', '12345678A', '600123456', 'Reparación de tejado', 'carlos.gomez@example.com', 'Calle Falsa 123', 'Madrid', '28001', 'Madrid', 'P', '2023-01-01', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
+('Ana', 'Lopez', '23456789B', '600234567', 'Pintura de fachada', 'ana.lopez@example.com', 'Avenida Siempre Viva 456', 'Barcelona', '08001', 'Barcelona', 'R', '2023-02-01', '2023-02-10', NULL, 2, 2, NULL, NULL, NULL, NULL),
+('Luis', 'Martinez', '34567890C', '600345678', 'Instalación de ventanas', 'luis.martinez@example.com', 'Calle Sol 789', 'Valencia', '46001', 'Valencia', 'C', '2023-03-01', NULL, NULL, 3, 3, NULL, NULL, NULL, NULL),
+('Laura', 'Sanchez', '45678901D', '600456789', 'Reforma de baño', 'laura.sanchez@example.com', 'Avenida Luna 101', 'Sevilla', '41001', 'Sevilla', 'B', '2023-04-01', NULL, NULL, 4, 4, NULL, NULL, NULL, NULL),
+('Pedro', 'Fernandez', '56789012E', '600567890', 'Construcción de piscina', 'pedro.fernandez@example.com', 'Calle Estrella 202', 'Bilbao', '48001', 'Vizcaya', 'A', '2023-05-01', NULL, NULL, 5, 5, NULL, NULL, NULL, NULL),
+('Marta', 'Lopez', '67890123F', '600678901', 'Reparación de tuberías', 'marta.lopez@example.com', 'Avenida Mar 303', 'Zaragoza', '50001', 'Zaragoza', 'P', '2023-06-01', NULL, NULL, 6, 6, NULL, NULL, NULL, NULL),
+('Jose', 'Garcia', '78901234G', '600789012', 'Instalación de aire acondicionado', 'jose.garcia@example.com', 'Calle Rio 404', 'Malaga', '29001', 'Málaga', 'R', '2023-07-01', '2023-07-15', NULL, 7, 7, NULL, NULL, NULL, NULL);
+
 
 --
 -- Volcado de datos para la tabla `provincias`
@@ -40,7 +152,7 @@ INSERT INTO `provincias` (`cod`, `nombre`) VALUES
 ('01', 'Alava'),
 ('02', 'Albacete'),
 ('03', 'Alicante'),
-('04', 'Almera'),
+('04', 'Almería'),
 ('33', 'Asturias'),
 ('05', 'Avila'),
 ('06', 'Badajoz'),
@@ -59,7 +171,7 @@ INSERT INTO `provincias` (`cod`, `nombre`) VALUES
 ('17', 'Girona'),
 ('18', 'Granada'),
 ('19', 'Guadalajara'),
-('20', 'Guipzcoa'),
+('20', 'Guipúzcoa'),
 ('21', 'Huelva'),
 ('22', 'Huesca'),
 ('23', 'Jaén'),
@@ -89,108 +201,3 @@ INSERT INTO `provincias` (`cod`, `nombre`) VALUES
 ('48', 'Vizcaya'),
 ('49', 'Zamora'),
 ('50', 'Zaragoza');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tareas`
---
-
-CREATE TABLE `tareas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `apellidos` varchar(60) NOT NULL,
-  `nif_cif` varchar(9) NOT NULL,
-  `telefono` varchar(16) NOT NULL,
-  `descripcion` text NOT NULL,
-  `correo` varchar(100) NOT NULL,
-  `direccion` varchar(100) DEFAULT NULL,
-  `poblacion` varchar(100) DEFAULT NULL,
-  `cod_postal` char(5) NOT NULL,
-  `provincia` varchar(100) DEFAULT NULL,
-  `estado` enum('C','P','R','B') DEFAULT NULL,
-  `fecha_creacion` date NOT NULL,
-  `operario` varchar(50) DEFAULT NULL,
-  `fecha_realizacion` date NOT NULL,
-  `anotaciones_anteriores` text DEFAULT NULL,
-  `anotaciones_posteriores` text DEFAULT NULL,
-  `fich_resumen` varchar(100) DEFAULT NULL,
-  `foto` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `tareas`
---
-
-INSERT INTO `tareas` (`id`, `nombre`, `apellidos`, `nif_cif`, `telefono`, `descripcion`, `correo`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `operario`, `fecha_realizacion`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fich_resumen`, `foto`) VALUES
-(1, 'Juan', 'Pérez', '12345678Z', '+34 600123456', 'Reparación de tuberías', 'juan.perez@example.com', 'Calle Falsa 123', 'Madrid', '28080', 'Madrid', 'B', '2023-10-01', 'operario12', '2023-10-28', 'Anotación anterior 1', 'Anotación posterior 1', 'resumen1.pdf', 'foto1.jpg'),
-(2, 'Ana', 'García', '12345678Z', '+34 123 45 67 89', 'Instalación eléctrica', 'ana.garcia@example.com', 'Avenida Siempre Viva 742', 'Barcelona', '08080', 'Barcelona', 'C', '2023-10-02', 'operario2', '2023-10-06', 'Anotación anterior 2', 'Anotación posterior 2', 'resumen2.pdf', 'foto2.jpg'),
-(3, 'Luis', 'Martínez', '54794584M', '+34 600112233', 'Mantenimiento de jardín', 'luis.martinez@example.com', 'Plaza Mayor 1', 'Valencia', '46001', 'Valencia', 'R', '2023-10-03', 'operario2', '2023-11-30', 'Anotación anterior 3', 'Anotación posterior 3', 'resumen3.pdf', 'foto3.jpg'),
-(4, 'Carlos', 'López', '54794584M', '+34 123-45-67-89', 'Pintura de fachada', 'carlos.lopez@example.com', 'Calle Nueva 45', 'Sevilla', '41001', 'Sevilla', 'B', '2023-10-04', 'operariocomun', '2024-02-10', 'Anotación anterior 4', 'Anotación posterior 4', 'resumen4.pdf', 'foto4.jpg'),
-(5, 'María', 'Fernández', '12345678Z', '+34 123456789', 'Reparación de tejado', 'maria.fernandez@example.com', 'Calle Vieja 67', 'Granada', '18001', 'Granada', 'C', '2023-10-05', 'operariocomun', '2023-10-09', 'Anotación anterior 5', 'Anotación posterior 5', 'resumen5.pdf', 'foto5.jpg'),
-(6, 'Pedro', 'Gómez', '12345678Z', '+34 123-45-67-89', 'Limpieza de piscina', 'pedro.gomez@example.com', 'Avenida Central 89', 'Málaga', '29001', 'Málaga', 'P', '2023-10-06', 'operario2', '2023-11-03', 'Anotación anterior 6', 'Anotación posterior 6', 'resumen6.pdf', 'foto6.jpg'),
-(7, 'Hector', 'Nunez', '54794584M', '+34 123-45-67-89', 'Podando sqls', 'hecnugar@gmail.com', 'Huelva', 'Aljaraque', '21006', 'Córdoba', 'P', '2024-12-10', 'operario2', '2024-12-19', 'anterior', 'posterior', NULL, NULL),
-(8, 'Juan', 'Pérez', '12345678Z', '+34 123-45-67-89', 'Reparación de equipo', 'juan.perez@gmail.com', 'Andorra', '', '28001', 'Madrid', 'B', '2023-01-01', 'operariocomun', '2023-01-10', 'Reparar todos los equipos', '', NULL, NULL),
-(9, 'María', 'García', '87654321X', '+34 987 65 43 21', 'Instalación de software', 'maria.garcia@hotmail.com', '', '', '08002', 'Barcelona', 'R', '2023-02-01', 'operario2', '2023-02-15', '', '', NULL, NULL),
-(10, 'Carlos', 'López', '12345678Z', '+34 654 32 10 98', 'Mantenimiento de red', 'carlos.lopez@yahoo.com', 'Aljaraque', '', '46003', 'Valencia', 'P', '2023-03-01', 'operariocomun', '2023-03-30', 'Anotacion anterior sin importancia', 'Terminar de mantener la red', NULL, NULL),
-(11, 'Hector', 'Núñez', '54794584M', '+34 644733825', 'Descripción de tarea de prueba', 'mundo123@hotmail.com', 'Avenida Central 89', 'Huelva', '64876', 'Córdoba', 'P', '2024-12-11', 'operario2', '2024-12-26', 'Anotación anterior', 'Anotación posterior', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `passwd` varchar(50) NOT NULL,
-  `rol` enum('A','O') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nombre`, `passwd`, `rol`) VALUES
-(1, 'admin', 'Administrador56@', 'A'),
-(2, 'operario12', 'Operario1@', 'O'),
-(3, 'operario2', 'Operario2@', 'O'),
-(4, 'operariocomun', 'OperarioComun123@', 'O');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `tareas`
---
-ALTER TABLE `tareas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tareas`
---
-ALTER TABLE `tareas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -5,22 +5,24 @@
 
 <table class="table table-striped table-bordered">
     <tbody>
-        @foreach($tarea as $key => $value)
-        <tr>
-            <th>{!! $key !!}</th>
-            <td>{!! $value !!}</td>
-        </tr>
+        @foreach($tarea->toArray() as $index => $valor)
+            @if(!in_array($index, ['id', 'cliente_id']))
+            <tr>
+                <th class="text-center">{{ $index }}</th>
+                <td class="text-center">{{ $valor }}</td>
+            </tr>
+            @endif
         @endforeach
     </tbody>
 </table>
 
 <form method="post" enctype="multipart/form-data">
-    <label for="estado">Estado de la tarea</label>
+    <label for="estado">Estado de la tarea*</label>
     @error('estado')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="radio" name="estado" value="R" id="estado" @if(old('estado') == 'R') checked @endif>R (Realizada)
+    <input type="radio" name="estado" value="R" id="estado" @if(old('estado', 'R') == 'R') checked @endif>R (Realizada)
     <input type="radio" name="estado" value="C" id="estado" @if(old('estado') == 'C') checked @endif>C (Cancelada)
     <br> <br>
 

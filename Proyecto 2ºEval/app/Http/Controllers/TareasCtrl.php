@@ -9,6 +9,7 @@ use App\Models\Provincias;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
 use App\Models\Usuarios;
+use Illuminate\Support\Facades\Validator;
 
 class TareasCtrl extends Controller
 {
@@ -74,6 +75,23 @@ class TareasCtrl extends Controller
     {
         $validated = $requestTarea->validated();
         // como ha pasado ya creamos la tarea con los campos que estemos validando ->
+
+        // https://laravel.com/docs/11.x/validation#performing-additional-validation
+
+        $validator = Validator::make($validated, []);
+        $validator->after(function ($validator) use ($validated) {
+            $nif = $validated['nif_cif_registrado'];
+            $telefono = $validated['telefono_registrado'];
+            if ($this->clientes->isClienteRegistered($telefono, $nif)) {
+                $validator->errors()->add('telefono_registrado', 'El teléfono debe estar asociado al DNI');
+                $validator->errors()->add('nif_cif_registrado', 'El DNI debe estar registrado');
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
         $tarea = Tareas::create($validated);
         return redirect()->route('tareas.show', $tarea)->with('mensaje', 'Tarea creada correctamente');
     }
@@ -103,9 +121,12 @@ class TareasCtrl extends Controller
      */
     public function update(TareasRequestUpdate $requestTarea, Tareas $tarea)
     {
+    // composer require laravel/ui bootstrap
+
         $validated = $requestTarea->validated();
-        // https://laravel.com/docs/11.x/validation#performing-additional-validation
+        // dd($validated);
         $tarea->update($validated);
+        return redirect()->route('tareas.index')->with('mensaje', 'Tarea actualizada correctamente');
     }
 
     /**
@@ -125,5 +146,17 @@ class TareasCtrl extends Controller
      */
     public function confirmarBorrarTarea(Tareas $tarea){
         return view('tareas.borrar_tarea', compact('tarea'));
+    }
+
+    /**
+     * Validamos el formulario de confirmación de tarea
+     * 
+     * 
+     */
+
+    public function confirmarTarea(Request $request, Tareas $tarea){
+        $validated = $request->validate();
+        $tarea->update($validated);
+        return redirect()->route('tareas.index')->with('mensaje', 'Tarea actualizada correctamente');
     }
 }

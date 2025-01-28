@@ -27,21 +27,6 @@ class TareasRequestUpdate extends FormRequest
     {
         // Importar la variable $reglas desde TareasRequest.php
         $reglas = require_once(__DIR__ . '/TareasRequest.php');
-        $reglas['nif_cif_registrado'] = ['required', 'string', 'size:9', new DniNifValidationRule];
-        $reglas['telefono_registrado'] = ['required', 'string', 'size:16', new TelefonoValidationRule];
-
-        // Validar si el NIF/CIF y el teléfono existen en la base de datos
-        $reglas['nif_cif_registrado'][] = function ($attribute, $value, $fail) {
-            if (!Clientes::where('cif', $value)->exists()) {
-            $fail('El NIF/CIF no está registrado en la base de datos.');
-            }
-        };
-
-        $reglas['telefono_registrado'][] = function ($attribute, $value, $fail) {
-            if (!Clientes::where('telefono', $value)->exists()) {
-            $fail('El teléfono no está registrado en la base de datos.');
-            }
-        };
         return $reglas;
     }
 
