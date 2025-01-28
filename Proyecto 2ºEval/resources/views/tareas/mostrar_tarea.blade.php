@@ -22,7 +22,7 @@
                 <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Volver atrás</a>
                 {{-- @if (\App\Models\SesionUsuario::getInstance()->isAdmin()) --}}
                     {{-- <a href="{{ route('modificar_tarea', ['id' => $tarea->id]) }}" class="btn btn-outline-primary d-inline-flex align-items-center">Modificar</a> --}}
-                    <a href="{!! route('confirmar.eliminar.tarea', ['tarea' => $tarea->id]) !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Borrar</a>
+                    <a href="{!! route('confirmar.eliminar.tarea', ['tarea' => $tarea]) !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Borrar</a>
                 {{-- @endif --}}
                 {{-- @if (\App\Models\SesionUsuario::getInstance()->isAdmin() && ($tarea['estado'] == 'P' || $tarea['estado'] == 'B')) --}}
                     {{-- <a href="{!! route('completar_tarea', ['id' => $tarea->id]) !!}" class="btn btn-outline-success">Completar tarea</a> --}}

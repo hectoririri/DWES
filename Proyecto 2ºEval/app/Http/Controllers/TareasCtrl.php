@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TareasRequestCreate;
+use App\Http\Requests\TareasRequestUpdate;
+use App\Models\Clientes;
 use App\Models\Provincias;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
@@ -13,6 +15,7 @@ class TareasCtrl extends Controller
     private $tareas;
     private $usuarios;
     private $provincias;
+    private $clientes;
 
     /**
      * Constructor. Instancia los modelos necesarios.
@@ -22,6 +25,7 @@ class TareasCtrl extends Controller
         $this->tareas = new Tareas();
         $this->usuarios = new Usuarios();
         $this->provincias = new Provincias();
+        $this->clientes = new Clientes();
     }
 
     /**
@@ -87,25 +91,30 @@ class TareasCtrl extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tareas $tarea)
     {
-        //
+        $operarios = $this->usuarios->getOperarios();
+        $provincias = $this->provincias->getProvincias();
+        return view('tareas.form_actualizar_tarea', compact('operarios', 'provincias', 'tarea'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TareasRequestUpdate $requestTarea, Tareas $tarea)
     {
-        //
+        $validated = $requestTarea->validated();
+        // https://laravel.com/docs/11.x/validation#performing-additional-validation
+        $tarea->update($validated);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tareas $tarea)
     {
-        //
+        $tarea->delete();
+        return redirect()->route('tareas.index')->with('mensaje', 'Tarea eliminada correctamente');
     }
 
     /**
@@ -115,6 +124,6 @@ class TareasCtrl extends Controller
      * @return void
      */
     public function confirmarBorrarTarea(Tareas $tarea){
-        return view('confirmar_borrar_tarea', compact('tarea'));
+        return view('tareas.borrar_tarea', compact('tarea'));
     }
 }

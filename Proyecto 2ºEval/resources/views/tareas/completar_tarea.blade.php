@@ -16,20 +16,29 @@
 
 <form method="post" enctype="multipart/form-data">
     <label for="estado">Estado de la tarea</label>
-    <span>{!! $errores->Error('estado') !!}</span>
-    <input type="radio" name="estado" value="R" id="estado" checked {!! $utiles->valorPost('estado') == 'R' ? 'checked' : '' !!}>R (Realizada)
-    <input type="radio" name="estado" value="C" id="estado" {!! $utiles->valorPost('estado') == 'C' ? 'checked' : '' !!}>C (Cancelada)
+    @error('estado')
+        <br>
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <input type="radio" name="estado" value="R" id="estado" @if(old('estado') == 'R') checked @endif>R (Realizada)
+    <input type="radio" name="estado" value="C" id="estado" @if(old('estado') == 'C') checked @endif>C (Cancelada)
     <br> <br>
 
     <label for="fecha_realizacion">Fecha de realización de la tarea*</label>
-    <span>{!! $errores->Error('fecha_realizacion') !!}</span>
-    <input type="date" name="fecha_realizacion" id="fecha_realizacion" value="{!! ($_POST) ? $utiles->valorPost('fecha_realizacion') : ($tarea['fecha_realizacion'] ?? '') !!}">
+    @error('fecha_realizacion')
+    <br>
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror    
+    <input type="date" name="fecha_realizacion" id="fecha_realizacion" value="{!! old('fecha_realizacion') !!}">
     <br> <br>
 
 
     <label for="anotaciones_posteriores">Anotaciones posteriores</label>
-    <span>{!! $errores->Error('anotaciones_posteriores') !!}</span>
-    <textarea name="anotaciones_posteriores" id="anotaciones_posteriores">{!! ($_POST) ? $utiles->valorPost('anotaciones_posteriores') : ($tarea['anotaciones_posteriores'] ?? '') !!}</textarea>
+    @error('anotaciones_posteriores')
+    <br>
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <textarea name="anotaciones_posteriores" id="anotaciones_posteriores">{!! old('anotaciones_posteriores') !!}</textarea>
     <br> <br>
 
 

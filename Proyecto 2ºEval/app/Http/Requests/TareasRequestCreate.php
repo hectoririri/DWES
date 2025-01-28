@@ -30,8 +30,7 @@ class TareasRequestCreate extends FormRequest
     public function messages()
     {
         return [
-            'nif_cif.string' => 'El campo NIF/CIF debe ser una cadena de texto.',
-            'nif_cif.max' => 'El campo NIF/CIF no puede tener más de 9 caracteres.',
+            'nif_cif.size' => 'El campo NIF/CIF debe tener 9 caracteres.',
         ];
     }
 }

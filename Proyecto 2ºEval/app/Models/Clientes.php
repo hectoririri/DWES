@@ -40,11 +40,6 @@ class Clientes extends Model
     }
 
     public function isClienteRegistered(string $tel, string $nif_cif){
-        $cliente = Clientes::where('telefono', $tel)->where('nif_cif', $nif_cif)->first();
-        if($cliente){
-            return true;
-        }else{
-            return false;
-        }
+        return $this->where('telefono', $tel)->where('cif', $nif_cif)->exists();
     }
 }

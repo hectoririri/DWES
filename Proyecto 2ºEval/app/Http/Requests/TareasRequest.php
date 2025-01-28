@@ -6,10 +6,10 @@ use App\Rules\DniNifValidationRule;
 use App\Rules\TelefonoValidationRule;
 
 $reglas = [
-    // 'nif_cif' => ['required', 'string', 'size:9', new DniNifValidationRule],
-    // 'nombre' => ['required', 'string', 'max:40'],
+    'nif_cif' => ['required', 'string', 'size:9', new DniNifValidationRule],
+    'nombre' => ['required', 'string', 'max:40'],
     // 'apellidos' => ['required', 'string', 'max:60'],
-    // 'telefono' => ['required', 'string', 'size:16', new TelefonoValidationRule],
+    'telefono' => ['required', 'string', 'size:16', new TelefonoValidationRule],
     // 'descripcion' => ['required', 'string', 'max:500'],
     // 'correo' => ['required', 'email', 'max:100', 'exists:usuarios,correo'], //unique:usuarios: el correo debe ser único en la tabla usuarios preguntar
     // 'direccion' => ['string', 'max:100'],

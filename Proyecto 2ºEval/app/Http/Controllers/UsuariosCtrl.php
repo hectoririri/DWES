@@ -24,7 +24,7 @@ class UsuariosCtrl extends Controller
     public function index()
     {
         $usuarios = $this->usuarios->getUsuarios();
-        return view('mostrar_usuarios', compact('usuarios'));
+        return view('usuarios.mostrar_usuarios', compact('usuarios'));
     }
 
     /**

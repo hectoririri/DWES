@@ -13,7 +13,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre') }}">
+    <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre', $tarea->nombre) }}">
 </div>
 
 <div class="form-group">
@@ -22,7 +22,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="apellidos" id="apellidos" value="{{ old('apellidos') }}">
+    <input type="text" class="form-control" name="apellidos" id="apellidos" value="{{ old('apellidos', $tarea->apellidos) }}">
 </div>
 
 <div class="form-group">
@@ -31,7 +31,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono') }}">
+    <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
 </div>
 
 <div class="form-group">
@@ -40,7 +40,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea class="form-control" name="descripcion" id="descripcion">{{ old('descripcion') }}</textarea>
+    <textarea class="form-control" name="descripcion" id="descripcion">{{ old('descripcion', $tarea->descripcion) }}</textarea>
 </div>
 
 <div class="form-group">
@@ -49,7 +49,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="correo" id="correo" value="{{ old('correo') }}">
+    <input type="text" class="form-control" name="correo" id="correo" value="{{ old('correo', $tarea->correo) }}">
 </div>
 
 <div class="form-group">
@@ -58,7 +58,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="direccion" id="direccion" value="{{ old('direccion') }}">
+    <input type="text" class="form-control" name="direccion" id="direccion" value="{{ old('direccion', $tarea->direccion) }}">
 </div>
 
 <div class="form-group">
@@ -67,7 +67,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="poblacion" id="poblacion" value="{{ old('poblacion') }}">
+    <input type="text" class="form-control" name="poblacion" id="poblacion" value="{{ old('poblacion', $tarea->poblacion) }}">
 </div>
 
 <div class="form-group">
@@ -76,7 +76,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="cod_postal" id="cod_postal" value="{{ old('cod_postal') }}">
+    <input type="text" class="form-control" name="cod_postal" id="cod_postal" value="{{ old('cod_postal', $tarea->cod_postal) }}">
 </div>
 
 <div class="form-group">
@@ -88,7 +88,7 @@
     <select class="form-control" name="provincia" id="provincia">
         <option value="" selected></option>
        @foreach ($provincias as $provincia)
-        <option value="{{$provincia->nombre}}" @if(old('provincia') == $provincia->nombre) selected @endif>{{$provincia->nombre}}</option>
+        <option value="{{$provincia->nombre}}" {{ old('provincia', $tarea->provincia) == $provincia->nombre ? 'selected' : '' }}>{{$provincia->nombre}}</option>
        @endforeach
     </select>
 </div>
@@ -100,19 +100,19 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <div class="form-check">
-        <input type="radio" class="form-check-input" name="estado" value="P" id="estado_P" @if(old('estado') == 'P') checked @endif>
+        <input type="radio" class="form-check-input" name="estado" value="P" id="estado_P" @if(old('estado', $tarea->estado) == 'P') checked @endif>
         <label class="form-check-label" for="estado_P">P (Pendiente)</label>
     </div>
     <div class="form-check">
-        <input type="radio" class="form-check-input" name="estado" value="B" id="estado_B" @if(old('estado') == 'B') checked @endif>
+        <input type="radio" class="form-check-input" name="estado" value="B" id="estado_B" @if(old('estado', $tarea->estado) == 'B') checked @endif>
         <label class="form-check-label" for="estado_B">B (Esperando ser aprobada)</label>
     </div>
     <div class="form-check">
-        <input type="radio" class="form-check-input" name="estado" value="R" id="estado_R" @if(old('estado') == 'R') checked @endif>
+        <input type="radio" class="form-check-input" name="estado" value="R" id="estado_R" @if(old('estado', $tarea->estado) == 'R') checked @endif>
         <label class="form-check-label" for="estado_R">R (Realizada)</label>
     </div>
     <div class="form-check">
-        <input type="radio" class="form-check-input" name="estado" value="C" id="estado_C" @if(old('estado') == 'C') checked @endif>
+        <input type="radio" class="form-check-input" name="estado" value="C" id="estado_C" @if(old('estado', $tarea->estado) == 'C') checked @endif>
         <label class="form-check-label" for="estado_C">C (Cancelada)</label>
     </div>
 </div>
@@ -123,12 +123,13 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="date" class="form-control" name="fecha_creacion" id="fecha_creacion" value="{{ date('Y-m-d') }}" readonly>
+    {{-- No carga bien por formato --}}
+    <input type="date" class="form-control" name="fecha_creacion" id="fecha_creacion" value="{{ old('fecha_creacion', date('Y-m-d')) }}" readonly>
 </div>
 
 {{-- Si es cliente se oculta --}}
 <div class="form-group">
-    <label for="operario">Operario encargado*</label>
+    <label for="operario_id">Operario encargado*</label>
     @error('operario')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
@@ -136,7 +137,7 @@
     <select class="form-control" name="operario" id="operario_id">
         <option value="" selected></option>
         @foreach ($operarios as $operario)
-            <option value="{{$operario->id}}" @if(old('operario') == $operario->id) selected @endif >{{$operario->nombre." ".$operario->apellidos}}</option>
+                    <option value="{{$operario->id}}" {{ old('operario', $tarea->operario) == $operario->id ? 'selected' : '' }} >{{$operario->nombre." ".$operario->apellidos}}</option>
         @endforeach
     </select>
 </div>
@@ -147,7 +148,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="date" class="form-control" name="fecha_realizacion" id="fecha_realizacion" value=" {{ old('fecha_realizacion') }}">
+    <input type="date" class="form-control" name="fecha_realizacion" id="fecha_realizacion" value="{{ old('fecha_realizacion', $tarea->fecha_realizacion) }}">
 </div>
 
 <div class="form-group">
@@ -156,7 +157,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea class="form-control" name="anotaciones_anteriores" id="anotaciones_anteriores">{{ old('anotaciones_anteriores') }}</textarea>
+    <textarea class="form-control" name="anotaciones_anteriores" id="anotaciones_anteriores">{{ old('anotaciones_anteriores', $tarea->anotaciones_anteriores) }}</textarea>
 </div>
 
 <div class="form-group">
@@ -165,7 +166,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea class="form-control" name="anotaciones_posteriores" id="anotaciones_posteriores">{{ old('anotaciones_posteriores') }}</textarea>
+    <textarea class="form-control" name="anotaciones_posteriores" id="anotaciones_posteriores">{{ old('anotaciones_posteriores', $tarea->anotaciones_posteriores) }}</textarea>
 </div>
 
 <div class="form-group">

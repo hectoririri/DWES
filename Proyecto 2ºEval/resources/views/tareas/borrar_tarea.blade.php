@@ -1,7 +1,8 @@
 @extends('layout/plantilla')
 @section('title', 'Eliminar tarea')
 @section('cuerpo')
-<form method="post">
+<form method="POST" action="{{route('tareas.destroy', ['tarea' => $tarea])}}">
+    @method('DELETE')
     <h2>¿Está seguro de que desea eliminar la siguiente tarea?</h2>
     <table class="table table-hover table-bordered">
         <tbody>
