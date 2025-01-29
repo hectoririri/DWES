@@ -123,8 +123,8 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    {{-- No carga bien por formato --}}
-    <input type="date" class="form-control" name="fecha_creacion" id="fecha_creacion" value="{{ old('fecha_creacion', date('Y-m-d')) }}" readonly>
+    
+    <input type="datetime-local" class="form-control" name="fecha_creacion" id="fecha_creacion" @if(!empty($tarea->fecha_creacion)) value="{{$tarea->fecha_creacion}}" @else value="{{ date("Y-m-d H:i:s") }}" @endif readonly>
 </div>
 
 {{-- Si es cliente se oculta --}}
@@ -148,7 +148,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="date" class="form-control" name="fecha_realizacion" id="fecha_realizacion" value="{{ old('fecha_realizacion', $tarea->fecha_realizacion) }}">
+    <input type="datetime-local" class="form-control" name="fecha_realizacion" id="fecha_realizacion" value="{{ old('fecha_realizacion', $tarea->fecha_realizacion) }}">
 </div>
 
 <div class="form-group">

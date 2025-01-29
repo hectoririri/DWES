@@ -14,6 +14,11 @@ class Tareas extends Model
     protected $primaryKey = "id";
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
+    // Se castea para que no salte el formato ISO 8601
+    protected $casts = [
+        'fecha_creacion' => 'datetime:d-m-Y H:i:s',
+        'fecha_actualizacion' => 'datetime:d-m-Y H:i:s',
+    ];
     protected $fillable = ['nombre', 'apellidos', 'nif_cif', 'telefono', 'descripcion', 'correo', 'direccion', 'poblacion', 'cod_postal', 'provincia', 'estado', 'fecha_creacion', 'operario', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'id_usuario'];
     
     /**

@@ -16,7 +16,11 @@
     </tbody>
 </table>
 
-<form method="post" enctype="multipart/form-data">
+<form method="POST" action="{{route('confirmar.tarea', ['tarea'=>$tarea])}}" enctype="multipart/form-data">
+    @method('PATCH')
+
+    <input type="hidden" value="caquita">
+
     <label for="estado">Estado de la tarea*</label>
     @error('estado')
         <br>
@@ -26,23 +30,21 @@
     <input type="radio" name="estado" value="C" id="estado" @if(old('estado') == 'C') checked @endif>C (Cancelada)
     <br> <br>
 
-    <label for="fecha_realizacion">Fecha de realización de la tarea*</label>
+    <label for="fecha_realizacion">Fecha y hora de realización de la tarea*</label>
     @error('fecha_realizacion')
     <br>
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror    
-    <input type="date" name="fecha_realizacion" id="fecha_realizacion" value="{!! old('fecha_realizacion') !!}">
+    <input type="datetime-local" name="fecha_realizacion" id="fecha_realizacion" value="{!! old('fecha_realizacion', $tarea->fecha_realizacion) !!}">
     <br> <br>
-
 
     <label for="anotaciones_posteriores">Anotaciones posteriores</label>
     @error('anotaciones_posteriores')
     <br>
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea name="anotaciones_posteriores" id="anotaciones_posteriores">{!! old('anotaciones_posteriores') !!}</textarea>
+    <textarea name="anotaciones_posteriores" id="anotaciones_posteriores">{!! old('anotaciones_posteriores', $tarea->anotaciones_posteriores) !!}</textarea>
     <br> <br>
-
 
     <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>
     <button type="submit" class="btn btn-primary d-inline-flex align-items-center">Completar</button>

@@ -27,6 +27,11 @@ Route::get('usuarios/confirmar_eliminar/{usuario}', [UsuariosCtrl::class, 'confi
     ->where('usuario', '[0-9]+')
     ->name('confirmar.eliminar.usuario');
 
+Route::patch('tareas/completar/{tarea}', [TareasCtrl::class, 'confirmarTarea'])
+    ->where('tarea', '[0-9]+')
+    ->name('confirmar.tarea');
+
+// Los resources CRUD para cada controlador
 Route::resources([
     'tareas' => TareasCtrl::class,
     'usuarios' => UsuariosCtrl::class,

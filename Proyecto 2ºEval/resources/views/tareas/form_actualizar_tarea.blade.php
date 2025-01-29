@@ -13,7 +13,6 @@
     
     @include('tareas.form_tarea_campos')
 
-    <input type="text" class="form-control" name="telefono_registrado" id="telefono_registrado" value="{{ old('telefono_registrado') }}">
     <a href="{{ route('tareas.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
