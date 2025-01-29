@@ -32,7 +32,7 @@ class UsuariosCtrl extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.form_crear_usuario');
     }
 
     /**
@@ -40,7 +40,12 @@ class UsuariosCtrl extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validated = $request->validate([
+            // campos a comprobar
+        ]);
+        $usuario = Usuarios::create($validated);
+        return redirect()->route('usuarios.show', $usuario);
     }
 
     /**

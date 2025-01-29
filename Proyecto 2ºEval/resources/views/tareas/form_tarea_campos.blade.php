@@ -8,24 +8,6 @@
 </div>
 
 <div class="form-group">
-    <label for="nombre">Nombre*</label>
-    @error('nombre')
-        <br>
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre', $tarea->nombre) }}">
-</div>
-
-<div class="form-group">
-    <label for="apellidos">Apellidos*</label>
-    @error('apellidos')
-        <br>
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <input type="text" class="form-control" name="apellidos" id="apellidos" value="{{ old('apellidos', $tarea->apellidos) }}">
-</div>
-
-<div class="form-group">
     <label for="telefono_contacto">Teléfono de contacto*</label>
     @error('telefono')
         <br>
@@ -41,15 +23,6 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <textarea class="form-control" name="descripcion" id="descripcion">{{ old('descripcion', $tarea->descripcion) }}</textarea>
-</div>
-
-<div class="form-group">
-    <label for="correo">Correo electrónico*</label>
-    @error('correo')
-        <br>
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <input type="text" class="form-control" name="correo" id="correo" value="{{ old('correo', $tarea->correo) }}">
 </div>
 
 <div class="form-group">

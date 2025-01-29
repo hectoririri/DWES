@@ -39,7 +39,7 @@ class Clientes extends Model
     {
     }
 
-    public function isClienteRegistered(string $tel, string $nif_cif){
-        return $this->where('telefono', $tel)->where('cif', $nif_cif)->exists();
+    public static function isClienteRegistered(string $tel, string $nif_cif){
+        return self::where('telefono', $tel)->where('cif', $nif_cif)->exists();
     }
 }
