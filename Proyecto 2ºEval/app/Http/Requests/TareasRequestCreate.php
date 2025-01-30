@@ -41,7 +41,7 @@ class TareasRequestCreate extends FormRequest
         */
 
         // Si el formulario lo manda un administrador quitariamos ambos campos de la variable reglas
-        // y añadimos el select de clientes
+        // añadimos el select de clientes
         /* $reglas['cliente_id'] = ['required', 'int', 'max:11', 'exists:clientes,id'] */
 
         $reglas = [
@@ -62,12 +62,10 @@ class TareasRequestCreate extends FormRequest
             'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
             'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],
             'operario' => ['required', 'int', 'max:11', 'exists:usuarios,id'],
-            // mirar lo del formato
             'fecha_creacion' => ['required', 'date_format:Y-m-d\\TH:i'],
             'fecha_realizacion' => ['required', 'date_format:Y-m-d\\TH:i', 'after:fecha_creacion'],
             'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],
             'anotaciones_posteriores' => ['nullable', 'string', 'max:500'],
-            // ficheros
         ];
         
         return $reglas;

@@ -41,7 +41,7 @@ class TareasRequestUpdate extends FormRequest
             'fecha_realizacion' => ['required', 'date_format:Y-m-d\\TH:i', 'after:fecha_creacion'],
             'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],
             'anotaciones_posteriores' => ['nullable', 'string', 'max:500'],
-            // ficheros
+            // ficheros solo en administrador
         ];
         return $reglas;
     }

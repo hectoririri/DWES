@@ -1,9 +1,9 @@
 @extends('layout/plantilla')
 @section('title', 'Formulario De Alta Usuario')
 @section('cuerpo')
-<form method="POST" action="{{route('usuarios.store')}}" enctype="multipart/form-data">
-
-    <h2>Formulario de creación de usuario</h2>
+<form method="POST" action="{{route('usuarios.update')}}" enctype="multipart/form-data">
+    @method('PUT')
+    <h2>Formulario de modificación de usuario</h2>
 
     <div class="form-group">
         <label for="dni">DNI*</label>
@@ -65,14 +65,7 @@
             <br>
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <div class="form-check">
-            <input type="radio" class="form-check-input" name="rol" value="A" id="rol_A" @if(old('rol') == 'A') checked @endif>
-            <label class="form-check-label" for="rol_A">Administrador</label>
-        </div>
-        <div class="form-check">
-            <input type="radio" class="form-check-input" name="rol" value="O" id="rol_O" @if(old('rol') == 'O') checked @endif>
-            <label class="form-check-label" for="rol_O">Operario</label>
-        </div>
+        <input type="text" class="form-control" name="rol" id="rol" value="{{ old('rol') }}">
     </div>
 
     <a href="{{ route('usuarios.index') }}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>

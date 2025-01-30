@@ -13,16 +13,6 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * Relación uno a uno con la tabla usuarios
-     *
-     * @return void
-     */
-    public function usuario()
-    {
-        return $this->hasOne(Usuarios::class);
-    }
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>

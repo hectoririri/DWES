@@ -65,6 +65,10 @@ class TareasCtrl extends Controller
     public function store(TareasRequestCreate $requestTarea)
     {
         $validated = $requestTarea->validated();
+        
+        // Si es usuario creamos la tarea de la siguiente manera:
+        $validated['cliente_id'] = Cliente::getIdFromNifTelephone($validated['nif_cif'], $validated['telefono']);
+        
         $tarea = Tarea::create($validated);
         return redirect()->route('tareas.show', $tarea)
             ->with('mensaje', 'Tarea creada correctamente');

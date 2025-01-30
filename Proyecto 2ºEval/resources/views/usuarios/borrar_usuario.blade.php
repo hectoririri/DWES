@@ -1,7 +1,7 @@
 @extends('layout/plantilla')
 @section('title', 'Eliminar usuario')
 @section('cuerpo')
-<form method="POST" action="{{route('usuario.destroy', ['usuario' => $usuario])}}">
+<form method="POST" action="{{route('usuarios.destroy', ['usuario' => $usuario])}}">
     @method('DELETE')
     <h2>¿Está seguro de que desea eliminar al siguiente usuario?</h2>
     <table class="table table-striped table-bordered">

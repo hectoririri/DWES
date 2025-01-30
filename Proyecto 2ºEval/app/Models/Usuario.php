@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    protected $table = "usuarios";
+    protected $table = "users";
     protected $primaryKey = "id";
-    const CREATED_AT = 'fecha_alta';
-    const UPDATED_AT = 'fecha_actualizado';
 
     /**
      * Declaramos la relación uno a muchos con la tabla tareas
@@ -19,23 +17,6 @@ class Usuario extends Model
     public function tareas()
     {
         return $this->hasMany(Tarea::class);
-    }
-
-    /**
-     * Relación uno a uno con la tabla user
-     *
-     * @return void
-     */
-    public function user()
-    {
-        return $this->hasOne(User::class);
-    }
-
-    /**
-     * Constructor vacío
-     */ 
-    public function __construct()
-    {
     }
 
     /**

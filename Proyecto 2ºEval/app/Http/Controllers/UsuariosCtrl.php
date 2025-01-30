@@ -81,8 +81,7 @@ class UsuariosCtrl extends Controller
      * @param integer $id id del usuario a borrar
      * @return void
      */
-    public function confirmarBorrarUsuario(int $id){
-        $usuario = Usuario::getUsuario($id);
-        return view('confirmar_borrar_usuario', compact('usuario'));
+    public function confirmarBorrarUsuario(Usuario $usuario){
+        return view('usuarios.borrar_usuario', compact('usuario'));
     }
 }

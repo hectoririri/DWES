@@ -1,3 +1,5 @@
+{{-- compartido aquí y especifico fuera --}}
+
 <div class="form-group">
     <label for="nif_cif">NIF o CIF*</label>
     @error('nif_cif')
@@ -155,14 +157,4 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <textarea class="form-control" name="anotaciones_posteriores" id="anotaciones_posteriores">{{ old('anotaciones_posteriores', $tarea->anotaciones_posteriores) }}</textarea>
-</div>
-
-<div class="form-group">
-    <label for="fichero">Fichero resumen de tareas realizadas</label>
-    <input type="file" class="form-control-file" name="fichero_resumen" id="fichero">
-</div>
-
-<div class="form-group">
-    <label for="foto">Fotos del trabajo realizado</label>
-    <input type="file" class="form-control-file" name="foto" id="foto">
 </div>
