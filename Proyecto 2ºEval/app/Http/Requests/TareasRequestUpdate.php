@@ -26,7 +26,23 @@ class TareasRequestUpdate extends FormRequest
     public function rules(): array
     {
         // Importar la variable $reglas desde TareasRequest.php
-        $reglas = require_once(__DIR__ . '/TareasRequest.php');
+        $reglas = [
+            'descripcion' => ['required', 'string', 'max:500'],
+            'direccion' => ['nullable', 'string', 'max:100'],
+            'poblacion' => ['nullable', 'string', 'max:100'],
+            // mirar cod postal
+            'cod_postal' => ['required', 'integer', 'max:99999'],
+            'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
+            'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],
+            'operario' => ['required', 'int', 'max:11', 'exists:usuarios,id'],
+            'cliente_id' => ['required', 'int', 'max:11', 'exists:clientes,id'],
+            // mirar lo del formato
+            'fecha_creacion' => ['required', 'date_format:Y-m-d\\TH:i'],
+            'fecha_realizacion' => ['required', 'date_format:Y-m-d\\TH:i', 'after:fecha_creacion'],
+            'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],
+            'anotaciones_posteriores' => ['nullable', 'string', 'max:500'],
+            // ficheros
+        ];
         return $reglas;
     }
 
@@ -35,4 +51,3 @@ class TareasRequestUpdate extends FormRequest
         return [];
     }
 }
-

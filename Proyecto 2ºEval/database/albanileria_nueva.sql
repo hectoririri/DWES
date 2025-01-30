@@ -7,23 +7,6 @@ CREATE TABLE `provincias` (
 );
 
 --
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE `usuarios`(
-  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
-  `dni` varchar(9),
-  `contrasena` varchar(255),
-  `nombre` varchar(50),
-  `correo` varchar(50),
-  `telefono` varchar(16),
-  `direccion` varchar(100),
-  `rol` enum('O','A'),
-  `fecha_alta` DATE,
-  `fecha_actualizado` DATE DEFAULT NULL
-);
-
---
 -- Estructura de tabla para la tabla `cartera_clientes`
 --
 
@@ -63,56 +46,26 @@ CREATE TABLE `cuota`(
 
 CREATE TABLE `tareas` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
-  `nombre` varchar(40),
-  `apellidos` varchar(60),
-  `nif_cif` varchar(9),
-  `telefono` varchar(16),
   `descripcion` text,
   `correo` varchar(100),
   `direccion` varchar(100) DEFAULT NULL,
   `poblacion` varchar(100) DEFAULT NULL,
   `cod_postal` char(5),
   `provincia` varchar(100) DEFAULT NULL,
-  `estado` enum('C','P','R','B','A') DEFAULT NULL,
-  -- B=Esperando ser aprobada, P=Pendiente, R=Realizada, C=Cancelada, A=Esperando ser asignada por administrador
+  `estado` enum('C','P','R','B') DEFAULT NULL,
+  -- B=Esperando ser aprobada, P=Pendiente, R=Realizada, C=Cancelada
   `fecha_creacion` date,
   `fecha_realizacion` date DEFAULT NULL,
   `fecha_actualizacion` date DEFAULT NULL,
-  `operario` int(11),
+  `operario_id` int(11),
   `cliente_id` int(11) DEFAULT NULL,
   `anotaciones_anteriores` text DEFAULT NULL,
   `anotaciones_posteriores` text DEFAULT NULL,
   `fichero` varchar(100) DEFAULT NULL,
   `foto` varchar(100) DEFAULT NULL,
-   FOREIGN KEY (`operario`) REFERENCES `usuarios`(`id`),
+   FOREIGN KEY (`operario_id`) REFERENCES `users`(`id`),
    FOREIGN KEY (`cliente_id`) REFERENCES `clientes`(`id`)
 );
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`dni`, `nombre`, `correo`, `telefono`, `direccion`, `rol`, `fecha_alta`, `fecha_actualizado`) VALUES
-('12345678A', 'Juan Perez', 'juan.perez@example.com', '600123456', 'Calle Falsa 123', 'O', '2023-01-01', NULL),
-('23456789B', 'Ana Gomez', 'ana.gomez@example.com', '600234567', 'Avenida Siempre Viva 456', 'A', '2023-02-01', NULL),
-('34567890C', 'Luis Martinez', 'luis.martinez@example.com', '600345678', 'Calle Sol 789', 'O', '2023-03-01', NULL),
-('45678901D', 'Laura Sanchez', 'laura.sanchez@example.com', '600456789', 'Avenida Luna 101', 'A', '2023-04-01', NULL),
-('56789012E', 'Pedro Fernandez', 'pedro.fernandez@example.com', '600567890', 'Calle Estrella 202', 'O', '2023-05-01', NULL),
-('67890123F', 'Marta Lopez', 'marta.lopez@example.com', '600678901', 'Avenida Mar 303', 'A', '2023-06-01', NULL),
-('78901234G', 'Jose Garcia', 'jose.garcia@example.com', '600789012', 'Calle Rio 404', 'O', '2023-07-01', NULL),
-('89012345H', 'Sara Ruiz', 'sara.ruiz@example.com', '600890123', 'Avenida Montaña 505', 'A', '2023-08-01', NULL),
-('90123456I', 'Carlos Ortega', 'carlos.ortega@example.com', '600901234', 'Calle Verde 606', 'O', '2023-09-01', NULL),
-('01234567J', 'Lucia Torres', 'lucia.torres@example.com', '600012345', 'Avenida Azul 707', 'A', '2023-10-01', NULL),
-('11234567K', 'Alberto Nunez', 'alberto.nunez@example.com', '600112345', 'Calle Blanca 808', 'O', '2023-11-01', NULL),
-('22345678L', 'Beatriz Suarez', 'beatriz.suarez@example.com', '600223456', 'Avenida Roja 909', 'A', '2023-12-01', NULL),
-('33456789M', 'Carmen Diaz', 'carmen.diaz@example.com', '600334567', 'Calle Verde 1010', 'O', '2024-01-01', NULL),
-('44567890N', 'Daniel Perez', 'daniel.perez@example.com', '600445678', 'Avenida Azul 1111', 'A', '2024-02-01', NULL),
-('55678901O', 'Elena Garcia', 'elena.garcia@example.com', '600556789', 'Calle Amarilla 1212', 'O', '2024-03-01', NULL),
-('66789012P', 'Fernando Lopez', 'fernando.lopez@example.com', '600667890', 'Avenida Negra 1313', 'A', '2024-04-01', NULL),
-('77890123Q', 'Gloria Martinez', 'gloria.martinez@example.com', '600778901', 'Calle Rosa 1414', 'O', '2024-05-01', NULL),
-('88901234R', 'Hector Sanchez', 'hector.sanchez@example.com', '600889012', 'Avenida Naranja 1515', 'A', '2024-06-01', NULL),
-('99012345S', 'Irene Fernandez', 'irene.fernandez@example.com', '600990123', 'Calle Morada 1616', 'O', '2024-07-01', NULL),
-('10123456T', 'Javier Ruiz', 'javier.ruiz@example.com', '600101234', 'Avenida Celeste 1717', 'A', '2024-08-01', NULL);
 
 INSERT INTO `clientes` (`cif`, `nombre`, `telefono`, `correo`, `pais`, `cuenta_corriente`, `moneda`, `importe_mensual`, `fecha_alta`, `fecha_actualizado`) VALUES
 ('A12345678', 'Empresa S.A.', '900123456', 'contacto@empresa.com', 'España', 'ES7620770024003102575766', 'EUR', 1000.00, '2023-01-01', NULL),

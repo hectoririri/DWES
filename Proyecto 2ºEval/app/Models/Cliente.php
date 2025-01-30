@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Clientes extends Model
+class Cliente extends Model
 {
     protected $table = "clientes";
     protected $primaryKey = "id";
@@ -19,7 +19,7 @@ class Clientes extends Model
      */
     public function tareas()
     {
-        return $this->hasMany(Tareas::class);
+        return $this->hasMany(Tarea::class);
     }
     
     /**
@@ -29,7 +29,7 @@ class Clientes extends Model
      */
     public function cuotas()
     {
-        return $this->hasMany(Cuotas::class);
+        return $this->hasMany(Cuota::class);
     }
 
     /**
@@ -39,7 +39,11 @@ class Clientes extends Model
     {
     }
 
-    public static function isClienteRegistered(string $tel, string $nif_cif){
+    public static function isClienteRegistered(string $tel = null, string $nif_cif = null){
         return self::where('telefono', $tel)->where('cif', $nif_cif)->exists();
+    }
+
+    public static function getClientes(){
+        return self::all();
     }
 }

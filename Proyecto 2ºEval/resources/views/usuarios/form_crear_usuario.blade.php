@@ -1,16 +1,17 @@
 @extends('layout/plantilla')
 @section('title', 'Formulario De Alta Usuario')
 @section('cuerpo')
-<form method="POST" action="usuarios.store" enctype="multipart/form-data">
+<form method="POST" action="{{route('usuarios.store')}}" enctype="multipart/form-data">
+
     <h2>Formulario de creación de usuario</h2>
 
     <div class="form-group">
-        <label for="nif_cif">NIF o CIF*</label>
-        @error('nif_cif')
+        <label for="dni">DNI*</label>
+        @error('dni')
             <br>
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="text" class="form-control" name="nif_cif" id="nif_cif" value="{{ old('nif_cif') }}">
+        <input type="text" class="form-control" name="dni" id="dni" value="{{ old('dni') }}">
     </div>
 
     <div class="form-group">
@@ -29,6 +30,33 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <input type="text" class="form-control" name="password" id="password" value="{{ old('password') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="correo">Correo electrónico*</label>
+        @error('correo')
+            <br>
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <input type="text" class="form-control" name="correo" id="correo" value="{{ old('correo') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="telefono">Telefono*</label>
+        @error('telefono')
+            <br>
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <input type="text" class="form-control" name="telefono" id="telefono" value="{{ old('telefono') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="direccion">Direccion</label>
+        @error('direccion')
+            <br>
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <input type="text" class="form-control" name="direccion" id="direccion" value="{{ old('direccion') }}">
     </div>
 
     <div class="form-group">

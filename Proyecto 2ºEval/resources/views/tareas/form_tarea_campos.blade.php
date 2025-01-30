@@ -97,10 +97,10 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     
-    <input type="datetime-local" class="form-control" name="fecha_creacion" id="fecha_creacion" @if(!empty($tarea->fecha_creacion)) value="{{$tarea->fecha_creacion}}" @else value="{{ date("Y-m-d H:i:s") }}" @endif readonly>
+    <input type="datetime-local" class="form-control" name="fecha_creacion" id="fecha_creacion" @if(!empty($tarea->fecha_creacion)) value="{{$tarea->fecha_creacion}}" @else value="{{ date("Y-m-d\\TH:i") }}" @endif readonly>
 </div>
 
-{{-- Si es cliente se oculta --}}
+{{-- Si es cliente se omite --}}
 <div class="form-group">
     <label for="operario_id">Operario encargado*</label>
     @error('operario')
@@ -111,6 +111,21 @@
         <option value="" selected></option>
         @foreach ($operarios as $operario)
                     <option value="{{$operario->id}}" {{ old('operario', $tarea->operario) == $operario->id ? 'selected' : '' }} >{{$operario->nombre." ".$operario->apellidos}}</option>
+        @endforeach
+    </select>
+</div>
+
+{{-- Si es cliente se oculta --}}
+<div class="form-group">
+    <label for="cliente_id">Cliente que encarga el trabajo*</label>
+    @error('cliente')
+        <br>
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <select class="form-control" name="cliente" id="cliente_id">
+        <option value="" selected></option>
+        @foreach ($clientes as $cliente)
+                    <option value="{{$cliente->id}}" {{ old('cliente', $tarea->cliente) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
         @endforeach
     </select>
 </div>

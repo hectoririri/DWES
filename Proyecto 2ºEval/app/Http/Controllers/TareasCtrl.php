@@ -4,37 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TareasRequestCreate;
 use App\Http\Requests\TareasRequestUpdate;
+use App\Models\Cliente;
 use App\Models\Clientes;
+use App\Models\Provincia;
 use App\Models\Provincias;
+use App\Models\Tarea;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
+use App\Models\Usuario;
 use App\Models\Usuarios;
 use Illuminate\Support\Facades\Validator;
 
 class TareasCtrl extends Controller
 {
-    private $tareas;
-    private $usuarios;
-    private $provincias;
-    private $clientes;
 
-    /**
-     * Constructor. Instancia los modelos necesarios.
-     */
-    public function __construct()
-    {
-        $this->tareas = new Tareas();
-        $this->usuarios = new Usuarios();
-        $this->provincias = new Provincias();
-        $this->clientes = new Clientes();
-    }
 
     /**
      * Muestra una vista con todas las tareas
      */
     public function index()
     {
-        $tareas = $this->tareas->getTareas();
+        $tareas = Tarea::getTareas();
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
@@ -44,7 +34,7 @@ class TareasCtrl extends Controller
      * @return void
      */
     public function mostrarTareasPendientes(){
-        $tareas = $this->tareas->getTareasPendientes();
+        $tareas = Tarea::getTareasPendientes();
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
@@ -53,7 +43,7 @@ class TareasCtrl extends Controller
      *
      * @return void
      */
-    public function completarTarea(Tareas $tarea){
+    public function completarTarea(Tarea $tarea){
         return view('tareas.completar_tarea', compact('tarea'));
     }
 
@@ -62,10 +52,11 @@ class TareasCtrl extends Controller
      */
     public function create()
     {
-        $operarios = $this->usuarios->getOperarios();
-        $provincias = $this->provincias->getProvincias();
-        $tarea = new Tareas();
-        return view('tareas.form_tarea', compact('operarios', 'provincias', 'tarea'));
+        $operarios = Usuario::getOperarios();
+        $provincias = Provincia::getProvincias();
+        $clientes = Cliente::getClientes();
+        $tarea = new Tarea();
+        return view('tareas.form_tarea', compact('operarios', 'provincias', 'tarea', 'clientes'));
     }
 
     /**
@@ -74,7 +65,7 @@ class TareasCtrl extends Controller
     public function store(TareasRequestCreate $requestTarea)
     {
         $validated = $requestTarea->validated();
-        $tarea = Tareas::create($validated);
+        $tarea = Tarea::create($validated);
         return redirect()->route('tareas.show', $tarea)
             ->with('mensaje', 'Tarea creada correctamente');
     }
@@ -84,7 +75,7 @@ class TareasCtrl extends Controller
      * @param Tareas tarea a mostrar
      * @return void
      */
-    public function show(Tareas $tarea)
+    public function show(Tarea $tarea)
     {
         return view('tareas.mostrar_tarea', compact('tarea'));
     }
@@ -92,17 +83,18 @@ class TareasCtrl extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tareas $tarea)
+    public function edit(Tarea $tarea)
     {
-        $operarios = $this->usuarios->getOperarios();
-        $provincias = $this->provincias->getProvincias();
-        return view('tareas.form_actualizar_tarea', compact('operarios', 'provincias', 'tarea'));
+        $operarios = Usuario::getOperarios();
+        $provincias = Provincia::getProvincias();
+        $clientes = Cliente::getClientes();
+        return view('tareas.form_actualizar_tarea', compact('operarios', 'provincias', 'tarea', 'clientes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(TareasRequestUpdate $requestTarea, Tareas $tarea)
+    public function update(TareasRequestUpdate $requestTarea, Tarea $tarea)
     {
     // composer require laravel/ui bootstrap
 
@@ -114,7 +106,7 @@ class TareasCtrl extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tareas $tarea)
+    public function destroy(Tarea $tarea)
     {
         $tarea->delete();
         return redirect()->route('tareas.index')->with('mensaje', 'Tarea eliminada correctamente');
@@ -126,7 +118,7 @@ class TareasCtrl extends Controller
      * @param integer $id id de la tarea a borrar
      * @return void
      */
-    public function confirmarBorrarTarea(Tareas $tarea){
+    public function confirmarBorrarTarea(Tarea $tarea){
         return view('tareas.borrar_tarea', compact('tarea'));
     }
 
@@ -136,7 +128,7 @@ class TareasCtrl extends Controller
      * 
      */
 
-    public function confirmarTarea(Request $request, Tareas $tarea)
+    public function confirmarTarea(Request $request, Tarea $tarea)
     {
         $validated = $request->validate([
             'estado' => ['required', 'size:1', 'in:R,C'],

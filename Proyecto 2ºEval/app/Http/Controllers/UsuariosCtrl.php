@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Usuarios;
 
 class UsuariosCtrl extends Controller
 {
-    private $usuarios;
-
-    /**
-     * Constructor. Instancia los modelos necesarios.
-     */
-    public function __construct()
-    {
-        $this->usuarios = new Usuarios();
-    }
+    
     /**
      * Muestra todos los usuarios de la base de datos.
      *
@@ -23,7 +16,7 @@ class UsuariosCtrl extends Controller
      */
     public function index()
     {
-        $usuarios = $this->usuarios->getUsuarios();
+        $usuarios = Usuario::getUsuarios();
         return view('usuarios.mostrar_usuarios', compact('usuarios'));
     }
 
@@ -44,7 +37,7 @@ class UsuariosCtrl extends Controller
         $validated = $request->validate([
             // campos a comprobar
         ]);
-        $usuario = Usuarios::create($validated);
+        $usuario = Usuario::create($validated);
         return redirect()->route('usuarios.show', $usuario);
     }
 
@@ -54,8 +47,8 @@ class UsuariosCtrl extends Controller
      */
     public function show(int $id)
     {
-        $usuario = $this->usuarios->getUsuario($id);
-        return view('mostrar_usuario', compact('usuario'));
+        $usuario = Usuario::getUsuario($id);
+        return view('usuarios.mostrar_usuario', compact('usuario'));
     }
 
     /**
@@ -89,7 +82,7 @@ class UsuariosCtrl extends Controller
      * @return void
      */
     public function confirmarBorrarUsuario(int $id){
-        $usuario = $this->usuarios->getUsuario($id);
+        $usuario = Usuario::getUsuario($id);
         return view('confirmar_borrar_usuario', compact('usuario'));
     }
 }

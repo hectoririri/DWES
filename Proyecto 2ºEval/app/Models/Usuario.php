@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuarios extends Model
+class Usuario extends Model
 {
     protected $table = "usuarios";
     protected $primaryKey = "id";
@@ -18,7 +18,7 @@ class Usuarios extends Model
      */
     public function tareas()
     {
-        return $this->hasMany(Tareas::class);
+        return $this->hasMany(Tarea::class);
     }
 
     /**
@@ -43,8 +43,8 @@ class Usuarios extends Model
      *
      * @return void
      */
-    public function getUsuarios(){
-        $usuarios = Usuarios::paginate(5);
+    public static function getUsuarios(){
+        $usuarios = self::paginate(5);
         return $usuarios;
     }
 
@@ -54,8 +54,8 @@ class Usuarios extends Model
      * @return void
      * @param int $id id del usuario
      */
-    public function getUsuario(int $id){
-        $usuario = usuarios::where('id', $id)->first();
+    public static function getUsuario(int $id){
+        $usuario = self::where('id', $id)->first();
         return $usuario;
     }
 
@@ -64,8 +64,8 @@ class Usuarios extends Model
      *
      * @return void
      */
-    public function getOperarios(){
-        $operarios = Usuarios::where('rol', 'O')->get();
+    public static function getOperarios(){
+        $operarios = self::where('rol', 'O')->get();
         return $operarios;
     }
 }

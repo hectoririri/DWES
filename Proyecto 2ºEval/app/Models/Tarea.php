@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use PDO;
 use PDOException;
 
-class Tareas extends Model
+class Tarea extends Model
 {
     protected $table = "tareas";
     protected $primaryKey = "id";
@@ -28,7 +28,7 @@ class Tareas extends Model
      */
     public function usuarios()
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(Usuario::class);
     }
 
     public function __construct()
@@ -40,9 +40,9 @@ class Tareas extends Model
      *
      * @return void
      */
-    public function getTareas()
+    public static function getTareas()
     {
-        $tareas = Tareas::paginate(5);
+        $tareas = self::paginate(5);
         return $tareas;
     }
 
@@ -52,9 +52,9 @@ class Tareas extends Model
      * @param integer $id id de la tarea
      * @return void
      */
-    public function getTarea(int $id)
+    public static function getTarea(int $id)
     {
-        $tarea = Tareas::where('id', $id)->first();
+        $tarea = self::where('id', $id)->first();
         return $tarea;
     }
 
@@ -63,9 +63,9 @@ class Tareas extends Model
      *
      * @return void
      */
-    public function getTareasPendientes()
+    public static function getTareaPendientes()
     {
-        $tareas = Tareas::where('estado', 'P')->paginate(5);
+        $tareas = self::where('estado', 'P')->paginate(5);
         return $tareas;
     }
 }

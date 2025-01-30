@@ -20,3 +20,7 @@ update = guardar tarea al editarla (put)
 rutas registradas en web.php -> php artisan route:list
 
 al terminar de guardar o actualizar mostrar la ruta de esa tarea
+
+
+cambiar modelos a singular
+hacerlos con funciones estaticas sin tener que instanciarlos para usarlos

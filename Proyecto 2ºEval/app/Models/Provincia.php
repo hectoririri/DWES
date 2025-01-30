@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Provincias extends Model
+class Provincia extends Model
 {
     protected $table = "provincias";
     protected $primaryKey = "cod";
@@ -23,9 +23,9 @@ class Provincias extends Model
      *
      * @return collection
      */
-    public function getProvincias()
+    public static function getProvincias()
     {
-        $provincias = Provincias::all();
+        $provincias = self::all();
         return $provincias;
     }
 }
