@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Usuarios;
+use App\Rules\DniNifValidationRule;
+use App\Rules\TelefonoValidationRule;
 
 class UsuariosCtrl extends Controller
 {
@@ -25,20 +28,19 @@ class UsuariosCtrl extends Controller
      */
     public function create()
     {
-        return view('usuarios.form_crear_usuario');
+        $usuario = new Usuario();
+        return view('usuarios.form_crear_usuario', compact('usuario'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
         
-        $validated = $request->validate([
-            // campos a comprobar
-        ]);
+        $validated = $request->validated();
         $usuario = Usuario::create($validated);
-        return redirect()->route('usuarios.show', $usuario);
+        return redirect()->route('usuarios.show', $usuario)->with('mensaje', 'Usuario '.$usuario->name.' creado correctamente');
     }
 
     /**
@@ -54,25 +56,28 @@ class UsuariosCtrl extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Usuario $usuario)
     {
-        //
+        return view('usuarios.form_editar_usuario', compact('usuario'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UsuarioRequest $request, Usuario $usuario)
     {
-        //
+        $validated = $request->validated();
+        $usuario->update($validated);
+        return redirect()->route('usuario.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Usuario $usuario)
     {
-        //
+        $usuario->delete();
+        return redirect()->route('usuarios.index')->with('mensaje', 'Usuario eliminado correctamente');
     }
 
     /**

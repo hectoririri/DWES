@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TareasRequestCreate;
+use App\Http\Requests\TareaRequestCreate;
+use App\Http\Requests\TareaRequestUpdate;
 use App\Http\Requests\TareasRequestUpdate;
 use App\Models\Cliente;
-use App\Models\Clientes;
 use App\Models\Provincia;
-use App\Models\Provincias;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
 use App\Models\Usuario;
-use App\Models\Usuarios;
-use Illuminate\Support\Facades\Validator;
 
 class TareasCtrl extends Controller
 {
@@ -56,19 +53,21 @@ class TareasCtrl extends Controller
         $provincias = Provincia::getProvincias();
         $clientes = Cliente::getClientes();
         $tarea = new Tarea();
-        return view('tareas.form_tarea', compact('operarios', 'provincias', 'tarea', 'clientes'));
+        return view('tareas.form_crear_tarea', compact('operarios', 'provincias', 'tarea', 'clientes'));
     }
 
     /**
      * Guarda una nueva tarea en la base de datos
      */
-    public function store(TareasRequestCreate $requestTarea)
+    public function store(TareaRequestCreate $requestTarea)
     {
         $validated = $requestTarea->validated();
         
-        // Si es usuario creamos la tarea de la siguiente manera:
-        $validated['cliente_id'] = Cliente::getIdFromNifTelephone($validated['nif_cif'], $validated['telefono']);
+        // Si es usuario añadimos el cliente_id a mano:
+        $validated['cliente_id'] = Cliente::getIdFromNifTelephone($validated['telefono'], $validated['nif_cif']);
         
+        return dd($validated);
+        // Creamos la tarea y redirijimos
         $tarea = Tarea::create($validated);
         return redirect()->route('tareas.show', $tarea)
             ->with('mensaje', 'Tarea creada correctamente');
@@ -98,7 +97,7 @@ class TareasCtrl extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TareasRequestUpdate $requestTarea, Tarea $tarea)
+    public function update(TareaRequestUpdate $requestTarea, Tarea $tarea)
     {
     // composer require laravel/ui bootstrap
 

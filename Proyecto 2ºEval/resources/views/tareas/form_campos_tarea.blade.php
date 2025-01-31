@@ -1,23 +1,3 @@
-{{-- compartido aquí y especifico fuera --}}
-
-<div class="form-group">
-    <label for="nif_cif">NIF o CIF*</label>
-    @error('nif_cif')
-        <br>
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <input type="text" class="form-control" name="nif_cif" id="nif_cif" value="{{ old('nif_cif', $tarea->nif_cif) }}">
-</div>
-
-<div class="form-group">
-    <label for="telefono_contacto">Teléfono de contacto*</label>
-    @error('telefono')
-        <br>
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
-</div>
-
 <div class="form-group">
     <label for="descripcion">Descripción identificativa de la tarea*</label>
     @error('descripcion')
@@ -102,7 +82,7 @@
     <input type="datetime-local" class="form-control" name="fecha_creacion" id="fecha_creacion" @if(!empty($tarea->fecha_creacion)) value="{{$tarea->fecha_creacion}}" @else value="{{ date("Y-m-d\\TH:i") }}" @endif readonly>
 </div>
 
-{{-- Si es cliente se omite --}}
+{{-- Solo si es admin --}}
 <div class="form-group">
     <label for="operario_id">Operario encargado*</label>
     @error('operario')
@@ -112,12 +92,12 @@
     <select class="form-control" name="operario" id="operario_id">
         <option value="" selected></option>
         @foreach ($operarios as $operario)
-                    <option value="{{$operario->id}}" {{ old('operario', $tarea->operario) == $operario->id ? 'selected' : '' }} >{{$operario->nombre." ".$operario->apellidos}}</option>
+                    <option value="{{$operario->id}}" {{ old('operario', $tarea->operario) == $operario->id ? 'selected' : '' }} >{{$operario->name." ".$operario->apellidos}}</option>
         @endforeach
     </select>
 </div>
 
-{{-- Si es cliente se oculta --}}
+{{-- Para el cliente se oculta --}}
 <div class="form-group">
     <label for="cliente_id">Cliente que encarga el trabajo*</label>
     @error('cliente')

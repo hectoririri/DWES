@@ -1,9 +1,9 @@
 @extends('layout/plantilla')
 @section('title', 'Formulario De Alta Usuario')
 @section('cuerpo')
-<form method="POST" action="{{route('usuarios.store')}}" enctype="multipart/form-data">
-
-    <h2>Formulario de creación de usuario</h2>
+<form method="POST" action="{{route('usuarios.update', compact('usuario'))}}" enctype="multipart/form-data">
+    @method('PUT')
+    <h2>Formulario de modificación de usuario</h2>
 
     @include('usuarios.form_campos_usuario')
 

@@ -7,7 +7,7 @@ use App\Rules\DniNifValidationRule;
 use App\Rules\TelefonoValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TareasRequestUpdate extends FormRequest
+class TareaRequestUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,6 @@ class TareasRequestUpdate extends FormRequest
             'descripcion' => ['required', 'string', 'max:500'],
             'direccion' => ['nullable', 'string', 'max:100'],
             'poblacion' => ['nullable', 'string', 'max:100'],
-            // mirar cod postal
             'cod_postal' => ['required', 'integer', 'max:99999'],
             'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
             'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],

@@ -11,7 +11,7 @@
     @endif
     @dump($tarea->toArray())
     
-    @include('tareas.form_tarea_campos')
+    @include('tareas.form_campos_tarea')
 
     <div class="form-group">
         <label for="fichero">Fichero resumen de tareas realizadas</label>

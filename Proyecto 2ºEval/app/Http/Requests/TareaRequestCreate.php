@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Clientes;
+use App\Models\Cliente;
 use App\Rules\DniNifValidationRule;
 use App\Rules\TelefonoValidationRule;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TareasRequestCreate extends FormRequest
+class TareaRequestCreate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class TareasRequestCreate extends FormRequest
      */
     public function rules(): array
     {
-        // Si el formulario lo manda un cliente y no añadimos
+        // Si el formulario lo manda un cliente: Añadimos nif y telefono
         /*
         $reglas['nif_cif'] = ['required', 'string', 'size:9', new DniNifValidationRule, 
             function (string $attribute, mixed $value, \Closure $fail) {
@@ -40,8 +40,8 @@ class TareasRequestCreate extends FormRequest
         $reglas['telefono'] = ['required', 'string', 'size:16', new TelefonoValidationRule];
         */
 
-        // Si el formulario lo manda un administrador quitariamos ambos campos de la variable reglas
-        // añadimos el select de clientes
+        // Si el formulario lo manda un administrador:
+        // solo añadimos el select de clientes
         /* $reglas['cliente_id'] = ['required', 'int', 'max:11', 'exists:clientes,id'] */
 
         $reglas = [
@@ -49,7 +49,7 @@ class TareasRequestCreate extends FormRequest
             function (string $attribute, mixed $value, \Closure $fail) {
                 $nif = request()->input('nif_cif');
                 $telefono = request()->input('telefono');
-                if (!Clientes::isClienteRegistered($telefono, $nif)) {
+                if (!Cliente::isClienteRegistered($telefono, $nif)) {
                     // Añadimos error en caso de que no esté registrado
                     $fail('El cliente con este NIF/CIF y teléfono no está registrado en el sistema');
                 }
@@ -61,7 +61,7 @@ class TareasRequestCreate extends FormRequest
             'cod_postal' => ['required', 'integer', 'max:99999'],
             'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
             'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],
-            'operario' => ['required', 'int', 'max:11', 'exists:usuarios,id'],
+            'operario' => ['required', 'int', 'max:11', 'exists:users,id'],
             'fecha_creacion' => ['required', 'date_format:Y-m-d\\TH:i'],
             'fecha_realizacion' => ['required', 'date_format:Y-m-d\\TH:i', 'after:fecha_creacion'],
             'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],

@@ -24,6 +24,7 @@ return new class extends Migration
             // meter datos de usuario de la otra tabla
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

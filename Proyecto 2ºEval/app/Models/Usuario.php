@@ -3,11 +3,14 @@ namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Usuario extends Model
 {
     protected $table = "users";
     protected $primaryKey = "id";
+    protected $fillable = ['dni', 'telefono', 'direccion', 'rol', 'name', 'email', 'password'];
+    use SoftDeletes;
 
     /**
      * Declaramos la relación uno a muchos con la tabla tareas

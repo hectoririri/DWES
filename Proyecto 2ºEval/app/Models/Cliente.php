@@ -46,4 +46,8 @@ class Cliente extends Model
     public static function getClientes(){
         return self::all();
     }
+
+    public static function getIdFromNifTelephone(string $tel = null, string $nif_cif = null){
+        return self::where('telefono', $tel)->where('cif', $nif_cif)->value('id');
+    }
 }
