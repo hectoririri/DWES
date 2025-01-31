@@ -1,7 +1,7 @@
 @extends('layout/plantilla')
 @section('title', 'Detalles del usuario')
 @section('cuerpo')
-<h1 class="text-center">Detalles del usuario {{$usuario->nombre}}</h1>
+<h1 class="text-center">Detalles del usuario {{$usuario->name}}</h1>
 <div class="table-responsive">
     <table class="table table-striped table-bordered text-center">
         <tbody>

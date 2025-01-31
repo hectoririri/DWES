@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,6 +9,11 @@ class Usuario extends Model
     protected $table = "users";
     protected $primaryKey = "id";
     protected $fillable = ['dni', 'telefono', 'direccion', 'rol', 'name', 'email', 'password'];
+    // Se castea para que no salte el formato ISO 8601
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y H:i:s',
+        'updated_at' => 'datetime:d-m-Y H:i:s',
+    ];
     use SoftDeletes;
 
     /**

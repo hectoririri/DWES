@@ -82,7 +82,7 @@
     <input type="datetime-local" class="form-control" name="fecha_creacion" id="fecha_creacion" @if(!empty($tarea->fecha_creacion)) value="{{$tarea->fecha_creacion}}" @else value="{{ date("Y-m-d\\TH:i") }}" @endif readonly>
 </div>
 
-{{-- Solo si es admin --}}
+{{-- Para el cliente se oculta --}}
 <div class="form-group">
     <label for="operario_id">Operario encargado*</label>
     @error('operario')

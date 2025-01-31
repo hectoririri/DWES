@@ -2,11 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\DataBase;
-use App\Models\Utiles;
 use Illuminate\Database\Eloquent\Model;
-use PDO;
-use PDOException;
 
 class Tarea extends Model
 {
@@ -19,7 +15,7 @@ class Tarea extends Model
         'fecha_creacion' => 'datetime:d-m-Y H:i:s',
         'fecha_actualizacion' => 'datetime:d-m-Y H:i:s',
     ];
-    protected $fillable = ['descripcion', 'correo', 'direccion', 'poblacion', 'cod_postal', 'provincia', 'estado', 'fecha_creacion', 'operario_id', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'usuario_id', 'operario_asignado'];
+    protected $fillable = ['descripcion', 'correo', 'direccion', 'poblacion', 'cod_postal', 'provincia', 'estado', 'fecha_creacion', 'operario_id', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'usuario_id'];
     
     /**
      * Declaramos la relación muchos a uno con la tabla usuarios

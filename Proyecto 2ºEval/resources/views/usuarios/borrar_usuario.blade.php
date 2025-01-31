@@ -12,19 +12,19 @@
             </tr>
             <tr>
                 <th class="text-center">Nombre</th>
-                <td class="text-center">{!! $usuario->nombre !!}</td>
+                <td class="text-center">{!! $usuario->name !!}</td>
             </tr>
             <tr>
                 <th class="text-center">Correo Electrónico</th>
-                <td class="text-center">{!! $usuario->correo !!}</td>
+                <td class="text-center">{!! $usuario->email !!}</td>
             </tr>
             <tr>
                 <th class="text-center">Rol</th>
-                <td class="text-center">{{ $usuario->tipo == 'A' ? 'Administrador' : 'Operario' }}</td>
+                <td class="text-center">{{ $usuario->rol == 'A' ? 'Administrador' : 'Operario' }}</td>
             </tr>
             <tr>
                 <th class="text-center">Fecha Alta</th>
-                <td class="text-center">{!! $usuario->fecha_alta !!}</td>
+                <td class="text-center">{!! $usuario->created_at !!}</td>
             </tr>
         </tbody>
     </table>
