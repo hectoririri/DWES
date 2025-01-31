@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-01-2025 a las 14:04:49
+-- Tiempo de generación: 31-01-2025 a las 01:57:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -250,24 +250,25 @@ CREATE TABLE `tareas` (
   `anotaciones_anteriores` text DEFAULT NULL,
   `anotaciones_posteriores` text DEFAULT NULL,
   `fichero` varchar(100) DEFAULT NULL,
-  `foto` varchar(100) DEFAULT NULL
+  `foto` varchar(100) DEFAULT NULL,
+  `operario_asignado` tinyint(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tareas`
 --
 
-INSERT INTO `tareas` (`id`, `descripcion`, `correo`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `fecha_realizacion`, `fecha_actualizacion`, `operario_id`, `cliente_id`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`) VALUES
-(41, 'Reparación de fuga en baño', 'cliente1@example.com', 'Calle Mayor 12', 'Madrid', '28001', 'Madrid', 'P', '2025-01-20', NULL, '2025-01-21', 1, 3, 'Detectada fuga bajo lavabo', 'Pendiente de aprobación', NULL, NULL),
-(42, 'Instalación de tuberías', 'cliente2@example.com', 'Av. Andalucía 45', 'Sevilla', '41005', 'Sevilla', 'B', '2025-01-18', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL),
-(43, 'Pintado de fachada', 'cliente3@example.com', 'Calle Gran Vía 30', 'Barcelona', '08010', 'Barcelona', 'R', '2025-01-10', '2025-01-15', '2025-01-16', 3, 2, 'Fachada en mal estado', 'Trabajo finalizado con éxito', 'presupuesto.pdf', 'fachada_final.jpg'),
-(44, 'Cambio de baldosas', 'cliente4@example.com', 'Calle Serrano 8', 'Madrid', '28006', 'Madrid', 'P', '2025-01-22', NULL, NULL, 4, 5, NULL, NULL, NULL, NULL),
-(45, 'Revisión eléctrica', 'cliente5@example.com', 'Calle Alcazaba 7', 'Málaga', '29015', 'Málaga', 'B', '2025-01-19', NULL, NULL, 1, 4, 'Algunas luces parpadean', 'Esperando aprobación del cliente', NULL, NULL),
-(46, 'Impermeabilización de terraza', 'cliente6@example.com', 'Av. Libertad 32', 'Valencia', '46002', 'Valencia', 'C', '2025-01-12', NULL, '2025-01-14', 2, 6, 'Filtraciones en techo inferior', 'Cliente canceló por presupuesto alto', NULL, NULL),
-(47, 'Colocación de pladur', 'cliente7@example.com', 'Calle Río Ebro 5', 'Zaragoza', '50002', 'Zaragoza', 'P', '2025-01-23', NULL, NULL, 3, 2, NULL, NULL, NULL, NULL),
-(48, 'Pavimentación de garaje', 'cliente8@example.com', 'Calle Real 20', 'Granada', '18001', 'Granada', 'R', '2025-01-05', '2025-01-08', '2025-01-09', 4, 3, 'Hormigón anterior muy deteriorado', 'Obra completada', 'factura.pdf', 'garaje_nuevo.jpg'),
-(49, 'Sustitución de ventanas', 'cliente9@example.com', 'Av. Castilla 14', 'Valladolid', '47008', 'Valladolid', 'P', '2025-01-24', NULL, NULL, 1, 7, NULL, NULL, NULL, NULL),
-(50, 'Reforma integral de baño', 'cliente10@example.com', 'Calle Sol 3', 'Alicante', '03001', 'Alicante', 'B', '2025-01-17', NULL, NULL, 2, 8, 'Baño con instalaciones antiguas', 'Aprobado, en espera de materiales', 'presupuesto_baño.pdf', NULL);
+INSERT INTO `tareas` (`id`, `descripcion`, `correo`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `fecha_realizacion`, `fecha_actualizacion`, `operario_id`, `cliente_id`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`, `operario_asignado`) VALUES
+(41, 'Reparación de fuga en baño', 'cliente1@example.com', 'Calle Mayor 12', 'Madrid', '28001', 'Madrid', 'P', '2025-01-20', NULL, '2025-01-21', 1, 3, 'Detectada fuga bajo lavabo', 'Pendiente de aprobación', NULL, NULL, 0),
+(42, 'Instalación de tuberías', 'cliente2@example.com', 'Av. Andalucía 45', 'Sevilla', '41005', 'Sevilla', 'B', '2025-01-18', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, 0),
+(43, 'Pintado de fachada', 'cliente3@example.com', 'Calle Gran Vía 30', 'Barcelona', '08010', 'Barcelona', 'R', '2025-01-10', '2025-01-15', '2025-01-16', 3, 2, 'Fachada en mal estado', 'Trabajo finalizado con éxito', 'presupuesto.pdf', 'fachada_final.jpg', 0),
+(44, 'Cambio de baldosas', 'cliente4@example.com', 'Calle Serrano 8', 'Madrid', '28006', 'Madrid', 'P', '2025-01-22', NULL, NULL, 4, 5, NULL, NULL, NULL, NULL, 0),
+(45, 'Revisión eléctrica', 'cliente5@example.com', 'Calle Alcazaba 7', 'Málaga', '29015', 'Málaga', 'B', '2025-01-19', NULL, NULL, 1, 4, 'Algunas luces parpadean', 'Esperando aprobación del cliente', NULL, NULL, 0),
+(46, 'Impermeabilización de terraza', 'cliente6@example.com', 'Av. Libertad 32', 'Valencia', '46002', 'Valencia', 'C', '2025-01-12', NULL, '2025-01-14', 2, 6, 'Filtraciones en techo inferior', 'Cliente canceló por presupuesto alto', NULL, NULL, 0),
+(47, 'Colocación de pladur', 'cliente7@example.com', 'Calle Río Ebro 5', 'Zaragoza', '50002', 'Zaragoza', 'P', '2025-01-23', NULL, NULL, 3, 2, NULL, NULL, NULL, NULL, 0),
+(48, 'Pavimentación de garaje', 'cliente8@example.com', 'Calle Real 20', 'Granada', '18001', 'Granada', 'R', '2025-01-05', '2025-01-08', '2025-01-09', 4, 3, 'Hormigón anterior muy deteriorado', 'Obra completada', 'factura.pdf', 'garaje_nuevo.jpg', 0),
+(49, 'Sustitución de ventanas', 'cliente9@example.com', 'Av. Castilla 14', 'Valladolid', '47008', 'Valladolid', 'P', '2025-01-24', NULL, NULL, 1, 7, NULL, NULL, NULL, NULL, 0),
+(50, 'Reforma integral de baño', 'cliente10@example.com', 'Calle Sol 3', 'Alicante', '03001', 'Alicante', 'B', '2025-01-17', NULL, NULL, 2, 8, 'Baño con instalaciones antiguas', 'Aprobado, en espera de materiales', 'presupuesto_baño.pdf', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -295,17 +296,19 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `dni`, `name`, `email`, `telefono`, `direccion`, `rol`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '12345678A', 'Juan Pérez', 'juan.perez@example.com', '600123456', 'Calle Mayor 12, Madrid', 'O', NULL, 'hashed_password_1', NULL, '2025-01-01 09:00:00', '2025-01-02 11:30:00'),
-(2, '87654321B', 'María López', 'maria.lopez@example.com', '610987654', 'Av. Andalucía 45, Sevilla', 'O', NULL, 'hashed_password_2', NULL, '2025-01-02 10:15:00', '2025-01-03 12:45:00'),
-(3, '11223344C', 'Carlos Sánchez', 'carlos.sanchez@example.com', '620345678', 'Calle Gran Vía 30, Barcelona', 'O', NULL, 'hashed_password_3', NULL, '2025-01-03 08:45:00', '2025-01-04 14:00:00'),
-(4, '44332211D', 'Lucía Fernández', 'lucia.fernandez@example.com', '630456789', 'Calle Serrano 8, Madrid', 'O', NULL, 'hashed_password_4', NULL, '2025-01-04 13:20:00', '2025-01-05 16:10:00'),
-(5, '55667788E', 'David Martínez', 'david.martinez@example.com', '640567890', 'Calle Alcazaba 7, Málaga', 'O', NULL, 'hashed_password_5', NULL, '2025-01-05 07:30:00', '2025-01-06 18:30:00'),
-(6, '99887766F', 'Ana Torres', 'ana.torres@example.com', '650678901', 'Av. Libertad 32, Valencia', 'O', NULL, 'hashed_password_6', NULL, '2025-01-06 09:45:00', '2025-01-07 13:55:00'),
-(7, '33445566G', 'Miguel Romero', 'miguel.romero@example.com', '660789012', 'Calle Río Ebro 5, Zaragoza', 'O', NULL, 'hashed_password_7', NULL, '2025-01-07 11:10:00', '2025-01-08 17:20:00'),
-(8, '77665544H', 'Isabel Navarro', 'isabel.navarro@example.com', '670890123', 'Calle Real 20, Granada', 'O', NULL, 'hashed_password_8', NULL, '2025-01-08 15:25:00', '2025-01-09 19:40:00'),
-(9, '22334455I', 'Pablo Domínguez', 'pablo.dominguez@example.com', '680901234', 'Av. Castilla 14, Valladolid', 'O', NULL, 'hashed_password_9', NULL, '2025-01-09 08:00:00', '2025-01-10 21:15:00'),
-(10, '88990011J', 'Elena Ruiz', 'elena.ruiz@example.com', '690123456', 'Calle Sol 3, Alicante', 'A', NULL, 'hashed_password_10', NULL, '2025-01-10 06:55:00', '2025-01-11 22:30:00');
+INSERT INTO `users` (`id`, `dni`, `name`, `email`, `telefono`, `direccion`, `rol`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '12345678A', 'Juan Pérez', 'juan.perez@example.com', '600123456', 'Calle Mayor 12, Madrid', 'O', NULL, 'hashed_password_1', NULL, '2025-01-01 09:00:00', '2025-01-02 11:30:00', NULL),
+(2, '87654321B', 'María López', 'maria.lopez@example.com', '610987654', 'Av. Andalucía 45, Sevilla', 'O', NULL, 'hashed_password_2', NULL, '2025-01-02 10:15:00', '2025-01-30 21:43:56', '2025-01-30 21:43:56'),
+(3, '11223344C', 'Carlos Sánchez', 'carlos.sanchez@example.com', '620345678', 'Calle Gran Vía 30, Barcelona', 'O', NULL, 'hashed_password_3', NULL, '2025-01-03 08:45:00', '2025-01-04 14:00:00', NULL),
+(4, '44332211D', 'Lucía Fernández', 'lucia.fernandez@example.com', '630456789', 'Calle Serrano 8, Madrid', 'O', NULL, 'hashed_password_4', NULL, '2025-01-04 13:20:00', '2025-01-05 16:10:00', NULL),
+(5, '55667788E', 'David Martínez', 'david.martinez@example.com', '640567890', 'Calle Alcazaba 7, Málaga', 'O', NULL, 'hashed_password_5', NULL, '2025-01-05 07:30:00', '2025-01-06 18:30:00', NULL),
+(6, '99887766F', 'Ana Torres', 'ana.torres@example.com', '650678901', 'Av. Libertad 32, Valencia', 'O', NULL, 'hashed_password_6', NULL, '2025-01-06 09:45:00', '2025-01-07 13:55:00', NULL),
+(7, '33445566G', 'Miguel Romero', 'miguel.romero@example.com', '660789012', 'Calle Río Ebro 5, Zaragoza', 'O', NULL, 'hashed_password_7', NULL, '2025-01-07 11:10:00', '2025-01-08 17:20:00', NULL),
+(8, '77665544H', 'Isabel Navarro', 'isabel.navarro@example.com', '670890123', 'Calle Real 20, Granada', 'O', NULL, 'hashed_password_8', NULL, '2025-01-08 15:25:00', '2025-01-09 19:40:00', NULL),
+(9, '22334455I', 'Pablo Domínguez', 'pablo.dominguez@example.com', '680901234', 'Av. Castilla 14, Valladolid', 'O', NULL, 'hashed_password_9', NULL, '2025-01-09 08:00:00', '2025-01-10 21:15:00', NULL),
+(10, '88990011J', 'Elena Ruiz', 'elena.ruiz@example.com', '690123456', 'Calle Sol 3, Alicante', 'A', NULL, 'hashed_password_10', NULL, '2025-01-10 06:55:00', '2025-01-11 22:30:00', NULL),
+(11, '54794584M', 'nombre', 'hecnugar@gmail.com', '+34-123-45-67-89', 'mi casa', 'A', NULL, 'Contraseña56@', NULL, '2025-01-30 23:08:35', '2025-01-30 23:08:55', '2025-01-30 23:08:55'),
+(12, '12345678Z', 'Hector', 'hnungar584@gmail.com', '+34-123-45-67-89', 'he cambiao', 'A', NULL, 'Contraseña56@', NULL, '2025-01-30 23:25:08', '2025-01-30 23:41:08', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -409,7 +412,7 @@ ALTER TABLE `tareas`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
