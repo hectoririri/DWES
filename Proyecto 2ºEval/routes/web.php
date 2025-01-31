@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 include 'helpers.php';
 
 // https://laravel.com/docs/11.x/controllers#restful-localizing-resource-uris
 
-Route::get('/', function () {
-    return view('home')->with('mostrarMenu', true);
-});
+
 
 Route::get('/tareas/pendientes', [TareasCtrl::class, 'mostrarTareasPendientes'])
     ->name('tareas.pendientes');
@@ -36,3 +36,9 @@ Route::resources([
     'tareas' => TareasCtrl::class,
     'usuarios' => UsuariosCtrl::class,
 ]);
+
+Auth::routes();
+
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
