@@ -6,6 +6,7 @@ use App\Rules\DniNifValidationRule;
 use App\Rules\TelefonoValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UsuarioRequest extends FormRequest
 {
@@ -35,7 +36,7 @@ class UsuarioRequest extends FormRequest
             $isCreating ? 'unique:users,email' : Rule::unique('users', 'email')->ignore($id_usuario),
         ],
             'name' => ['required', 'string', 'max:50'],
-            'password' => ['required', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', 'string', 'min:8'],
+            'password' => ['required', Password::min(8)->letters()->mixedCase()->numbers()->symbols(), 'string', 'min:8'],
             'telefono' => ['required', 'string', 'size:16', new TelefonoValidationRule],
             'direccion' => ['required', 'string', 'max:150'],
             'rol' => ['required', 'string', 'size:1', 'in:A,O'],

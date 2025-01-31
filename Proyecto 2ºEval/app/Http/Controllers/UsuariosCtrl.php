@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuarios;
 use App\Rules\DniNifValidationRule;
 use App\Rules\TelefonoValidationRule;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosCtrl extends Controller
 {
@@ -39,6 +40,8 @@ class UsuariosCtrl extends Controller
     {
         
         $validated = $request->validated();
+         // Enctriptamos la contraseña antes de guardarla
+        $validated['password'] = Hash::make($validated['password']);
         $usuario = Usuario::create($validated);
         return redirect()->route('usuarios.show', $usuario)->with('mensaje', 'Usuario '.$usuario->name.' creado correctamente');
     }
