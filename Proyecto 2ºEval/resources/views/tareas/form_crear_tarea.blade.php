@@ -19,7 +19,7 @@
     </div>
     @endif
 
-    @if (!auth()->user()->isAdmin())
+    @if (!auth()->check())
         <h3 class="text-secondary">Validese con una cuenta cliente registrada en nuestro sistema</h3>
 
         <div class="form-group">

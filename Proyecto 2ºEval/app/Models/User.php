@@ -48,10 +48,20 @@ class User extends Authenticatable
     }
 
     public static function isAdmin(){
-        return Auth::user()->rol == 'A';
+        if (auth()->check()){
+            if (Auth::user()->rol == 'A'){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static function isOperario(){
-        return Auth::user()->rol == 'O';
+        if (auth()->check()){
+            if (Auth::user()->rol == 'O'){
+                return true;
+            }
+        }
+        return false;
     }
 }
