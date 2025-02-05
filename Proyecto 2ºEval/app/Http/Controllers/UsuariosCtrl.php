@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
-use Illuminate\Http\Request;
-use App\Models\Usuarios;
-use App\Rules\DniNifValidationRule;
-use App\Rules\TelefonoValidationRule;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosCtrl extends Controller
 {
-    
+    public function __construct()
+    {
+        // Aplicar el middleware 'roles:A' a todas las acciones para que solo el administrador pueda acceder
+        $this->middleware('roles:A');
+    }
+
     /**
      * Muestra todos los usuarios de la base de datos.
      *
@@ -20,7 +21,7 @@ class UsuariosCtrl extends Controller
      */
     public function index()
     {
-        
+
         $usuarios = Usuario::getUsuarios();
         return view('usuarios.mostrar_usuarios', compact('usuarios'));
     }
@@ -41,7 +42,7 @@ class UsuariosCtrl extends Controller
     {
         
         $validated = $request->validated();
-         // Enctriptamos la contraseña antes de guardarla
+        // Enctriptamos la contraseña antes de guardarla
         $validated['password'] = Hash::make($validated['password']);
         $usuario = Usuario::create($validated);
         return redirect()->route('usuarios.show', $usuario)->with('mensaje', 'Usuario '.$usuario->name.' creado correctamente');
@@ -70,6 +71,8 @@ class UsuariosCtrl extends Controller
     public function update(UsuarioRequest $request, Usuario $usuario)
     {
         $validated = $request->validated();
+        // Enctriptamos la contraseña antes de guardarla
+        $validated['password'] = Hash::make($validated['password']);
         $usuario->update($validated);
         return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
     }

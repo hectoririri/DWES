@@ -35,7 +35,6 @@ class TareaRequestUpdate extends FormRequest
             'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],
             'operario' => ['required', 'int', 'max:11', 'exists:usuarios,id'],
             'cliente_id' => ['required', 'int', 'max:11', 'exists:clientes,id'],
-            // mirar lo del formato
             'fecha_creacion' => ['required', 'date_format:Y-m-d\\TH:i'],
             'fecha_realizacion' => ['required', 'date_format:Y-m-d\\TH:i', 'after:fecha_creacion'],
             'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],

@@ -67,7 +67,6 @@ class TareasCtrl extends Controller
         // Si es usuario añadimos el cliente_id a mano:
         $validated['cliente_id'] = Cliente::getIdFromNifTelephone($validated['telefono'], $validated['nif_cif']);
         
-        return dd($validated);
         // Creamos la tarea y redirijimos
         $tarea = Tarea::create($validated);
         return redirect()->route('usuarios.show', $tarea)

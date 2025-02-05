@@ -9,25 +9,37 @@
     </div>
     @endif
 
-    <h3 class="text-secondary">Validese con una cuenta cliente registrada en nuestro sistema</h3>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
-    <div class="form-group">
-        <label for="nif_cif">NIF o CIF*</label>
-        @error('nif_cif')
-            <br>
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <input type="text" class="form-control" name="nif_cif" id="nif_cif" value="{{ old('nif_cif', $tarea->nif_cif) }}">
-    </div>
-    
-    <div class="form-group">
-        <label for="telefono_contacto">Teléfono de contacto*</label>
-        @error('telefono')
-            <br>
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
-    </div>
+    @if (!auth()->user()->isAdmin())
+        <h3 class="text-secondary">Validese con una cuenta cliente registrada en nuestro sistema</h3>
+
+        <div class="form-group">
+            <label for="nif_cif">NIF o CIF*</label>
+            @error('nif_cif')
+                <br>
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <input type="text" class="form-control" name="nif_cif" id="nif_cif" value="{{ old('nif_cif', $tarea->nif_cif) }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="telefono_contacto">Teléfono de contacto*</label>
+            @error('telefono')
+                <br>
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
+        </div>
+    @endif
 
     {{-- Añadimos campos comunes --}}
     @include('tareas.form_campos_tarea')
