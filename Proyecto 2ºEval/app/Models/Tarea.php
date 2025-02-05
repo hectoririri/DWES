@@ -59,7 +59,7 @@ class Tarea extends Model
      *
      * @return void
      */
-    public static function getTareaPendientes()
+    public static function getTareasPendientes()
     {
         $tareas = self::where('estado', 'P')->paginate(5);
         return $tareas;

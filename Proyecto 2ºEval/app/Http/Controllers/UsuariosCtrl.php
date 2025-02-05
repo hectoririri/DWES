@@ -20,6 +20,7 @@ class UsuariosCtrl extends Controller
      */
     public function index()
     {
+        
         $usuarios = Usuario::getUsuarios();
         return view('usuarios.mostrar_usuarios', compact('usuarios'));
     }
@@ -50,9 +51,8 @@ class UsuariosCtrl extends Controller
      * Muestra los detalles del usuario seleccionado.
      * @param int $id, id del usuario
      */
-    public function show(int $id)
+    public function show(Usuario $usuario)
     {
-        $usuario = Usuario::getUsuario($id);
         return view('usuarios.mostrar_usuario', compact('usuario'));
     }
 
@@ -71,7 +71,7 @@ class UsuariosCtrl extends Controller
     {
         $validated = $request->validated();
         $usuario->update($validated);
-        return redirect()->route('usuario.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
+        return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
     }
 
     /**

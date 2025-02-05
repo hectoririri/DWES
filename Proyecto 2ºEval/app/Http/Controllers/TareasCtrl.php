@@ -15,6 +15,16 @@ use App\Models\Usuario;
 class TareasCtrl extends Controller
 {
 
+    public function __construct()
+    {
+        // Aplicar el middleware 'auth' a todas las acciones excepto 'create' y 'store'
+        $this->middleware('auth')->except('create', 'store');
+
+        // Aplicar middleware 'roles' para definir permisos por acción
+        $this->middleware('roles:O,A')->only('index', 'show', 'mostrarTareasPendientes');
+        $this->middleware('roles:O')->only('completarTarea', 'confirmarTarea');
+        $this->middleware('roles:A')->only('edit', 'update', 'destroy', 'confirmarBorrarTarea');
+    }
 
     /**
      * Muestra una vista con todas las tareas
@@ -33,15 +43,6 @@ class TareasCtrl extends Controller
     public function mostrarTareasPendientes(){
         $tareas = Tarea::getTareasPendientes();
         return view('tareas.mostrar_tareas', compact('tareas'));
-    }
-
-    /**
-     * Muestra una vista con las tareas pendientes
-     *
-     * @return void
-     */
-    public function completarTarea(Tarea $tarea){
-        return view('tareas.completar_tarea', compact('tarea'));
     }
 
     /**
@@ -69,7 +70,7 @@ class TareasCtrl extends Controller
         return dd($validated);
         // Creamos la tarea y redirijimos
         $tarea = Tarea::create($validated);
-        return redirect()->route('tareas.show', $tarea)
+        return redirect()->route('usuarios.show', $tarea)
             ->with('mensaje', 'Tarea creada correctamente');
     }
 
@@ -126,11 +127,19 @@ class TareasCtrl extends Controller
     }
 
     /**
+     * Muestra una vista con las tareas pendientes
+     *
+     * @return view
+     */
+    public function completarTarea(Tarea $tarea){
+        return view('tareas.completar_tarea', compact('tarea'));
+    }
+
+    /**
      * Validamos el formulario de confirmación de tarea
      * 
      * 
      */
-
     public function confirmarTarea(Request $request, Tarea $tarea)
     {
         $validated = $request->validate([

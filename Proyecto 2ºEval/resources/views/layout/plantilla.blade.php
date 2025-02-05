@@ -26,7 +26,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! miurl('home') !!}">Home</a>
+                                    <a class="nav-link" href="{!! route('home') !!}">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{!! route('tareas.index') !!}">Mostrar Tareas</a>
@@ -46,7 +46,8 @@
             </div>
             <div class="col-md-10">
                 <div class="d-flex justify-content-end">
-                    <a href="{!! miurl('loggout') !!}">Cerrar sesión</a>
+                    {{-- <a href="{!! route('loggout') !!}">Cerrar sesión</a> --}}
+                    <a href="#">cerrar sesion</a>
                 </div>
                 @yield('cuerpo')
             </div>
