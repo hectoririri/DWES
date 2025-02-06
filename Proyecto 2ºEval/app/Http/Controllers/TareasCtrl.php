@@ -10,6 +10,7 @@ use App\Models\Provincia;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
+use App\Models\User;
 use App\Models\Usuario;
 
 class TareasCtrl extends Controller
@@ -32,6 +33,7 @@ class TareasCtrl extends Controller
     public function index()
     {
         $tareas = Tarea::getTareas();
+        
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
@@ -65,11 +67,13 @@ class TareasCtrl extends Controller
         $validated = $requestTarea->validated();
         
         // Si es usuario añadimos el cliente_id a mano:
-        $validated['cliente_id'] = Cliente::getIdFromNifTelephone($validated['telefono'], $validated['nif_cif']);
-        
+        if (!auth()->check()){
+            $validated['cliente_id'] = Cliente::getIdFromNifTelephone($validated['telefono'], $validated['nif_cif']);
+        }
+
         // Creamos la tarea y redirijimos
         $tarea = Tarea::create($validated);
-        return redirect()->route('usuarios.show', $tarea)
+        return redirect()->route('tareas.show', $tarea)
             ->with('mensaje', 'Tarea creada correctamente');
     }
 

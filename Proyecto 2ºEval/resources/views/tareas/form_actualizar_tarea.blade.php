@@ -4,6 +4,7 @@
 <form method="POST" action="{{route('tareas.update', ['tarea'=>$tarea])}}" enctype="multipart/form-data" class="bg-light p-4 rounded">
     @method('PATCH')
     <h2 class="text-secondary">Actualizando tarea tarea</h2>
+    
     @if (session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}

@@ -32,15 +32,16 @@ class TareaRequestCreate extends FormRequest
             'poblacion' => ['nullable', 'string', 'max:100'],
             'cod_postal' => ['required', 'digits:5'],
             'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
-            'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],
-            'operario' => ['required', 'integer', 'exists:users,id'],
+            'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C'],
             'fecha_creacion' => ['required', 'date'],
+            'cliente_id' => ['required', 'integer', 'exists:clientes,id'],
             'fecha_realizacion' => ['required', 'date', 'after:fecha_creacion'],
             'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],
             'anotaciones_posteriores' => ['nullable', 'string', 'max:500'],
         ];
 
-        if (auth()->check() && auth()->user()->isAdmin()) {
+        if (auth()->user()->isAdmin()) {
+            $reglas['operario_id'] = ['required', 'integer', 'exists:users,id'];
             $reglas['cliente_id'] = ['required', 'integer', 'exists:clientes,id'];
         } else {
             $reglas['nif_cif'] = [

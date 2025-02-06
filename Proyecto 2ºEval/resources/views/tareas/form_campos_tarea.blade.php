@@ -82,33 +82,33 @@
     <input type="datetime-local" class="form-control" name="fecha_creacion" id="fecha_creacion" @if(!empty($tarea->fecha_creacion)) value="{{$tarea->fecha_creacion}}" @else value="{{ date("Y-m-d\\TH:i") }}" @endif readonly>
 </div>
 
-@if(!auth()->check())
+@if(auth()->check())
 {{-- Para el cliente se oculta --}}
 <div class="form-group">
-    <label for="operario_id">Operario encargado*</label>
-    @error('operario')
+    <label for="operario">Operario encargado*</label>
+    @error('operario_id')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <select class="form-control" name="operario" id="operario_id">
+    <select class="form-control" name="operario_id" id="operario">
         <option value="" selected></option>
         @foreach ($operarios as $operario)
-                    <option value="{{$operario->id}}" {{ old('operario', $tarea->operario) == $operario->id ? 'selected' : '' }} >{{$operario->name." ".$operario->apellidos}}</option>
+                    <option value="{{$operario->id}}" {{ old('operario_id', $tarea->operario_id) == $operario->id ? 'selected' : '' }} >{{$operario->name." ".$operario->apellidos}}</option>
         @endforeach
     </select>
 </div>
 
 {{-- Para el cliente se oculta --}}
 <div class="form-group">
-    <label for="cliente_id">Cliente que encarga el trabajo*</label>
+    <label for="cliente">Cliente que encarga el trabajo*</label>
     @error('cliente_id')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <select class="form-control" name="cliente" id="cliente_id">
+    <select class="form-control" name="cliente_id" id="cliente">
         <option value="" selected></option>
         @foreach ($clientes as $cliente)
-                    <option value="{{$cliente->id}}" {{ old('cliente', $tarea->cliente) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
+                    <option value="{{$cliente->id}}" {{ old('cliente_id', $tarea->cliente_id) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
         @endforeach
     </select>
 </div>
