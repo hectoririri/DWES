@@ -3,21 +3,6 @@
 @section('cuerpo')
 <form method="POST" action="{{route('tareas.store')}}" enctype="multipart/form-data" class="bg-light p-4 rounded">
     <h1 class="text-primary text-center mb-5">Creando tarea</h1>
-    @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @endif
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
 
     @if (!auth()->check())
         <h3 class="text-secondary">Validese con una cuenta cliente registrada en nuestro sistema</h3>

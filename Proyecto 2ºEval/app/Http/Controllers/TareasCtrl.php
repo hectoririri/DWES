@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TareaRequestCreate;
 use App\Http\Requests\TareaRequestUpdate;
-use App\Http\Requests\TareasRequestUpdate;
 use App\Models\Cliente;
 use App\Models\Provincia;
 use App\Models\Tarea;
@@ -32,8 +31,11 @@ class TareasCtrl extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::getTareas();
-        
+        if (auth()->user()->rol == 'O') {
+            $tareas = Tarea::getTareasOperario(auth()->user()->id);
+        } else {
+            $tareas = Tarea::getTareas();
+        }
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
@@ -43,7 +45,12 @@ class TareasCtrl extends Controller
      * @return void
      */
     public function mostrarTareasPendientes(){
-        $tareas = Tarea::getTareasPendientes();
+        // $tareas = (auth()->user()->rol == 'O') ? $tareas = Tarea::getTareasPendientesOperario(auth()->user()->id) : $tareas = Tarea::getTareasPendientes();
+        if (auth()->user()->rol == 'O') {
+            $tareas = Tarea::getTareasPendientesOperario(auth()->user()->id);
+        } else{
+            $tareas = Tarea::getTareasPendientes();
+        }
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
@@ -64,6 +71,7 @@ class TareasCtrl extends Controller
      */
     public function store(TareaRequestCreate $requestTarea)
     {
+        // Validamos el formulario con las reglas de creación
         $validated = $requestTarea->validated();
         
         // Si es usuario añadimos el cliente_id a mano:

@@ -61,7 +61,23 @@ class Tarea extends Model
      */
     public static function getTareasPendientes()
     {
-        $tareas = self::where('estado', 'P')->paginate(5);
+        $tareas = self::where('estado', 'P')->orWhere('estado', 'B')->paginate(5);
         return $tareas;
+    }
+
+    public static function getTareasPendientesOperario(int $id)
+    {
+        // orWhere applies to the entire query, not just the tasks of the specified user
+        // $tareas = Usuario::find($id)->tareas()->where('estado', 'P')->orWhere('estado', 'B')->paginate(5);
+        return Usuario::find($id)->tareas()->where(function($query) {
+            $query->where('estado', 'P')
+                  ->orWhere('estado', 'B');
+        })->paginate(5);
+        return $tareas;
+    }
+
+    public static function getTareasOperario(int $id)
+    {
+        return Usuario::find($id)->tareas()->paginate(5);
     }
 }
