@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Tarea extends Model
 {
@@ -25,6 +26,12 @@ class Tarea extends Model
     public function usuarios()
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    public function getTareaUrlAtributte(): string
+    {
+        // mirar en qwen para solucionar
+        return Storage::disk('tareas')->url($this->fichero);
     }
 
     public function __construct()
