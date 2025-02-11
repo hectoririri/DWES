@@ -28,18 +28,29 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{!! route('home') !!}">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('tareas.index') !!}">Mostrar Tareas</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="tareasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Tareas
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="tareasDropdown">
+                                        @if(auth()->user()->isAdmin())
+                                        <a class="dropdown-item" href="{!! route('tareas.create') !!}">Añadir Tarea</a>
+                                        @endif
+                                        <a class="dropdown-item" href="{!! route('tareas.index') !!}">Mostrar Tareas</a>
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('tareas.create') !!}">Añadir Tarea</a>
+                                @if(auth()->user()->isAdmin())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="usuariosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Usuarios
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="usuariosDropdown">
+                                        <a class="dropdown-item" href="{!! route('usuarios.create') !!}">Añadir usuarios</a>
+                                        <a class="dropdown-item" href="{!! route('usuarios.index') !!}">Mostrar usuarios</a>
+                                        {{-- <a class="dropdown-item" href="{!! route('clientes.index') !!}">Listar clientes</a> --}}
+                                    </div>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('usuarios.index') !!}">Mostrar usuarios</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('usuarios.create') !!}">Añadir usuario</a>
-                                </li>                                
+                                @endif
                             </ul>
                         </div>
                     </nav>

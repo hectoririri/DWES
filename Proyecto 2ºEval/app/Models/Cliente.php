@@ -39,14 +39,35 @@ class Cliente extends Model
     {
     }
 
-    public static function isClienteRegistered(string $tel = null, string $nif_cif = null){
-        return self::where('telefono', $tel)->where('cif', $nif_cif)->exists();
-    }
-
+    /**
+     * Devuelve colección de todos los clientes
+     *
+     * @return void
+     */
     public static function getClientes(){
         return self::all();
     }
 
+    
+
+    /**
+     * Comprueba si el cliente existe verificando su teléfono y nif_cif
+     *
+     * @param string|null $tel
+     * @param string|null $nif_cif
+     * @return boolean
+     */
+    public static function isClienteRegistered(string $tel = null, string $nif_cif = null){
+        return self::where('telefono', $tel)->where('cif', $nif_cif)->exists();
+    }
+
+    /**
+     * Devuelve el id del cliente basándose en su teléfono y nif_cif 
+     *
+     * @param string|null $tel
+     * @param string|null $nif_cif
+     * @return void
+     */
     public static function getIdFromNifTelephone(string $tel = null, string $nif_cif = null){
         return self::where('telefono', $tel)->where('cif', $nif_cif)->value('id');
     }

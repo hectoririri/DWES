@@ -35,7 +35,17 @@
         </tr>
         <tr>
             <th class="text-center">Estado</th>
-            <td class="text-center">{{ $tarea->estado }}</td>
+            <td>
+                @if ($tarea->estado == 'R')
+                    Realizado
+                @elseif ($tarea->estado == 'C')
+                    Cancelado
+                @elseif ($tarea->estado == 'P')
+                    Pendiente
+                @elseif ($tarea->estado == 'B')
+                    Por aprobar
+                @endif
+            </td>
         </tr>
         <tr>
             <th class="text-center">Fecha de creación</th>

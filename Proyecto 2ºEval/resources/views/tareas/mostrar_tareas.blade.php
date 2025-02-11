@@ -45,7 +45,17 @@
                     {{ Usuario::find($tarea->operario_id) ? Usuario::find($tarea->operario_id)->name : 'Operario eliminado. Cambiar operario'}}
                 </td>
                 @endif
-                <td>{{ $tarea->estado }}</td>
+                <td>
+                    @if ($tarea->estado == 'R')
+                        Realizado
+                    @elseif ($tarea->estado == 'C')
+                        Cancelado
+                    @elseif ($tarea->estado == 'P')
+                        Pendiente
+                    @elseif ($tarea->estado == 'B')
+                        Por aprobar
+                    @endif
+                </td>
                 <td>{{ $tarea->anotaciones_anteriores }}</td>
                 <td>{{ $tarea->anotaciones_posteriores }}</td>
                 <td>{{ $tarea->provincia }}</td>
