@@ -44,13 +44,20 @@ class TareasCtrl extends Controller
      *
      * @return void
      */
-    public function mostrarTareasPendientes(){
+    public function mostrarTareasPendientes()
+    {
         // $tareas = (auth()->user()->rol == 'O') ? $tareas = Tarea::getTareasPendientesOperario(auth()->user()->id) : $tareas = Tarea::getTareasPendientes();
-        if (auth()->user()->rol == 'O') {
+        if (auth()->user()->isOperario()) {
             $tareas = Tarea::getTareasPendientesOperario(auth()->user()->id);
         } else{
             $tareas = Tarea::getTareasPendientes();
         }
+        return view('tareas.mostrar_tareas', compact('tareas'));
+    }
+
+    public function mostrarTareasSinOperario()
+    {
+        $tareas = Tarea::getTareasSinOperario();
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 

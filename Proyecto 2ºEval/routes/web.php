@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/tareas/pendientes', [TareasCtrl::class, 'mostrarTareasPendientes'])
 ->name('tareas.pendientes');
 
+Route::get('/tareas/sin_operario', [TareasCtrl::class, 'mostrarTareasSinOperario'])
+->name('tareas.sin_operario');
+
 Route::get('/tareas/confirmar_eliminar/{tarea}', [TareasCtrl::class, 'confirmarBorrarTarea'])
     ->where('tarea', '[0-9]+')
     ->name('confirmar.eliminar.tarea');

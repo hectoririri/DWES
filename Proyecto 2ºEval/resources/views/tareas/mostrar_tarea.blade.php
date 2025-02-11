@@ -51,11 +51,13 @@
         </tr>
         <tr>
             <th class="text-center">Operario</th>
-            <td class="text-center"><a href="{!! route("usuarios.show", ['usuario' => Usuario::find($tarea->operario_id)]) !!}" target=”_blank”>{{ Usuario::find($tarea->operario_id)->name }} </a> || {{ Usuario::find($tarea->operario_id)->email }}</td>
+            <td class="text-center">{{ $tarea->operario_id }}</td>
+            {{-- <td class="text-center"><a href="{!! route("usuarios.show", ['usuario' => $tarea->operario_id]) !!}" target="_blank">{{ Usuario::find($tarea->operario_id)->name }} </a> || {{ Usuario::find($tarea->operario_id)->email }}</td> --}}
         </tr>
         <tr>
             <th class="text-center">Cliente</th>
-            <td class="text-center"><a href="{!! route("cliente.show", ['cliente' => Cliente::find($tarea->cliente_id)]) !!}" target=”_blank”>{{ Cliente::find($tarea->cliente_id)->name }} </a> || {{ Cliente::find($tarea->cliente_id)->email }}</td>
+            <td class="text-center">{{ $tarea->operario_id }}</td>
+            {{-- <td class="text-center"><a href="{!! route("cliente.show", ['cliente' => Cliente::find($tarea->cliente_id)]) !!}" target=”_blank”>{{ Cliente::find($tarea->cliente_id)->name }} </a> || {{ Cliente::find($tarea->cliente_id)->email }}</td> --}}
         </tr>
         <tr>
             <th class="text-center">Anotaciones anteriores</th>

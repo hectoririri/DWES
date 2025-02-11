@@ -83,6 +83,19 @@ class Tarea extends Model
         return $tareas;
     }
 
+    public static function getTareasSinOperario()
+    {
+        $tareas = self::where('operario_id', null)->paginate(5);
+        return $tareas;
+    }
+
+    /* Todas las tareas que su operario no exista
+    public static function getTareasOperarioEliminado()
+    {
+        $tareas = self::where('operario_id', null)->paginate(5);
+        return $tareas;
+    }
+    */
     public static function getTareasOperario(int $id)
     {
         return Usuario::find($id)->tareas()->paginate(5);
