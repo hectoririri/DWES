@@ -36,8 +36,6 @@ class ClientesCtrl extends Controller
         // Validamos el formulario y lo guardamos en $validado
         $validado = $request->validated();
 
-        // return dd($validado);
-
         // Creamos el nuevo cliente con los datos validados del formulario
         $cliente = Cliente::create($validado);
 
@@ -57,17 +55,26 @@ class ClientesCtrl extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Cliente $cliente)
     {
-        //
+        $paises = Pais::getPaises();
+        return view('clientes.form_actualizar_cliente', compact('cliente', 'paises'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ClienteRequest $request, Cliente $cliente)
     {
-        
+        // Validamos el formulario y lo guardamos en $validado
+        $validado = $request->validated();
+
+        // Actualizamos el cliente con el formulario validado
+        $cliente->update($validado);
+
+        // Redigirimos a la vista del nuevo cliente que hemos actualizado
+        return redirect()->route('clientes.show', $cliente)
+        ->with('mensaje', 'Cliente actualizado correctamente');
     }
 
     /**
