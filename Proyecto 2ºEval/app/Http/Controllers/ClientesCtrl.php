@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClienteRequest;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClientesCtrl extends Controller
@@ -11,7 +13,8 @@ class ClientesCtrl extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::getClientes();
+        return view('clientes.mostrar_clientes', compact('clientes'));
     }
 
     /**
@@ -19,23 +22,32 @@ class ClientesCtrl extends Controller
      */
     public function create()
     {
-        //
+        $cliente = new Cliente();
+        return view('clientes.form_crear_cliente', compact('cliente'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        //
+        // Validamos el formulario y lo guardamos en $validado
+        $validado = $request->validated();
+
+        // Creamos el nuevo cliente con los datos validados del formulario
+        $cliente = Cliente::create($validado);
+
+        // Redigirimos a la vista del nuevo cliente que hemos creado
+        return redirect()->route('clientes.show', $cliente)
+            ->with('mensaje', 'Tarea creada correctamente');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Cliente $cliente)
     {
-        //
+        return view('clientes.mostrar_cliente', compact('cliente'));
     }
 
     /**
@@ -51,14 +63,22 @@ class ClientesCtrl extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Cliente $cliente)
     {
-        //
+        $nombre = $cliente->nombre;
+        $cliente->delete();
+        return redirect()->route('clientes.index')->with('mensaje', 'Cliente '.$nombre.' eliminada correctamente');
+    }
+
+    public function confirmarEliminarCliente(Cliente $cliente)
+    {
+        return view('clientes.borrar_cliente', compact('cliente'));
+
     }
 }

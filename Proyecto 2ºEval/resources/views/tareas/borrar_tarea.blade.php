@@ -7,36 +7,36 @@
     <table class="table table-hover table-bordered">
         <tbody>
             <tr class="table-secondary">
-                <th>ID</th>
-                <td>{!!$tarea->id!!}</td>
+                <th class="text-center">ID</th>
+                <td class="text-center">{!!$tarea->id!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Nombre</th>
-                <td>{!!$tarea->nombre!!}</td>
+                <th class="text-center">Nombre</th>
+                <td class="text-center">{!!$tarea->nombre!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Apellidos</th>
-                <td>{!!$tarea->apellidos!!}</td>
+                <th class="text-center">Apellidos</th>
+                <td class="text-center">{!!$tarea->apellidos!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Provincia</th>
-                <td>{!!$tarea->provincia!!}</td>
+                <th class="text-center">Provincia</th>
+                <td class="text-center">{!!$tarea->provincia!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Descripción</th>
-                <td>{!!$tarea->descripcion!!}</td>
+                <th class="text-center">Descripción</th>
+                <td class="text-center">{!!$tarea->descripcion!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Dirección</th>
-                <td>{!!$tarea->direccion!!}</td>
+                <th class="text-center">Dirección</th>
+                <td class="text-center">{!!$tarea->direccion!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Estado de la tarea</th>
-                <td>{!!$tarea->estado!!}</td>
+                <th class="text-center">Estado de la tarea</th>
+                <td class="text-center">{!!$tarea->estado!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th>Fecha de realización</th>
-                <td>{!!$tarea->fecha_realizacion!!}</td>
+                <th class="text-center">Fecha de realización</th>
+                <td class="text-center">{!!$tarea->fecha_realizacion!!}</td>
             </tr>
         </tbody>
     </table>

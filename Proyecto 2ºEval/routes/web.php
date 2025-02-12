@@ -31,10 +31,16 @@ Route::get('usuarios/confirmar_eliminar/{usuario}', [UsuariosCtrl::class, 'confi
     ->where('usuario', '[0-9]+')
     ->name('confirmar.eliminar.usuario');
 
+// Rutas de clientes a parte de las CRUD
+Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confirmarEliminarCliente'])
+    ->where('cliente', '[0-9]+')
+    ->name('confirmar.eliminar.cliente');
+
 // Los resources CRUD para cada controlador 
 Route::resources([
     'tareas' => TareasCtrl::class,
     'usuarios' => UsuariosCtrl::class,
+    'clientes' => ClientesCtrl::class
 ]);
 
 // Rutas de autorización

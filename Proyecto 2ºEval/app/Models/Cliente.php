@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
 {
+    use SoftDeletes;
     protected $table = "clientes";
     protected $primaryKey = "id";
     const CREATED_AT = 'fecha_alta';
@@ -33,22 +35,14 @@ class Cliente extends Model
     }
 
     /**
-     * Constructor vacío
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Devuelve colección de todos los clientes
+     * Devuelve colección de todos los clientes activos activos
      *
      * @return void
      */
     public static function getClientes(){
-        return self::all();
+        $clientes = self::paginate(5);
+        return $clientes;
     }
-
-    
 
     /**
      * Comprueba si el cliente existe verificando su teléfono y nif_cif

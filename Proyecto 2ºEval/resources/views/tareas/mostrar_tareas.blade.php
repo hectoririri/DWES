@@ -111,8 +111,8 @@
     <p>Página {{ $tareas->currentPage() }} de {{ $tareas->lastPage() }}</p>
 </div>
 
-<a href="{!! route('tareas.pendientes') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Listar tareas pendientes</a>
 <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Mostrar por defecto</a>
+<a href="{!! route('tareas.pendientes') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Listar tareas pendientes</a>
 @if(auth()->user()->isAdmin())
 <a href="{!! route('tareas.sin_operario') !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Mostrar tareas sin operario</a>
 @endif
