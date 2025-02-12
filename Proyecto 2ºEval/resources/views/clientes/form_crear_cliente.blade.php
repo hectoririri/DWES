@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Formulario creación cliente')
 @section('cuerpo')
 <form method="POST" action="{{route('clientes.store')}}" enctype="multipart/form-data" class="bg-light p-4 rounded">

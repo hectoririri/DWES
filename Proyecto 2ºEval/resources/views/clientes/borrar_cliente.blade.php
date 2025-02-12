@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Eliminar cliente')
 @section('cuerpo')
 <form method="POST" action="{{route('clientes.destroy', ['cliente' => $cliente])}}">

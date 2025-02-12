@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Eliminar tarea')
 @section('cuerpo')
 <form method="POST" action="{{route('tareas.destroy', ['tarea' => $tarea])}}">

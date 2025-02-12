@@ -1,4 +1,4 @@
-@extends('layout.plantilla')
+@extends('layouts.plantilla')
 @section('title', 'Listado de Tareas')
 @section('cuerpo')
 <h1>Lista de Tareas</h1>
@@ -12,6 +12,7 @@
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;
+    use App\Models\Provincia;
 @endphp
 
 <table class="table table-striped table-bordered">
@@ -58,7 +59,7 @@
                 </td>
                 <td>{{ $tarea->anotaciones_anteriores }}</td>
                 <td>{{ $tarea->anotaciones_posteriores }}</td>
-                <td>{{ $tarea->provincia }}</td>
+                <td>{{ Provincia::find($tarea->provincia)->nombre }}</td>
                 <td>{{ $tarea->fecha_creacion }}</td>
                 <td>{{ $tarea->fecha_realizacion }}</td>
                 <td>

@@ -1,9 +1,10 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Detalles de la tarea')
 @section('cuerpo')
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;
+    use App\Models\Provincia;
 @endphp
 <h1 class="text-center">Detalles de la tarea Nº{{$tarea->id}}</h1>
 @if (session('mensaje'))
@@ -31,7 +32,7 @@
         </tr>
         <tr>
             <th class="text-center">Provincia</th>
-            <td class="text-center">{{ $tarea->provincia }}</td>
+            <td class="text-center">{{ Provincia::find($tarea->provincia)->nombre }}</td>
         </tr>
         <tr>
             <th class="text-center">Estado</th>

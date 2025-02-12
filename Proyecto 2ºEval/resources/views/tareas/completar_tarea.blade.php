@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Formulario para completar tarea')
 @section('cuerpo')
 <h2>Completar tarea</h2>

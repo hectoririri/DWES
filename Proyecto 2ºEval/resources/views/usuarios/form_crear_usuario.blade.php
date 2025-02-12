@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Formulario De Alta Usuario')
 @section('cuerpo')
 <form method="POST" action="{{route('usuarios.store')}}" enctype="multipart/form-data">

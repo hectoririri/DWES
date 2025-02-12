@@ -1,4 +1,4 @@
-@extends('layout.plantilla')
+@extends('layouts.plantilla')
 @section('title', 'Listado de Clientes')
 @section('cuerpo')
 <h1>Lista de Clientes</h1>

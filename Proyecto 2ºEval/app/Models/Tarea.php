@@ -30,13 +30,13 @@ class Tarea extends Model
     }
 
     /**
-     * Declaramos la relación uno a muchos con la tabla tareas
+     * Declaramos la relación muchos a uno con la tabla provincias
      *
-     * @return void
+     * @return BelongsTo
      */
-    public function provincias(): BelongsTo
+    public function provincia(): BelongsTo
     {
-        return $this->belongsTo(Provincia::class, 'cod', 'provincia');
+        return $this->belongsTo(Provincia::class);
     }
 
     public function getTareaUrlAtributte(): string

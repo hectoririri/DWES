@@ -61,8 +61,15 @@
     </nav>
     <main class="container-fluid mt-3">
         <div class="d-flex justify-content-end">
-            {{-- <a href="{!! route('loggout') !!}">Cerrar sesión</a> --}}
-            <a href="#">cerrar sesion</a>
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                {{ __('Cerrar Sesión') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </div>
         @yield('cuerpo')
     </main>

@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Formulario actualización cliente')
 @section('cuerpo')
 <form method="POST" action="{{route('clientes.update', ['cliente'=>$cliente])}}" enctype="multipart/form-data" class="bg-light p-4 rounded">

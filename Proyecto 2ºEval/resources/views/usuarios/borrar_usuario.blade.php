@@ -1,4 +1,4 @@
-@extends('layout/plantilla')
+@extends('layouts/plantilla')
 @section('title', 'Eliminar usuario')
 @section('cuerpo')
 <form method="POST" action="{{route('usuarios.destroy', ['usuario' => $usuario])}}">
