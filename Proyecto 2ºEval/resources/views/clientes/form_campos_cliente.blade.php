@@ -4,7 +4,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea class="form-control" name="cif" id="Cif">{{ old('cif', $cliente->cif) }}</textarea>
+    <input type="text" class="form-control" name="cif" id="Cif" value="{{ old('cif', $cliente->cif) }}">
 </div>
 
 <div class="form-group">
@@ -40,7 +40,12 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="pais" id="Pais" value="{{ old('pais', $cliente->pais) }}">
+    <select class="form-control" name="pais" id="Pais">
+        <option value="" selected></option>
+       @foreach ($paises as $pais)
+        <option value="{{$pais->id}}" {{ old('pais', $cliente->pais) == $pais->id ? 'selected' : '' }}>{{$pais->nombre}}</option>
+       @endforeach
+    </select>
 </div>
 
 <div class="form-group">
@@ -58,8 +63,14 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    
-    <input type="text" class="form-control" name="moneda" id="Moneda" value="{{ old('moneda', $cliente->moneda) }}">
+    <select class="form-control" name="moneda" id="Pais">
+        <option value="" selected></option>
+       @foreach ($paises as $pais)
+       @if ($pais->iso_moneda != null)
+        <option value="{{$pais->iso_moneda}}" {{ old('moneda', $cliente->moneda) == $pais->iso_moneda ? 'selected' : '' }}>{{$pais->iso_moneda}}</option>
+       @endif
+       @endforeach
+    </select>
 </div>
 
 <div class="form-group">

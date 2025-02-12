@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
@@ -12,12 +13,13 @@ class Cliente extends Model
     protected $primaryKey = "id";
     const CREATED_AT = 'fecha_alta';
     const UPDATED_AT = 'fecha_actualizado';
+    protected $guarded = [];
 
 
     /**
      * Declaramos la relación uno a muchos con la tabla tareas
      *
-     * @return void
+     * @return hasMany
      */
     public function tareas()
     {
@@ -27,11 +29,21 @@ class Cliente extends Model
     /**
      * Declaramos la relación uno a muchos con la tabla cuotas
      *
-     * @return void
+     * @return hasMany
      */
     public function cuotas()
     {
         return $this->hasMany(Cuota::class);
+    }
+
+    /**
+     * Declaramos la relación muchos a uno de la tabla paises
+     *
+     * @return BelongsTo
+     */
+    public function paises(): BelongsTo
+    {
+        return $this->belongsTo(Pais::class);
     }
 
     /**

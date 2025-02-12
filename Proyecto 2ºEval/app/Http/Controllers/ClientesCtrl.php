@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClienteRequest;
 use App\Models\Cliente;
+use App\Models\Pais;
 use Illuminate\Http\Request;
 
 class ClientesCtrl extends Controller
@@ -23,7 +24,8 @@ class ClientesCtrl extends Controller
     public function create()
     {
         $cliente = new Cliente();
-        return view('clientes.form_crear_cliente', compact('cliente'));
+        $paises = Pais::getPaises();
+        return view('clientes.form_crear_cliente', compact('cliente', 'paises'));
     }
 
     /**
@@ -33,6 +35,8 @@ class ClientesCtrl extends Controller
     {
         // Validamos el formulario y lo guardamos en $validado
         $validado = $request->validated();
+
+        // return dd($validado);
 
         // Creamos el nuevo cliente con los datos validados del formulario
         $cliente = Cliente::create($validado);

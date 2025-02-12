@@ -25,7 +25,9 @@ class UsuarioRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Recogemos el id del usuario al que estamos editando
         $id_usuario = request()->route('usuario');
+        // Comprobamos si estamos creando un usuario o editando a uno ya existente
         $isCreating = $this->route()->getName() == 'usuarios.store';
         $reglas = [
             'dni' => ['required', 'string', 'size:9', new DniNifValidationRule, 
