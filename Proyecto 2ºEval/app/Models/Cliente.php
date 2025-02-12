@@ -41,7 +41,7 @@ class Cliente extends Model
      *
      * @return BelongsTo
      */
-    public function paises(): BelongsTo
+    public function pais(): BelongsTo
     {
         return $this->belongsTo(Pais::class);
     }

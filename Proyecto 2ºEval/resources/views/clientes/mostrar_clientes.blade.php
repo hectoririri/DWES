@@ -12,6 +12,7 @@
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;
+    use App\Models\Pais;
 @endphp
 
 <table class="table table-striped table-bordered">
@@ -41,7 +42,7 @@
                 <td>{{ $cliente->nombre }}</td>
                 <td>{{ $cliente->telefono }}</td>
                 <td>{{ $cliente->correo }}</td>
-                <td>{{ $cliente->pais }}</td>
+                <td>{{ Pais::find($cliente->pais)->nombre }}</td>
                 <td>{{ $cliente->cuenta_corriente }}</td>
                 <td>{{ $cliente->moneda }}</td>
                 <td>cambio a euros (conversion)</td>
@@ -87,3 +88,4 @@
 
 {{-- <a href="{!! route('clientes.operario_eliminado') !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Mostrar clientes con operario eliminado</a> --}}
 @endsection
+

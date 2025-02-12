@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Provincia extends Model
 {
@@ -12,10 +13,13 @@ class Provincia extends Model
     public $incrementing = false;
 
     /**
-     * Constructor vacío
+     * Declaramos la relación uno a muchos con la tabla tareas
+     *
+     * @return void
      */
-    public function __construct()
+    public function tareas(): HasMany
     {
+        return $this->hasMany(Tarea::class, 'provincia', 'cod');
     }
 
     /**

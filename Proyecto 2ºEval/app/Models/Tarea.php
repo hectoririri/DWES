@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 class Tarea extends Model
@@ -26,6 +27,16 @@ class Tarea extends Model
     public function usuarios()
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    /**
+     * Declaramos la relación uno a muchos con la tabla tareas
+     *
+     * @return void
+     */
+    public function provincias(): BelongsTo
+    {
+        return $this->belongsTo(Provincia::class, 'cod', 'provincia');
     }
 
     public function getTareaUrlAtributte(): string
