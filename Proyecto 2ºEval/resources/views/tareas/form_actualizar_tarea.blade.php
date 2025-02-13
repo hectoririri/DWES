@@ -3,24 +3,30 @@
 @section('cuerpo')
 <form method="POST" action="{{route('tareas.update', ['tarea'=>$tarea])}}" enctype="multipart/form-data" class="bg-light p-4 rounded">
     @method('PATCH')
-    <h2 class="text-secondary">Actualizando tarea tarea</h2>
+    <h2 class="text-secondary mb-5 text-center">Actualizando tarea Nº{{$tarea->id}}</h2>
     
     @if (session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
     </div>
-    @endif
-    @dump($tarea->toArray())
-    
+    @endif    
     @include('tareas.form_campos_tarea')
 
     <div class="form-group">
-        <label for="fichero">Fichero resumen de tareas realizadas</label>
-        <input type="file" class="form-control-file" name="fichero_resumen" id="fichero">
+        <label for="Fichero">Fichero resumen de tareas realizadas</label>
+        @error('fichero')
+                <br>
+                <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <input type="file" class="form-control-file" name="fichero" id="Fichero">
     </div>
     
     <div class="form-group">
         <label for="foto">Fotos del trabajo realizado</label>
+        @error('foto')
+                <br>
+                <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <input type="file" class="form-control-file" name="foto" id="foto">
     </div>
 

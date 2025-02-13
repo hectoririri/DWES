@@ -33,7 +33,7 @@ class TareaRequestCreate extends FormRequest
             'direccion' => ['nullable', 'string', 'max:100'],
             'poblacion' => ['nullable', 'string', 'max:100'],
             'cod_postal' => ['required', 'digits:5'],
-            'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
+            'provincia' => ['required', 'string', 'exists:provincias,cod', 'max:1000'],
             'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C'],
             'fecha_creacion' => ['required', 'date'],
             'fecha_realizacion' => ['required', 'date', 'after:fecha_creacion'],

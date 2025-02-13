@@ -118,9 +118,24 @@ class TareasCtrl extends Controller
      */
     public function update(TareaRequestUpdate $requestTarea, Tarea $tarea)
     {
-    // composer require laravel/ui bootstrap
-
+        // Validamos con las reglas
         $validated = $requestTarea->validated();
+
+        // Comprobamos si se han subido los ficheros al formulario y procesamos cada uno por separado
+        if ($requestTarea->hasFile('fichero')) {
+            // Guardamos el fichero en su carpeta correspondiente
+            $fichero_name = $requestTarea->file('fichero')->store('/', 'tareas');
+            // Sobreescribimos el nombre del fichero que se almacenará por el hasheado
+            $validated['fichero'] = $fichero_name;
+            // return dd($validated);
+        }
+
+        if ($requestTarea->hasFile('foto')) {
+            $foto_name = $requestTarea->file('foto')->store('/', 'fotos');
+            $validated['foto'] = $foto_name;
+        }
+
+        // Actualizamos la tarea
         $tarea->update($validated);
         return redirect()->route('tareas.index')->with('mensaje', 'Tarea actualizada correctamente');
     }

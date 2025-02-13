@@ -17,7 +17,8 @@ class Tarea extends Model
         'fecha_creacion' => 'datetime:d-m-Y H:i:s',
         'fecha_actualizacion' => 'datetime:d-m-Y H:i:s',
     ];
-    protected $fillable = ['descripcion', 'correo', 'direccion', 'poblacion', 'cod_postal', 'provincia', 'estado', 'fecha_creacion', 'operario_id', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'cliente_id'];
+    protected $guarded = [];
+
     
     /**
      * Declaramos la relación muchos a uno con la tabla usuarios
@@ -37,16 +38,6 @@ class Tarea extends Model
     public function provincia(): BelongsTo
     {
         return $this->belongsTo(Provincia::class);
-    }
-
-    public function getTareaUrlAtributte(): string
-    {
-        // mirar en qwen para solucionar
-        return Storage::disk('tareas')->url($this->fichero);
-    }
-
-    public function __construct()
-    {
     }
 
     /**
@@ -110,5 +101,25 @@ class Tarea extends Model
     public static function getTareasOperario(int $id)
     {
         return Usuario::find($id)->tareas()->paginate(5);
+    }
+
+    /**
+     * Recoge la url directa al archivo del fichero de la tarea
+     *
+     * @return string
+     */
+    public function getTareaUrlAttribute(): string
+    {
+        return Storage::disk('tareas')->url($this->fichero);
+    }
+
+    /**
+     * Recoge la url directa al archivo de la foto de la tarea
+     *
+     * @return string
+     */
+    public function getFotoUrlAttribute(): string
+    {
+        return Storage::disk('fotos')->url($this->foto);
     }
 }

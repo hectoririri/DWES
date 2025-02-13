@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +49,11 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return boolean
+     */
     public static function isAdmin(){
         if (auth()->check()){
             if (Auth::user()->rol == 'A'){
@@ -56,6 +63,11 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return boolean
+     */
     public static function isOperario(){
         if (auth()->check()){
             if (Auth::user()->rol == 'O'){
@@ -64,4 +76,6 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    
 }

@@ -80,11 +80,15 @@
         </tr>
         <tr>
             <th class="text-center">Fichero</th>
-            <td class="text-center"></td>
+            <td class="text-center">
+                <iframe width="400" height="400" src="{{asset($tarea->getTareaUrlAttribute())}}" frameborder="2"></iframe>
+                <a target="_blank" href="{{asset($tarea->getTareaUrlAttribute())}}">Abrir en otra pestaña</a>
+                <p>Añadir botones de descargar</p>
+            </td>
         </tr>
         <tr>
             <th class="text-center">Foto</th>
-            <td class="text-center"></td>
+            <td class="text-center"><img src="{{ $tarea->getFotoUrlAttribute() }}" alt="{{ $tarea->foto }}" /></td>
         </tr>
         <tr>
             <td colspan="3" class="text-center">

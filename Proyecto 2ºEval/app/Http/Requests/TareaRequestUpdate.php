@@ -31,7 +31,7 @@ class TareaRequestUpdate extends FormRequest
             'direccion' => ['nullable', 'string', 'max:100'],
             'poblacion' => ['nullable', 'string', 'max:100'],
             'cod_postal' => ['required', 'integer', 'max:99999'],
-            'provincia' => ['required', 'string', 'exists:provincias,nombre', 'max:50'],
+            'provincia' => ['required', 'string', 'exists:provincias,cod', 'max:1000'],
             'estado' => ['required', 'string', 'size:1', 'in:P,B,R,C,A'],
             'operario_id' => ['required', 'integer', 'exists:users,id'],
             'cliente_id' => ['required', 'integer', 'exists:clientes,id'],
@@ -39,7 +39,8 @@ class TareaRequestUpdate extends FormRequest
             'fecha_realizacion' => ['required', 'date_format:Y-m-d\\TH:i', 'after:fecha_creacion'],
             'anotaciones_anteriores' => ['nullable', 'string', 'max:500'],
             'anotaciones_posteriores' => ['nullable', 'string', 'max:500'],
-            // ficheros solo en administrador
+            'fichero' => ['nullable', 'mimes:pdf'],
+            'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:9999']
         ];
         return $reglas;
     }
