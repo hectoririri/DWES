@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
-// https://laravel.com/docs/11.x/controllers#restful-localizing-resource-uris
+// API
+Route::get('/monedas', function(){
+   $monedas = Http::get('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json');
+   //dd($monedas);
+   return $monedas['eur'];
+});
+
+// PDF
+// https://www.nigmacode.com/laravel/generar-pdf-dompdf-laravel
 
 // Rutas de tareas a parte de las CRUD
 Route::get('/tareas/pendientes', [TareasCtrl::class, 'mostrarTareasPendientes'])
@@ -40,7 +49,8 @@ Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confi
 Route::resources([
     'tareas' => TareasCtrl::class,
     'usuarios' => UsuariosCtrl::class,
-    'clientes' => ClientesCtrl::class
+    'clientes' => ClientesCtrl::class,
+    'cuotas' => CuotaCtrl::class
 ]);
 
 // Rutas de autorización

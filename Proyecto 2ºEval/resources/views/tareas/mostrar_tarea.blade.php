@@ -15,28 +15,28 @@
 <table class="table table-striped table-bordered text-center">
     <tbody>
         <tr>
-            <th class="text-center">Descripción</th>
-            <td class="text-center">{{ $tarea->descripcion }}</td>
+            <th class="text-center" colspan="2">Descripción</th>
+            <td class="text-center" colspan="2">{{ $tarea->descripcion }}</td>
         </tr>
         <tr>
-            <th class="text-center">Dirección</th>
-            <td class="text-center">{{ $tarea->direccion }}</td>
+            <th class="text-center" colspan="2">Dirección</th>
+            <td class="text-center"  colspan="2">{{ $tarea->direccion }}</td>
         </tr>
         <tr>
-            <th class="text-center">Población</th>
-            <td class="text-center">{{ $tarea->poblacion }}</td>
+            <th class="text-center" colspan="2">Población</th>
+            <td class="text-center" colspan="2">{{ $tarea->poblacion }}</td>
         </tr>
         <tr>
-            <th class="text-center">Código postal</th>
-            <td class="text-center">{{ $tarea->cod_postal }}</td>
+            <th class="text-center" colspan="2">Código postal</th>
+            <td class="text-center" colspan="2">{{ $tarea->cod_postal }}</td>
         </tr>
         <tr>
-            <th class="text-center">Provincia</th>
-            <td class="text-center">{{ Provincia::find($tarea->provincia)->nombre }}</td>
+            <th class="text-center" colspan="2">Provincia</th>
+            <td class="text-center" colspan="2">{{ Provincia::find($tarea->provincia)->nombre }}</td>
         </tr>
         <tr>
-            <th class="text-center">Estado</th>
-            <td>
+            <th class="text-center" colspan="2">Estado</th>
+            <td colspan="2">
                 @if ($tarea->estado == 'R')
                     Realizado
                 @elseif ($tarea->estado == 'C')
@@ -49,46 +49,57 @@
             </td>
         </tr>
         <tr>
-            <th class="text-center">Fecha de creación</th>
-            <td class="text-center">{{ $tarea->fecha_creacion }}</td>
+            <th class="text-center" colspan="2">Fecha de creación</th>
+            <td class="text-center" colspan="2">{{ $tarea->fecha_creacion }}</td>
         </tr>
         <tr>
-            <th class="text-center">Fecha de realización</th>
-            <td class="text-center">@if ($tarea->fecha_realizacion == null) No realizada aún @else {{ $tarea->fecha_realizacion }} @endif</td>
+            <th class="text-center" colspan="2">Fecha de realización</th>
+            <td class="text-center" colspan="2">@if ($tarea->fecha_realizacion == null) No realizada aún @else {{ $tarea->fecha_realizacion }} @endif</td>
         </tr>
         <tr>
-            <th class="text-center">Fecha de actualización</th>
-            <td class="text-center"> @if ($tarea->fecha_actualizacion == null) No actualizado aún @else {{ $tarea->fecha_actualizacion }} @endif </td>
+            <th class="text-center" colspan="2">Fecha de actualización</th>
+            <td class="text-center" colspan="2"> @if ($tarea->fecha_actualizacion == null) No actualizado aún @else {{ $tarea->fecha_actualizacion }} @endif </td>
         </tr>
         <tr>
-            <th class="text-center">Operario</th>
-            <td class="text-center">{{ $tarea->operario_id }}</td>
+            <th class="text-center" colspan="2">Operario</th>
+            <td class="text-center" colspan="2">{{ $tarea->operario_id }}</td>
             {{-- <td class="text-center"><a href="{!! route("usuarios.show", ['usuario' => $tarea->operario_id]) !!}" target="_blank">{{ Usuario::find($tarea->operario_id)->name }} </a> || {{ Usuario::find($tarea->operario_id)->email }}</td> --}}
         </tr>
         <tr>
-            <th class="text-center">Cliente</th>
-            <td class="text-center">{{ $tarea->operario_id }}</td>
+            <th class="text-center" colspan="2">Cliente</th>
+            <td class="text-center" colspan="2">{{ $tarea->operario_id }}</td>
             {{-- <td class="text-center"><a href="{!! route("cliente.show", ['cliente' => Cliente::find($tarea->cliente_id)]) !!}" target=”_blank”>{{ Cliente::find($tarea->cliente_id)->name }} </a> || {{ Cliente::find($tarea->cliente_id)->email }}</td> --}}
         </tr>
         <tr>
-            <th class="text-center">Anotaciones anteriores</th>
-            <td class="text-center">{{ $tarea->anotaciones_anteriores }}</td>
+            <th class="text-center" colspan="2">Anotaciones anteriores</th>
+            <td class="text-center" colspan="2">{{ $tarea->anotaciones_anteriores }}</td>
         </tr>
         <tr>
-            <th class="text-center">Anotaciones posteriores</th>
-            <td class="text-center">{{ $tarea->anotaciones_posteriores }}</td>
+            <th class="text-center" colspan="2">Anotaciones posteriores</th>
+            <td class="text-center" colspan="2">{{ $tarea->anotaciones_posteriores }}</td>
         </tr>
         <tr>
-            <th class="text-center">Fichero</th>
-            <td class="text-center">
-                <iframe width="400" height="400" src="{{asset($tarea->getTareaUrlAttribute())}}" frameborder="2"></iframe>
-                <a target="_blank" href="{{asset($tarea->getTareaUrlAttribute())}}">Abrir en otra pestaña</a>
-                <p>Añadir botones de descargar</p>
+            <th class="text-center align-middle">Fichero</th>
+            <td class="text-center align-middle">
+                @if ($tarea->fichero)
+                    <iframe width="380" height="550" src="{{ $tarea->getTareaUrlAttribute() }}" frameborder="2"></iframe>
+                    <br>
+                    <a target="_blank" href="{{ $tarea->getTareaUrlAttribute() }}">Abrir en otra pestaña</a>
+                    <p><a href="{{ $tarea->getTareaUrlAttribute() }}" download>Descargar</a></p>
+                @else
+                    No hay fichero disponible
+                @endif
             </td>
-        </tr>
-        <tr>
-            <th class="text-center">Foto</th>
-            <td class="text-center"><img src="{{ $tarea->getFotoUrlAttribute() }}" alt="{{ $tarea->foto }}" /></td>
+            {{-- https://icon666.com/search?q=download --}}
+            
+            <th class="text-center align-middle">Foto</th>
+            <td class="text-center align-middle">
+                @if ($tarea->foto)
+                    <img width="380" height="550" src="{{ $tarea->getFotoUrlAttribute() }}" alt="{{ $tarea->foto }}" />
+                @else
+                    No hay foto disponible
+                @endif
+            </td>
         </tr>
         <tr>
             <td colspan="3" class="text-center">

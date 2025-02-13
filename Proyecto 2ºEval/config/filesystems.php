@@ -37,17 +37,17 @@ return [
             'throw' => false,
         ],
 
-        'tareas' => [
+        'ficheros' => [
             'driver' => 'local',
-            'root' => storage_path('app/tareas'),
-            'url' => env('APP_URL').'/fichero_tareas',
+            'root' => storage_path('app/ficheros'),
+            'url' => env('APP_URL').'/ficheros',
             'visibility' => 'public',
         ],
 
         'fotos' => [
             'driver' => 'local',
             'root' => storage_path('app/fotos'),
-            'url' => env('APP_URL').'/fichero_fotos',
+            'url' => env('APP_URL').'/fotos',
             'visibility' => 'public',
         ],
 
@@ -85,8 +85,8 @@ return [
     */
 
     'links' => [
-        public_path('fichero_tareas') => storage_path('app/tareas'),
-        public_path('fichero_fotos') => storage_path('app/fotos'),
+        public_path('/fotos') => storage_path('app/fotos'),
+        public_path('/ficheros') => storage_path('app/ficheros'),
     ],
 
 ];

@@ -41,7 +41,7 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <select class="form-control" name="provincia" id="provincia">
-        <option value="" selected></option>
+        <option value="" hidden selected>Seleccione una provincia</option>
        @foreach ($provincias as $provincia)
         <option value="{{$provincia->cod}}" {{ old('provincia', $tarea->provincia) == $provincia->cod ? 'selected' : '' }}>{{$provincia->nombre}}</option>
        @endforeach
@@ -91,7 +91,7 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <select class="form-control" name="operario_id" id="operario">
-        <option value="" selected></option>
+        <option value="" hidden selected>Seleccione a un operario</option>
         @foreach ($operarios as $operario)
                     <option value="{{$operario->id}}" {{ old('operario_id', $tarea->operario_id) == $operario->id ? 'selected' : '' }} >{{$operario->name." ".$operario->apellidos}}</option>
         @endforeach
@@ -106,7 +106,7 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     <select class="form-control" name="cliente_id" id="cliente">
-        <option value="" selected></option>
+        <option value="" hidden selected>Seleccione a un cliente</option>
         @foreach ($clientes as $cliente)
                     <option value="{{$cliente->id}}" {{ old('cliente_id', $tarea->cliente_id) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
         @endforeach

@@ -110,7 +110,7 @@ class Tarea extends Model
      */
     public function getTareaUrlAttribute(): string
     {
-        return Storage::disk('tareas')->url($this->fichero);
+        return Storage::disk('ficheros')->url($this->fichero);
     }
 
     /**
