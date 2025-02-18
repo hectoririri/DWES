@@ -16,6 +16,11 @@ Route::get('/monedas', function(){
 // PDF
 // https://www.nigmacode.com/laravel/generar-pdf-dompdf-laravel
 
+// Rutas home
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
 // Rutas de tareas a parte de las CRUD
 Route::get('/tareas/pendientes', [TareasCtrl::class, 'mostrarTareasPendientes'])
 ->name('tareas.pendientes');
@@ -55,6 +60,3 @@ Route::resources([
 
 // Rutas de autorización
 Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('home');

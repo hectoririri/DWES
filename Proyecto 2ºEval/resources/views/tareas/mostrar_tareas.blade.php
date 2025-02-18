@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 @section('title', 'Listado de Tareas')
 @section('cuerpo')
-<h1>Lista de Tareas</h1>
+<h1>Lista Tareas</h1>
 
 @if (session('mensaje'))
 <div class="alert alert-success">
@@ -15,6 +15,7 @@
     use App\Models\Provincia;
 @endphp
 
+@if ($tareas->isNotEmpty())
 <table class="table table-striped table-bordered">
     <thead class="thead-dark">
         <tr class="text-center">
@@ -39,13 +40,18 @@
         @foreach ($tareas as $tarea)
             <tr class="text-center">
                 <td>{{ $tarea->descripcion }}</td>
-                @if ($tarea->operario_id == null)
-                <td class="text-danger">Operario por asignar</td>
-                @else
                 <td>
-                    {{ Usuario::find($tarea->operario_id) ? Usuario::find($tarea->operario_id)->name : 'Operario eliminado. Cambiar operario'}}
+                    @php
+                        $operario = Usuario::find($tarea->operario_id);
+                    @endphp
+                    @if ($tarea->operario_id === null)
+                        <span class="text-warning">Sin operario asignado</span>
+                    @elseif ($operario === null)
+                        <span class="text-danger">Operario eliminado</span>
+                    @else
+                        {{ $operario->name }}
+                    @endif
                 </td>
-                @endif
                 <td>
                     @if ($tarea->estado == 'R')
                         Realizado
@@ -104,7 +110,9 @@
         @endforeach
     </tbody>
 </table>
-
+@else
+<h2>No tienes tareas asignadas</h2>
+@endif
 <div class="d-flex justify-content-center mt-4">
     {{ $tareas->links('pagination::bootstrap-4') }}
 </div>

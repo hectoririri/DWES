@@ -10,8 +10,11 @@ class UsuariosCtrl extends Controller
 {
     public function __construct()
     {
-        // Aplicar el middleware 'roles:A' a todas las acciones para que solo el administrador pueda acceder
-        $this->middleware('roles:A');
+        // Aplicar el middleware 'roles:A' a todas las acciones EXCEPTO 'edit' y 'update'
+        $this->middleware('roles:A')->except(['edit', 'update']);
+
+        // Permitir acceso a 'edit' y 'update' para roles 'A' y 'O'
+        $this->middleware('roles:A,O')->only('edit', 'update');
     }
 
     /**
@@ -62,7 +65,12 @@ class UsuariosCtrl extends Controller
      */
     public function edit(Usuario $usuario)
     {
-        return view('usuarios.form_editar_usuario', compact('usuario'));
+        if (auth()->user()->isOperario()){
+            $usuario = auth()->user();
+            return view('usuarios.form_editar_usuario', compact('usuario'));
+        }
+        else
+            return view('usuarios.form_editar_usuario', compact('usuario'));
     }
 
     /**

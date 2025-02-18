@@ -4,6 +4,7 @@
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;
+    use App\Models\Pais;
 @endphp
 <h1 class="text-center">Detalles del cliente {{$cliente->name}}</h1>
 @if (session('mensaje'))
@@ -31,7 +32,8 @@
         </tr>
         <tr>
             <th class="text-center">Pais</th>
-            <td class="text-center">{{ $cliente->pais }}</td>
+            <td class="text-center">{{ $cliente->getPais->nombre }}</td>
+            {{-- <td class="text-center">{{ Pais::find($cliente->pais)->nombre }}</td> --}}
         </tr>
         <tr>
             <th class="text-center">Cuenta Corriente</th>
@@ -40,10 +42,6 @@
         <tr>
             <th class="text-center">Moneda</th>
             <td class="text-center">{{ $cliente->moneda }}</td>
-        </tr>
-        <tr>
-            <th class="text-center">Cambio a Euros</th>
-            <td class="text-center"></td>
         </tr>
         <tr>
             <th class="text-center">Importe Mensual</th>

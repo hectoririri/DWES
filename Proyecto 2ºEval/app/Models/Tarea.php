@@ -27,7 +27,7 @@ class Tarea extends Model
      */
     public function usuarios()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class)->withTrashed();
     }
 
     /**
@@ -39,6 +39,8 @@ class Tarea extends Model
     {
         return $this->belongsTo(Provincia::class);
     }
+
+    // Relacion con operario
 
     /**
      * Devuelve una colección con todas las tareas
@@ -91,13 +93,6 @@ class Tarea extends Model
         return $tareas;
     }
 
-    /* Todas las tareas que su operario no exista
-    public static function getTareasOperarioEliminado()
-    {
-        $tareas = self::where('operario_id', null)->paginate(5);
-        return $tareas;
-    }
-    */
     public static function getTareasOperario(int $id)
     {
         return Usuario::find($id)->tareas()->paginate(5);

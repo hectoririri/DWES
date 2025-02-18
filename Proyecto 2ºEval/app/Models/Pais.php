@@ -19,7 +19,7 @@ class Pais extends Model
      */
     public function Cliente():HasMany
     {
-        return $this->hasMany(Cliente::class);
+        return $this->hasMany(Cliente::class, 'pais', 'id');
     }
 
     /**
