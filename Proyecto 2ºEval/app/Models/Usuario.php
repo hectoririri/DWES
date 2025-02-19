@@ -23,7 +23,7 @@ class Usuario extends Model
      */
     public function tareas()
     {
-        return $this->hasMany(Tarea::class, 'operario_id');
+        return $this->hasMany(Tarea::class, 'operario_id', 'id');
     }
 
     /**

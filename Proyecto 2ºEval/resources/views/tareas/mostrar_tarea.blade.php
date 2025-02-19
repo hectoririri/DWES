@@ -15,6 +15,19 @@
 <table class="table table-striped table-bordered text-center">
     <tbody>
         <tr>
+            <td colspan="4" class="text-center">
+                <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center justify-content-center w-25">Volver atrás</a>
+                @if (auth()->user()->isAdmin())
+                    <a href="{{ route('tareas.edit', ['tarea' => $tarea]) }}" class="btn btn-outline-primary d-inline-flex align-items-center justify-content-center w-25">Modificar</a>
+                    <button type="button" class="btn btn-outline-danger d-inline-flex align-items-center justify-content-center w-25" data-toggle="modal" data-target="#deleteModal">Borrar</button>
+                    {{-- <a href="{!! route('confirmar.eliminar.tarea', ['tarea' => $tarea]) !!}" class="btn btn-outline-danger d-inline-flex align-items-center justify-content-center w-25">Borrar</a> --}}
+                @endif
+                @if (auth()->user()->isOperario() && ($tarea->estado == 'P' || $tarea->estado == 'B'))
+                     <a href="{!! route('completar.tarea', ['tarea' => $tarea]) !!}" class="btn btn-outline-success">Completar tarea</a>
+                @endif
+            </td>
+        </tr>
+        <tr>
             <th class="text-center" colspan="2">Descripción</th>
             <td class="text-center" colspan="2">{{ $tarea->descripcion }}</td>
         </tr>
@@ -32,19 +45,19 @@
         </tr>
         <tr>
             <th class="text-center" colspan="2">Provincia</th>
-            <td class="text-center" colspan="2">{{ Provincia::find($tarea->provincia)->nombre }}</td>
+            <td class="text-center" colspan="2">{{ $tarea->getProvincia->nombre }}</td>
         </tr>
         <tr>
             <th class="text-center" colspan="2">Estado</th>
             <td colspan="2">
                 @if ($tarea->estado == 'R')
-                    Realizado
+                    <span class="bg-success text-white p-2 rounded">Realizado</span>
                 @elseif ($tarea->estado == 'C')
-                    Cancelado
+                    <span class="bg-danger text-white p-2 rounded">Cancelado</span>
                 @elseif ($tarea->estado == 'P')
-                    Pendiente
+                    <span class="bg-warning text-white p-2 rounded">Pendiente</span>
                 @elseif ($tarea->estado == 'B')
-                    Por aprobar
+                    <span class="bg-primary text-white p-2 rounded">Por aprobar</span>
                 @endif
             </td>
         </tr>
@@ -62,12 +75,12 @@
         </tr>
         <tr>
             <th class="text-center" colspan="2">Operario</th>
-            <td class="text-center" colspan="2">{{ $tarea->operario_id }}</td>
+            <td class="text-center" colspan="2">{{ $tarea->usuario == null ? 'Operario no asignado' : $tarea->usuario->name }}</td>
             {{-- <td class="text-center"><a href="{!! route("usuarios.show", ['usuario' => $tarea->operario_id]) !!}" target="_blank">{{ Usuario::find($tarea->operario_id)->name }} </a> || {{ Usuario::find($tarea->operario_id)->email }}</td> --}}
         </tr>
         <tr>
             <th class="text-center" colspan="2">Cliente</th>
-            <td class="text-center" colspan="2">{{ $tarea->operario_id }}</td>
+            <td class="text-center" colspan="2">{{ $tarea->cliente == null ? 'Cliente no asignado' : $tarea->cliente->nombre }}</td>
             {{-- <td class="text-center"><a href="{!! route("cliente.show", ['cliente' => Cliente::find($tarea->cliente_id)]) !!}" target=”_blank”>{{ Cliente::find($tarea->cliente_id)->name }} </a> || {{ Cliente::find($tarea->cliente_id)->email }}</td> --}}
         </tr>
         <tr>
@@ -95,24 +108,46 @@
             <th class="text-center align-middle">Foto</th>
             <td class="text-center align-middle">
                 @if ($tarea->foto)
-                    <img width="380" height="550" src="{{ $tarea->getFotoUrlAttribute() }}" alt="{{ $tarea->foto }}" />
+                    <img class="img-fluid sm" src="{{ $tarea->getFotoUrlAttribute() }}" alt="{{ $tarea->foto }}" />
                 @else
                     No hay foto disponible
                 @endif
             </td>
         </tr>
-        <tr>
-            <td colspan="3" class="text-center">
-                <a href="{!! route('tareas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Volver atrás</a>
-                @if (auth()->user()->isAdmin())
-                    <a href="{{ route('tareas.edit', ['tarea' => $tarea]) }}" class="btn btn-outline-primary d-inline-flex align-items-center">Modificar</a>
-                    <a href="{!! route('confirmar.eliminar.tarea', ['tarea' => $tarea]) !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Borrar</a>
-                @endif
-                @if (auth()->user()->isOperario() && ($tarea->estado == 'P' || $tarea->estado == 'B'))
-                     <a href="{!! route('completar.tarea', ['tarea' => $tarea]) !!}" class="btn btn-outline-success">Completar tarea</a>
-                @endif
-            </td>
-        </tr>
     </tbody>
 </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">¿Está seguro de que desea eliminar la tarea {{$tarea->id}}?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table>
+            <thead>
+                <th>Descripción</th>
+                <th>Dirección</th>
+                <th>Estado</th>
+                <th>Operario</th>
+                <th>Cliente</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$tarea->descripcion}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="{{route('tareas.index')}}" class="btn btn-danger">Borrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

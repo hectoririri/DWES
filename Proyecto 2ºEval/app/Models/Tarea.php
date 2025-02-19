@@ -25,9 +25,19 @@ class Tarea extends Model
      *
      * @return void
      */
-    public function usuarios()
+    public function usuario()
     {
-        return $this->belongsTo(Usuario::class)->withTrashed();
+        return $this->belongsTo(Usuario::class, 'operario_id', 'id')->withTrashed();
+    }
+
+    /**
+     * Declaramos la relación muchos a uno con la tabla usuarios
+     *
+     * @return void
+     */
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'cliente_id', 'id')->withTrashed();
     }
 
     /**
@@ -35,9 +45,9 @@ class Tarea extends Model
      *
      * @return BelongsTo
      */
-    public function provincia(): BelongsTo
+    public function getProvincia(): BelongsTo
     {
-        return $this->belongsTo(Provincia::class);
+        return $this->belongsTo(Provincia::class, 'provincia', 'cod');
     }
 
     // Relacion con operario
