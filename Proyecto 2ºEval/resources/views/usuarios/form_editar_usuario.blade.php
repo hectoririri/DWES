@@ -1,5 +1,5 @@
 @extends('layouts/plantilla')
-@section('title', 'Formulario De Alta Usuario')
+@section('title', 'Formulario De Modificación Usuario')
 @section('cuerpo')
 <form method="POST" action="{{route('usuarios.update', compact('usuario'))}}" enctype="multipart/form-data">
     @method('PUT')

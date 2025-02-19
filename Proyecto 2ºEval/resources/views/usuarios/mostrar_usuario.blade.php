@@ -37,6 +37,13 @@
                 <th class="text-center">Fecha modificación</th>
                 <td class="text-center">{{ $usuario->updated_at }}</td>
             </tr>
+            @if(Auth::user()->isOperario())
+            <tr>
+                <td colspan="3" class="text-center">
+                    <a href="{!! route("home") !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Volver atrás</a>
+                </td>
+            </tr>
+            @else
             <tr>
                 <td colspan="3" class="text-center">
                     <a href="{!! route("usuarios.index") !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Volver atrás</a>
@@ -45,6 +52,7 @@
                     <a href="{!! route("confirmar.eliminar.usuario", ['usuario' => $usuario->id]) !!}" class="btn btn-outline-danger d-inline-flex align-items-center">Borrar</a>
                 </td>
             </tr>
+            @endif
         </tbody>
     </table>
 </div>

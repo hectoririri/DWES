@@ -30,13 +30,13 @@
                         Tareas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="tareasDropdown">
-                        @if(auth()->user()->isAdmin())
+                        @if(Auth::user()->isAdmin())
                         <a class="dropdown-item" href="{!! route('tareas.create') !!}">Añadir Tarea</a>
                         @endif
                         <a class="dropdown-item" href="{!! route('tareas.index') !!}">Mostrar Tareas</a>
                     </div>
                 </li>
-                @if(auth()->user()->isAdmin())
+                @if(Auth::user()->isAdmin())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="usuariosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Usuarios
@@ -56,6 +56,9 @@
                     </div>
                 </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="{!! route('usuarios.show', ['usuario' => Auth::user()]) !!}">Mi perfil 👤</a>
+                </li>
             </ul>
         </div>
     </nav>

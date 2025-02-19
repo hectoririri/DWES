@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsuariosCtrl extends Controller
 {
     public function __construct()
     {
         // Aplicar el middleware 'roles:A' a todas las acciones EXCEPTO 'edit' y 'update'
-        $this->middleware('roles:A')->except(['edit', 'update']);
+        $this->middleware('roles:A')->except(['edit', 'update', 'show']);
 
         // Permitir acceso a 'edit' y 'update' para roles 'A' y 'O'
-        $this->middleware('roles:A,O')->only('edit', 'update');
+        $this->middleware('roles:A,O')->only('edit', 'update', 'show');
     }
 
     /**
@@ -43,7 +44,6 @@ class UsuariosCtrl extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        
         $validated = $request->validated();
         // Enctriptamos la contraseña antes de guardarla
         $validated['password'] = Hash::make($validated['password']);
@@ -57,17 +57,20 @@ class UsuariosCtrl extends Controller
      */
     public function show(Usuario $usuario)
     {
+        if (Auth::user()->isOperario() && Auth::user()->id != $usuario->id){
+            $usuario = Auth::user();
+        } 
         return view('usuarios.mostrar_usuario', compact('usuario'));
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
-    {
-        if (auth()->user()->isOperario()){
-            $usuario = auth()->user();
-            return view('usuarios.form_editar_usuario', compact('usuario'));
+    public function edit(Usuario $usuario) {
+        if (Auth::user()->isOperario() && Auth::user()->id != $usuario->id){
+            $usuario = Auth::user();
+            return redirect()->route('usuarios.edit', compact('usuario'));
         }
         else
             return view('usuarios.form_editar_usuario', compact('usuario'));
@@ -79,10 +82,16 @@ class UsuariosCtrl extends Controller
     public function update(UsuarioRequest $request, Usuario $usuario)
     {
         $validated = $request->validated();
-        // Enctriptamos la contraseña antes de guardarla
-        $validated['password'] = Hash::make($validated['password']);
+        if (Auth::user()->isAdmin()){
+            // Enctriptamos la contraseña antes de guardarla
+            $validated['password'] = Hash::make($validated['password']);
+        }
         $usuario->update($validated);
-        return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
+        if (Auth::user()->isAdmin()){
+            return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
+        } else {
+            return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
+        }
     }
 
     /**

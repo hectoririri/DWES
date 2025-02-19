@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/monedas', function(){
    $monedas = Http::get('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json');
    //dd($monedas);
-   return $monedas['eur'];
+   return $monedas;
 });
 
 // PDF
@@ -44,6 +44,7 @@ Route::patch('tareas/completar/{tarea}', [TareasCtrl::class, 'confirmarTarea'])
 Route::get('usuarios/confirmar_eliminar/{usuario}', [UsuariosCtrl::class, 'confirmarBorrarUsuario'])
     ->where('usuario', '[0-9]+')
     ->name('confirmar.eliminar.usuario');
+
 
 // Rutas de clientes a parte de las CRUD
 Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confirmarEliminarCliente'])
