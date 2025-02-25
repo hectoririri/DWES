@@ -55,6 +55,15 @@
                         <a class="dropdown-item" href="{!! route('clientes.index') !!}">Mostrar clientes</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="cuotasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cuotas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="cuotasDropdown">
+                        <a class="dropdown-item" href="{!! route('cuotas.create') !!}">Añadir cuotas</a>
+                        <a class="dropdown-item" href="{!! route('cuotas.index') !!}">Mostrar cuotas</a>
+                    </div>
+                </li>
                 @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{!! route('usuarios.show', ['usuario' => Auth::user()]) !!}">Mi perfil 👤</a>

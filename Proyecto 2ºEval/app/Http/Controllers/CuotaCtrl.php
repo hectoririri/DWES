@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cuota;
 use Illuminate\Http\Request;
 
 class CuotaCtrl extends Controller
@@ -11,7 +12,9 @@ class CuotaCtrl extends Controller
      */
     public function index()
     {
-        //
+        $cuotas = Cuota::getCuotas();
+        return view('cuotas.mostrar_cuotas', compact('cuotas'));
+
     }
 
     /**
@@ -33,9 +36,9 @@ class CuotaCtrl extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Cuota $cuota)
     {
-        //
+        return view('cuotas.mostrar_cuota', compact('cuota'));
     }
 
     /**
@@ -59,6 +62,7 @@ class CuotaCtrl extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $cuotas = Cuota::find($id);
+        $cuotas->delete();
     }
 }

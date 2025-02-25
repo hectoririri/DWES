@@ -7,11 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 // API
-Route::get('/monedas', function(){
-   $monedas = Http::get('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json');
-   //dd($monedas);
-   return $monedas;
-});
+Route::apiResource('moneda', MonedaCtrl::class);
 
 // PDF
 // https://www.nigmacode.com/laravel/generar-pdf-dompdf-laravel
@@ -21,7 +17,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-// Rutas de tareas a parte de las CRUD
+// RUTAS DE TAREAS a parte de las CRUD
 Route::get('/tareas/pendientes', [TareasCtrl::class, 'mostrarTareasPendientes'])
 ->name('tareas.pendientes');
 
@@ -40,16 +36,22 @@ Route::patch('tareas/completar/{tarea}', [TareasCtrl::class, 'confirmarTarea'])
     ->where('tarea', '[0-9]+')
     ->name('confirmar.tarea');
 
-// Rutas de usuarios a parte de las CRUD
+// RUTAS DE USUARIO a parte de las CRUD
 Route::get('usuarios/confirmar_eliminar/{usuario}', [UsuariosCtrl::class, 'confirmarBorrarUsuario'])
     ->where('usuario', '[0-9]+')
     ->name('confirmar.eliminar.usuario');
 
 
-// Rutas de clientes a parte de las CRUD
+// RUTAS DE CLIENTES a parte de las CRUD
 Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confirmarEliminarCliente'])
     ->where('cliente', '[0-9]+')
     ->name('confirmar.eliminar.cliente');
+
+
+// RUTAS DE CUOTAS a parte de las CRUD
+Route::get('cuotas/confirmar_eliminar/{cuota}', [CuotaCtrl::class, 'confirmarEliminarCuota'])
+    ->where('cuota', '[0-9]+')
+    ->name('confirmar.eliminar.cuota');
 
 // Los resources CRUD para cada controlador 
 Route::resources([

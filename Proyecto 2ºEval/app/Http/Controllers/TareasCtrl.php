@@ -9,7 +9,6 @@ use App\Models\Provincia;
 use App\Models\Tarea;
 use Illuminate\Http\Request;
 use App\Models\Tareas;
-use App\Models\User;
 use App\Models\Usuario;
 
 class TareasCtrl extends Controller
