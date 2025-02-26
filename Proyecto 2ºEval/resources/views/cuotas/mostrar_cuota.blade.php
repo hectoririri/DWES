@@ -9,10 +9,6 @@
 </div>
 @endif
 
-@php
-    use App\Models\Cliente;
-@endphp
-
 <table class="table table-striped table-bordered">
     <tbody>
         <tr>

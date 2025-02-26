@@ -88,7 +88,7 @@ class TareasCtrl extends Controller
         // Creamos la tarea y redirijimos
         $tarea = Tarea::create($validated);
         return redirect()->route('tareas.show', $tarea)
-            ->with('mensaje', 'Tarea creada correctamente');
+            ->with('success', 'Tarea creada correctamente');
     }
 
     /**
@@ -136,7 +136,7 @@ class TareasCtrl extends Controller
 
         // Actualizamos la tarea
         $tarea->update($validated);
-        return redirect()->route('tareas.index')->with('mensaje', 'Tarea actualizada correctamente');
+        return redirect()->route('tareas.index')->with('success', 'Tarea actualizada correctamente');
     }
 
     /**
@@ -145,7 +145,7 @@ class TareasCtrl extends Controller
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
-        return redirect()->route('tareas.index')->with('mensaje', 'Tarea eliminada correctamente');
+        return redirect()->route('tareas.index')->with('success', 'Tarea eliminada correctamente');
     }
 
     /**
@@ -181,6 +181,6 @@ class TareasCtrl extends Controller
         ]);
 
         $tarea->update($validated);
-        return redirect()->route('tareas.index')->with('mensaje', 'Tarea completada correctamente');
+        return redirect()->route('tareas.index')->with('success', 'Tarea completada correctamente');
     }
 }

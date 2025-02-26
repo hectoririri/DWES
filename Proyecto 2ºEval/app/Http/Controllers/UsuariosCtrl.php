@@ -48,7 +48,7 @@ class UsuariosCtrl extends Controller
         // Enctriptamos la contraseña antes de guardarla
         $validated['password'] = Hash::make($validated['password']);
         $usuario = Usuario::create($validated);
-        return redirect()->route('usuarios.show', $usuario)->with('mensaje', 'Usuario '.$usuario->name.' creado correctamente');
+        return redirect()->route('usuarios.show', $usuario)->with('success', 'Usuario '.$usuario->name.' creado correctamente');
     }
 
     /**
@@ -88,9 +88,9 @@ class UsuariosCtrl extends Controller
         }
         $usuario->update($validated);
         if (Auth::user()->isAdmin()){
-            return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
+            return redirect()->route('usuarios.show', compact('usuario'))->with('success', 'Usuario'. $usuario->name .'actualizado correctamente');
         } else {
-            return redirect()->route('usuarios.show', compact('usuario'))->with('mensaje', 'Usuario'. $usuario->name .'actualizado correctamente');
+            return redirect()->route('usuarios.show', compact('usuario'))->with('success', 'Usuario'. $usuario->name .'actualizado correctamente');
         }
     }
 
@@ -100,7 +100,7 @@ class UsuariosCtrl extends Controller
     public function destroy(Usuario $usuario)
     {
         $usuario->delete();
-        return redirect()->route('usuarios.index')->with('mensaje', 'Usuario eliminado correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente');
     }
 
     /**

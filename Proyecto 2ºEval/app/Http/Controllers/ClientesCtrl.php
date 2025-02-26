@@ -41,7 +41,7 @@ class ClientesCtrl extends Controller
 
         // Redigirimos a la vista del nuevo cliente que hemos creado
         return redirect()->route('clientes.show', $cliente)
-            ->with('mensaje', 'Tarea creada correctamente');
+            ->with('success', 'Tarea creada correctamente');
     }
 
     /**
@@ -74,7 +74,7 @@ class ClientesCtrl extends Controller
 
         // Redigirimos a la vista del nuevo cliente que hemos actualizado
         return redirect()->route('clientes.show', $cliente)
-        ->with('mensaje', 'Cliente actualizado correctamente');
+        ->with('success', 'Cliente actualizado correctamente');
     }
 
     /**
@@ -84,7 +84,7 @@ class ClientesCtrl extends Controller
     {
         $nombre = $cliente->nombre;
         $cliente->delete();
-        return redirect()->route('clientes.index')->with('mensaje', 'Cliente '.$nombre.' eliminada correctamente');
+        return redirect()->route('clientes.index')->with('success', 'Cliente '.$nombre.' eliminada correctamente');
     }
 
     public function confirmarEliminarCliente(Cliente $cliente)

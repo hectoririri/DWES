@@ -68,24 +68,71 @@
                     </div>
                 </li>
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link" href="{!! route('usuarios.show', ['usuario' => Auth::user()]) !!}">Mi perfil 👤</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="perfilDropdown">
+                        <a class="nav-link" href="{!! route('usuarios.show', ['usuario' => Auth::user()]) !!}">Mi perfil 👤</a>
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Cerrar Sesión') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </li>
             </ul>
         </div>
     </nav>
     <main class="container-fluid mt-3">
-        <div class="d-flex justify-content-end">
-            <a href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                {{ __('Cerrar Sesión') }}
-            </a>
+        @if (session('success') || session('error'))
+            <div id="alert-message" class="alert {{ session('success') ? 'alert-success' : 'alert-danger' }} opacity-0">
+                {{ session('success') ?? session('error') }}
+            </div>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
+            <style>
+                @keyframes slideInAndBounce {
+                    0% {
+                        transform: translateY(-100px);
+                        opacity: 0;
+                    }
+                    70% {
+                        transform: translateY(10px);
+                        opacity: 1;
+                    }
+                    85% {
+                        transform: translateY(-5px);
+                    }
+                    100% {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+            </style>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const alert = document.getElementById('alert-message');
+                    
+                    // Animación de entrada con rebote
+                    alert.style.animation = 'slideInAndBounce 0.8s ease-out forwards';
+                    alert.style.opacity = '1';
+
+                    // Animación fade out que se esconde automáticamente a los 2 segundos
+                    setTimeout(() => {
+                        alert.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                        alert.style.opacity = '0';
+                        alert.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            alert.remove();
+                        }, 500);
+                    }, 2000);
+                });
+            </script>
+        @endif
         @yield('cuerpo')
     </main>
     <footer class="text-center mt-4">
