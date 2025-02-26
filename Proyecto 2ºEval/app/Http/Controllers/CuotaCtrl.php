@@ -22,7 +22,8 @@ class CuotaCtrl extends Controller
      */
     public function create()
     {
-        //
+        $cuota = new Cuota();
+        return view('cuotas.form_crear_cuota', compact('cuota'));
     }
 
     /**

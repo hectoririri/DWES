@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.10.0.7000
+-- HeidiSQL Versión:             12.9.0.6999
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `cache` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla albanileria_prueba.cache: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla albanileria_prueba.cache: ~1 rows (aproximadamente)
 DELETE FROM `cache`;
 
 -- Volcando estructura para tabla albanileria_prueba.cache_locks
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `pais` smallint(3) unsigned zerofill NOT NULL DEFAULT 000,
   `cuenta_corriente` varchar(100) DEFAULT NULL,
   `moneda` varchar(50) DEFAULT NULL,
-  `importe_mensual` decimal(19,4) DEFAULT NULL,
+  `importe_mensual` decimal(19,2) DEFAULT NULL,
   `fecha_alta` timestamp NULL DEFAULT NULL,
   `fecha_actualizado` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -58,14 +58,14 @@ CREATE TABLE IF NOT EXISTS `clientes` (
 -- Volcando datos para la tabla albanileria_prueba.clientes: ~8 rows (aproximadamente)
 DELETE FROM `clientes`;
 INSERT INTO `clientes` (`id`, `cif`, `nombre`, `telefono`, `correo`, `pais`, `cuenta_corriente`, `moneda`, `importe_mensual`, `fecha_alta`, `fecha_actualizado`, `deleted_at`) VALUES
-	(1, '54794584M', 'Empresa S.A.', '+34 123-45-67-89', 'contacto@empresa.com', 008, 'ES7620770024003102575766', 'EUR', 1000.0000, '2022-12-31 23:00:00', '2025-02-12 16:06:30', '2025-02-12 16:06:30'),
-	(2, '12345678Z', 'Compañía SL', '+34-123-45-67-89', 'hecnugar@gmail.com', 040, 'ES9121000418450200051332', 'EUR', 2000.0000, '2023-01-31 23:00:00', '2025-02-12 16:16:15', NULL),
-	(3, 'C34567890', 'Negocio SL', '900345678', 'contacto@negocio.com', 010, 'ES7620770024003102575767', 'EUR', 1500.0000, '2023-02-28 23:00:00', NULL, NULL),
-	(4, 'D45678901', 'Industria SA', '900456789', 'info@industria.com', 016, 'ES9121000418450200051333', 'EUR', 2500.0000, '2023-03-31 22:00:00', NULL, NULL),
-	(5, 'E56789012', 'Servicios SL', '900567890', 'contacto@servicios.com', 012, 'ES7620770024003102575768', 'EUR', 3000.0000, '2023-04-30 22:00:00', NULL, NULL),
-	(6, 'F67890123', 'Comercio SA', '900678901', 'info@comercio.com', 020, 'ES9121000418450200051334', 'EUR', 3500.0000, '2023-05-31 22:00:00', NULL, NULL),
-	(7, 'G78901234', 'Consultoria SL', '900789012', 'contacto@consultoria.com', 032, 'ES7620770024003102575769', 'EUR', 4000.0000, '2023-06-30 22:00:00', NULL, NULL),
-	(8, 'H89012345', 'Tecnologia SA', '900890123', 'info@tecnologia.com', 036, 'ES9121000418450200051335', 'EUR', 4500.0000, '2023-07-31 22:00:00', NULL, NULL);
+	(1, '54794584M', 'Empresa S.A.', '+34 123-45-67-89', 'contacto@empresa.com', 008, 'ES7620770024003102575766', 'EUR', 1000.00, '2022-12-31 23:00:00', '2025-02-12 16:06:30', '2025-02-12 16:06:30'),
+	(2, '12345678Z', 'Compañía SL', '+34-113-23-64-89', 'hecnugar@gmail.com', 724, 'ES9121000418450200051332', 'EUR', 3400.00, '2023-01-31 23:00:00', '2025-02-18 07:53:23', NULL),
+	(3, 'C34567890', 'Negocio SL', '900345678', 'contacto@negocio.com', 010, 'ES7620770024003102575767', 'EUR', 1500.00, '2023-02-28 23:00:00', '2025-02-18 08:02:17', '2025-02-18 08:02:17'),
+	(4, 'D45678901', 'Industria SA', '900456789', 'info@industria.com', 016, 'ES9121000418450200051333', 'EUR', 2500.00, '2023-03-31 22:00:00', NULL, NULL),
+	(5, 'E56789012', 'Servicios SL', '900567890', 'contacto@servicios.com', 012, 'ES7620770024003102575768', 'EUR', 3000.00, '2023-04-30 22:00:00', NULL, NULL),
+	(6, 'F67890123', 'Comercio SA', '900678901', 'info@comercio.com', 020, 'ES9121000418450200051334', 'EUR', 3500.00, '2023-05-31 22:00:00', NULL, NULL),
+	(7, 'G78901234', 'Consultoria SL', '900789012', 'contacto@consultoria.com', 032, 'ES7620770024003102575769', 'EUR', 4000.00, '2023-06-30 22:00:00', NULL, NULL),
+	(8, 'H89012345', 'Tecnologia SA', '900890123', 'info@tecnologia.com', 036, 'ES9121000418450200051335', 'EUR', 4500.00, '2023-07-31 22:00:00', NULL, NULL);
 
 -- Volcando estructura para tabla albanileria_prueba.cuotas
 CREATE TABLE IF NOT EXISTS `cuotas` (
@@ -473,6 +473,8 @@ DELETE FROM `sessions`;
 -- Volcando estructura para tabla albanileria_prueba.tareas
 CREATE TABLE IF NOT EXISTS `tareas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `telefono_contacto` varchar(16) DEFAULT NULL,
+  `persona_contacto` varchar(60) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `poblacion` varchar(100) DEFAULT NULL,
@@ -499,23 +501,22 @@ CREATE TABLE IF NOT EXISTS `tareas` (
 
 -- Volcando datos para la tabla albanileria_prueba.tareas: ~16 rows (aproximadamente)
 DELETE FROM `tareas`;
-INSERT INTO `tareas` (`id`, `descripcion`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `fecha_realizacion`, `fecha_actualizacion`, `operario_id`, `cliente_id`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`) VALUES
-	(42, 'Instalación de tuberías', 'Av. Andalucía 45', 'Sevilla', '41005', '01', 'B', '2025-01-18 00:00:00', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL),
-	(43, 'Pintado de fachada', 'Calle Gran Vía 30', 'Barcelona', '08010', '01', 'R', '2025-01-10 00:00:00', '2025-01-15 00:00:00', '2025-01-16 00:00:00', 3, 2, 'Fachada en mal estado', 'Trabajo finalizado con éxito', 'presupuesto.pdf', 'fachada_final.jpg'),
-	(44, 'Cambio de baldosas', 'Calle Serrano 8', 'Madrid', '28006', '01', 'P', '2025-01-22 00:00:00', NULL, NULL, 4, 5, NULL, NULL, NULL, NULL),
-	(45, 'Revisión eléctrica', 'Calle Alcazaba 7', 'Málaga', '29015', '44', 'B', '2025-01-19 00:00:00', NULL, NULL, 1, 4, 'Algunas luces parpadean', 'Esperando aprobación del cliente', NULL, NULL),
-	(46, 'Impermeabilización de terraza', 'Av. Libertad 32', 'Valencia', '46002', '01', 'C', '2025-01-12 00:00:00', NULL, '2025-01-14 00:00:00', 2, 6, 'Filtraciones en techo inferior', 'Cliente canceló por presupuesto alto', NULL, NULL),
-	(47, 'Colocación de pladur', 'Calle Río Ebro 5', 'Zaragoza', '50002', '01', 'P', '2025-01-23 00:00:00', NULL, NULL, 3, 2, NULL, NULL, NULL, NULL),
-	(48, 'Pavimentación de garaje', 'Calle Real 20', 'Granada', '18001', '33', 'R', '2025-01-05 00:00:00', '2025-01-08 00:00:00', '2025-01-09 00:00:00', 4, 3, 'Hormigón anterior muy deteriorado', 'Obra completada', 'factura.pdf', 'garaje_nuevo.jpg'),
-	(49, 'Sustitución de ventanas', 'Av. Castilla 14', 'Valladolid', '47008', '01', 'P', '2025-01-24 00:00:00', NULL, NULL, 1, 7, NULL, NULL, NULL, NULL),
-	(50, 'Reforma integral de baño', 'Calle Sol 3', 'Alicante', '03001', '01', 'B', '2025-01-17 00:00:00', NULL, NULL, 2, 8, 'Baño con instalaciones antiguas', 'Aprobado, en espera de materiales', 'presupuesto_baño.pdf', NULL),
-	(51, 'tareita', 'direccion', 'poblacion', '21006', '20', 'P', '2025-02-06 00:00:00', '2025-02-06 00:00:00', '2025-02-06 00:00:00', 7, 0, 'anterior', 'posterior', NULL, NULL),
-	(52, 'Tarea como administrador', 'mi casa', 'huelvaloen', '21006', '04', 'P', '2025-02-06 00:00:00', '2025-02-21 00:00:00', '2025-02-06 00:00:00', 3, 0, 'anterior', 'posterior', NULL, NULL),
-	(53, 'tarea', NULL, NULL, '21006', '01', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 4, 5, NULL, NULL, NULL, NULL),
-	(54, 'tarea', NULL, NULL, '21006', '51', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 4, 0, NULL, NULL, NULL, NULL),
-	(55, 'tarea', NULL, NULL, '21006', '10', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 4, 6, NULL, NULL, NULL, NULL),
-	(56, 'nueva tarea con fechas', 'Avenida Siempre Viva 456', 'Barcelona', '52002', '01', 'R', '2025-02-06 09:01:00', '2025-02-28 10:01:00', '2025-02-06 09:02:30', 14, 7, 'anterior', 'posterior', NULL, NULL),
-	(57, 'Tarea sin operario', 'Avenida Siempre Viva 456', 'Huelva', '52002', '01', 'R', '2025-02-11 08:22:00', '2025-02-28 09:22:00', '2025-02-11 08:22:41', NULL, 1, 'anotacion anterior', NULL, NULL, NULL);
+INSERT INTO `tareas` (`id`, `telefono_contacto`, `persona_contacto`, `descripcion`, `direccion`, `poblacion`, `cod_postal`, `provincia`, `estado`, `fecha_creacion`, `fecha_realizacion`, `fecha_actualizacion`, `operario_id`, `cliente_id`, `anotaciones_anteriores`, `anotaciones_posteriores`, `fichero`, `foto`) VALUES
+	(42, NULL, NULL, 'Instalación de tuberías', 'Av. Andalucía 45', 'Sevilla', '41005', '01', 'B', '2025-01-18 00:00:00', NULL, NULL, 2, 1, NULL, NULL, NULL, NULL),
+	(43, NULL, NULL, 'Pintado de fachada', 'Calle Gran Vía 30', 'Barcelona', '08010', '01', 'R', '2025-01-10 00:00:00', '2025-01-15 00:00:00', '2025-01-16 00:00:00', 3, 2, 'Fachada en mal estado', 'Trabajo finalizado con éxito', 'presupuesto.pdf', 'fachada_final.jpg'),
+	(44, NULL, NULL, 'Cambio de baldosas', 'Calle Serrano 8', 'Madrid', '28006', '01', 'P', '2025-01-22 00:00:00', NULL, NULL, 4, 5, NULL, NULL, NULL, NULL),
+	(46, NULL, NULL, 'Impermeabilización de terraza', 'Av. Libertad 32', 'Valencia', '46002', '01', 'C', '2025-01-12 00:00:00', NULL, '2025-01-14 00:00:00', 2, 6, 'Filtraciones en techo inferior', 'Cliente canceló por presupuesto alto', NULL, NULL),
+	(47, NULL, NULL, 'Colocación de pladur', 'Calle Río Ebro 5', 'Zaragoza', '50002', '01', 'P', '2025-01-23 00:00:00', NULL, NULL, 3, 2, NULL, NULL, NULL, NULL),
+	(48, NULL, NULL, 'Pavimentación de garaje', 'Calle Real 20', 'Granada', '18001', '33', 'R', '2025-01-05 00:00:00', '2025-01-08 00:00:00', '2025-01-09 00:00:00', 4, 3, 'Hormigón anterior muy deteriorado', 'Obra completada', 'factura.pdf', 'garaje_nuevo.jpg'),
+	(49, NULL, NULL, 'Sustitución de ventanas', 'Av. Castilla 14', 'Valladolid', '47008', '01', 'P', '2025-01-24 00:00:00', NULL, NULL, 14, 7, NULL, NULL, NULL, NULL),
+	(50, NULL, NULL, 'Reforma integral de baño', 'Calle Sol 3', 'Alicante', '03001', '01', 'B', '2025-01-17 00:00:00', NULL, NULL, 2, 8, 'Baño con instalaciones antiguas', 'Aprobado, en espera de materiales', 'presupuesto_baño.pdf', NULL),
+	(51, NULL, NULL, 'tareita', 'direccion', 'poblacion', '21006', '20', 'P', '2025-02-06 00:00:00', '2025-02-06 00:00:00', '2025-02-06 00:00:00', 14, 0, 'anterior', 'posterior', NULL, NULL),
+	(52, NULL, NULL, 'Tarea como administrador', 'mi casa', 'huelvaloen', '21006', '04', 'P', '2025-02-06 00:00:00', '2025-02-21 00:00:00', '2025-02-06 00:00:00', 3, 0, 'anterior', 'posterior', NULL, NULL),
+	(53, NULL, NULL, 'tarea', NULL, NULL, '21006', '01', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 14, 5, NULL, NULL, NULL, NULL),
+	(54, NULL, NULL, 'tarea', NULL, NULL, '21006', '51', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 4, 0, NULL, NULL, NULL, NULL),
+	(55, NULL, NULL, 'tarea', NULL, NULL, '21006', '10', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 9, 6, NULL, NULL, NULL, NULL),
+	(56, NULL, NULL, 'nueva tarea con fechas', 'Avenida Siempre Viva 456', 'Barcelona', '52002', '01', 'R', '2025-02-06 09:01:00', '2025-02-28 10:01:00', '2025-02-13 08:07:22', 14, 3, 'anterior', 'posterior', 'BP9pdI4VC9aMTRPwcZlzyXA56N9Ahnzdn2RevvJ9.pdf', 'cItxEZtKlOhIUv9ZcUhgQlRaPCRE52ghnRDJwRlV.png'),
+	(57, NULL, NULL, 'Tarea sin operario', 'Avenida Siempre Viva 456', 'Huelva', '52002', '01', 'R', '2025-02-11 08:22:00', '2025-02-28 09:22:00', '2025-02-11 08:22:41', NULL, 1, 'anotacion anterior', NULL, NULL, NULL);
 
 -- Volcando estructura para tabla albanileria_prueba.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -549,7 +550,7 @@ INSERT INTO `users` (`id`, `dni`, `name`, `email`, `telefono`, `direccion`, `rol
 	(8, '77665544H', 'Isabel Navarro', 'isabel.navarro@example.com', '670890123', 'Calle Real 20, Granada', 'O', NULL, 'hashed_password_8', NULL, '2025-01-08 15:25:00', '2025-01-09 19:40:00', NULL),
 	(9, '22334455I', 'Pablo Domínguez', 'pablo.dominguez@example.com', '680901234', 'Av. Castilla 14, Valladolid', 'O', NULL, 'hashed_password_9', NULL, '2025-01-09 08:00:00', '2025-01-10 21:15:00', NULL),
 	(10, '88990011J', 'Elena Ruiz', 'elena.ruiz@example.com', '690123456', 'Calle Sol 3, Alicante', 'A', NULL, 'hashed_password_10', NULL, '2025-01-10 06:55:00', '2025-01-11 22:30:00', NULL),
-	(14, '54794584M', 'Hector', 'hecnugar@gmail.com', '+34 123-45-67-89', 'Calle Falsa 123', 'A', NULL, '$2y$12$4XdjiLUMcTNJeW6eAEjhBui0/Qw/l7EvHYqRGX/VCWxGdESbmQQK2', NULL, '2025-02-06 07:15:12', '2025-02-06 07:15:12', NULL);
+	(14, '54794584M', 'Hector', 'hecnugar@gmail.com', '+34 123-45-67-89', 'Calle Falsa 123', 'A', NULL, '$2y$12$4XdjiLUMcTNJeW6eAEjhBui0/Qw/l7EvHYqRGX/VCWxGdESbmQQK2', NULL, '2025-02-06 07:15:12', '2025-02-19 08:18:28', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

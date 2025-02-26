@@ -8,7 +8,7 @@ use App\Rules\TelefonoValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ClienteRequest extends FormRequest
+class CuotaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class ClienteRequest extends FormRequest
     public function rules(): array
     {
         $cliente = request()->route('cliente');
-        $isCreating = $this->route()->getName() == 'clientes.store';
+        $isCreating = $this->route()->getName() == 'cuotas.store';
         return [
             'cif' => [
                 'required',

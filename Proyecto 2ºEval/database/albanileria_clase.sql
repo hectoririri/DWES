@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `cuota` (
 
 -- Volcando datos para la tabla albanileria_prueba.cuota: ~8 rows (aproximadamente)
 DELETE FROM `cuota`;
-INSERT INTO `cuota` (`id`, `concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `cliente_id`) VALUES
+INSERT INTO `cuotas` (`id`, `concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `cliente_id`) VALUES
 	(1, 'Cuota Enero', '2023-01-01', 500.0000, 0, '2023-01-15', 'Pago pendiente', 1),
 	(2, 'Cuota Febrero', '2023-02-01', 600.0000, 1, '2023-02-15', 'Pago realizado', 2),
 	(3, 'Cuota Marzo', '2023-03-01', 700.0000, 0, '2023-03-15', 'Pago pendiente', 3),
