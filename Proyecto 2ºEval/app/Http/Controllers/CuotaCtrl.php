@@ -60,9 +60,12 @@ class CuotaCtrl extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Cuota $cuota)
     {
-        $cuotas = Cuota::find($id);
-        $cuotas->delete();
+        if ($cuota) {
+            $cuota->delete();
+            return redirect()->route('cuotas.index')->with('success', 'Cuota deleted successfully');
+        }
+        return redirect()->route('cuotas.index')->with('error', 'Cuota not found');
     }
 }

@@ -48,11 +48,6 @@ Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confi
     ->name('confirmar.eliminar.cliente');
 
 
-// RUTAS DE CUOTAS a parte de las CRUD
-Route::get('cuotas/confirmar_eliminar/{cuota}', [CuotaCtrl::class, 'confirmarEliminarCuota'])
-    ->where('cuota', '[0-9]+')
-    ->name('confirmar.eliminar.cuota');
-
 // Los resources CRUD para cada controlador 
 Route::resources([
     'tareas' => TareasCtrl::class,
