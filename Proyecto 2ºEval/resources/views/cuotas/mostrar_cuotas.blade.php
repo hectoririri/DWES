@@ -34,9 +34,9 @@
                 <td>{{ $cuota->importe }}</td>
                 <td>
                     @if ($cuota->pagada == 1)
-                        <span class="">Pagada</span>
+                        <span class="text-success">Pagada</span>
                     @else
-                        <span class="">No pagada</span>
+                        <span class="text-danger">No pagada</span>
                     @endif
                 </td>
                 <td>{{ $cuota->fecha_pago }}</td>
@@ -67,56 +67,53 @@
                     </button>
                 </td>
             </tr>
+            <div class="modal fade" id="cuotaModal{{ $cuota->id }}" tabindex="-1" aria-labelledby="cuotaModalLabel{{ $cuota->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cuotaModalLabel{{ $cuota->id }}">Detalles de la Cuota #{{ $cuota->id }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>¿Está seguro de que desea eliminar la siguiente cuota?</h1>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>Concepto:</b> {{ $cuota->concepto }}</p>
+                                    <p><b>Fecha Emisión:</b> {{ $cuota->fecha_emision }}</p>
+                                    <p><b>Importe:</b> {{ $cuota->importe }}</p>
+                                    <p><b>Estado:</b> 
+                                        @if ($cuota->pagada == 1)
+                                            <span class="text-success">Pagada</span>
+                                        @else
+                                            <span class="text-danger">No pagada</span>
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><b>Fecha Pago:</b> {{ $cuota->fecha_pago ?: 'No pagada' }}</p>
+                                    <p><b>Cliente:</b> {{ $cuota->cliente->nombre }}</p>
+                                    <p><b>Notas:</b> {{ $cuota->notas ?: 'Sin notas' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form method="POST" action="{{ route('cuotas.destroy', ['cuota' => $cuota]) }}">
+                            @method('DELETE')
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" name="boton" class="btn btn-danger d-inline-flex align-items-center">Eliminar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         @endforeach
     </tbody>
 </table>
 @else
 <h2>No tienes cuotas asignadas</h2>
 @endif
-<!-- Modal for displaying quota details -->
-@foreach ($cuotas as $cuota)
-<div class="modal fade" id="cuotaModal{{ $cuota->id }}" tabindex="-1" aria-labelledby="cuotaModalLabel{{ $cuota->id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cuotaModalLabel{{ $cuota->id }}">Detalles de la Cuota #{{ $cuota->id }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>¿Está seguro de que desea eliminar la siguiente cuota?</h1>
-                    </div>
-                    <div class="col-md-6">
-                        <p><b>Concepto:</b> {{ $cuota->concepto }}</p>
-                        <p><b>Fecha Emisión:</b> {{ $cuota->fecha_emision }}</p>
-                        <p><b>Importe:</b> {{ $cuota->importe }}</p>
-                        <p><b>Estado:</b> 
-                            @if ($cuota->pagada == 1)
-                                <span class="text-success">Pagada</span>
-                            @else
-                                <span class="text-danger">No pagada</span>
-                            @endif
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><b>Fecha Pago:</b> {{ $cuota->fecha_pago ?: 'No pagada' }}</p>
-                        <p><b>Cliente:</b> {{ $cuota->cliente->nombre }}</p>
-                        <p><b>Notas:</b> {{ $cuota->notas ?: 'Sin notas' }}</p>
-                    </div>
-                </div>
-            </div>
-            <form method="POST" action="{{ route('cuotas.destroy', ['cuota' => $cuota]) }}">
-                @method('DELETE')
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" name="boton" class="btn btn-danger d-inline-flex align-items-center">Eliminar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endforeach
 
 <div class="d-flex justify-content-center mt-4">
     {{ $cuotas->links('pagination::bootstrap-4') }}

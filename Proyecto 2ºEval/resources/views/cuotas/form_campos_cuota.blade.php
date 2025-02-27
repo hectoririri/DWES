@@ -26,12 +26,17 @@
 </div>
 
 <div class="form-group">
-    <label for="fecha_pago">Fecha Pago*</label>
-    @error('fecha_pago')
+    <label for="cliente">Cliente que encarga el trabajo*</label>
+    @error('cliente_id')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="datetime-local" class="form-control" name="fecha_pago" id="fecha_pago" value="{{ old('fecha_pago', $cuota->fecha_pago) }}">
+    <select class="form-control" name="cliente_id" id="cliente">
+        <option value="" hidden selected>Seleccione a un cliente</option>
+        @foreach ($clientes as $cliente)
+                    <option value="{{$cliente->id}}" {{ old('cliente_id', $tarea->cliente_id) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
+        @endforeach
+    </select>
 </div>
 
 <div class="form-group">
@@ -40,5 +45,5 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea name="notas" id="notas" cols="30" rows="10">{{ old('notas', $cuota->notas) }}</textarea>
+    <textarea name="notas" id="notas" cols="30" rows="2">{{ old('notas', $cuota->notas) }}</textarea>
 </div>

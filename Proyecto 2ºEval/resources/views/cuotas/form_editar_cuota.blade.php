@@ -8,6 +8,14 @@
     @include('cuotas.form_campos_cuota')
     
     <div class="form-group">
+        <label for="fecha_pago">Fecha Pago*</label>
+        @error('fecha_pago')
+            <br>
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <input type="datetime-local" class="form-control" name="fecha_pago" id="fecha_pago" value="{{ old('fecha_pago', $cuota->fecha_pago) }}">
+    </div>
+    <div class="form-group">
         <label for="pagada">Pagada*</label>
         @error('pagada')
             <br>
