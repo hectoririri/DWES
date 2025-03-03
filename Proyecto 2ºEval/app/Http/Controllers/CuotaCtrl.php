@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CuotaRequest;
+use App\Models\Cliente;
 use App\Models\Cuota;
-use Illuminate\Http\Request;
-
+use Pdf;
 class CuotaCtrl extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('roles:A');
+    // }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,15 +29,24 @@ class CuotaCtrl extends Controller
     public function create()
     {
         $cuota = new Cuota();
-        return view('cuotas.form_crear_cuota', compact('cuota'));
+        $clientes = Cliente::all();
+        return view('cuotas.form_crear_cuota', compact('cuota', 'clientes'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CuotaRequest $request)
     {
-        //
+        // Validamos el formulario y lo guardamos en $validado
+        $validado = $request->validated();
+
+        // Creamos la nueva cuota con los datos validados del formulario
+        $cuota = Cuota::create($validado);
+
+        // Redigirimos a la vista de la nueva cuota que hemos creado
+        return redirect()->route('cuotas.show', $cuota)
+            ->with('success', 'Cuota creada correctamente');
     }
 
     /**
@@ -45,17 +60,26 @@ class CuotaCtrl extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Cuota $cuota)
     {
-        //
+        $clientes = Cliente::all();
+        return view('cuotas.form_editar_cuota', compact('cuota', 'clientes'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CuotaRequest $request, Cuota $cuota)
     {
-        //
+        // Validamos el formulario y lo guardamos en $validado
+        $validado = $request->validated();
+
+        // Actualizamos la cuota con los datos validados del formulario
+        $cuota->update($validado);
+
+        // Redigirimos a la vista de la cuota actualizada 
+        return redirect()->route('cuotas.show', $cuota)
+            ->with('success', 'Cuota actualizada correctamente');
     }
 
     /**
@@ -68,5 +92,17 @@ class CuotaCtrl extends Controller
             return redirect()->route('cuotas.index')->with('success', 'Cuota deleted successfully');
         }
         return redirect()->route('cuotas.index')->with('error', 'Cuota not found');
+    }
+
+    public function crearPdf(Cuota $cuota){
+
+        // Instancia de domPDF cargando la vista blade del pdf
+        $pdf = Pdf::loadView('cuotas.pdf_cuota', compact('cuota'));
+        
+        // Tamaño de la hoja
+        $pdf->setPaper('a4');
+        
+        // Descargamos el pdf con el id de la cuota
+        return $pdf->download('cuota_' . $cuota->id . '.pdf');
     }
 }

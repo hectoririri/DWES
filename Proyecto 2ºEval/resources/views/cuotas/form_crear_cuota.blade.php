@@ -8,7 +8,7 @@
     @include('cuotas.form_campos_cuota')
 
     <a href="{{ route('cuotas.index') }}" class="btn btn-outline-secondary d-inline-flex align-items-center">Cancelar</a>
-    <button type="submit" class="btn btn-primary d-inline-flex align-items-center">Enviar</button>
+    <button type="submit" class="btn btn-primary d-inline-flex align-items-center">Crear cuota</button>
     <br> <br>
 </form>
 @endsection

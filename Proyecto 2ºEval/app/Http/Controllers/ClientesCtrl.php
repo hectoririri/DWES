@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ClientesCtrl extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('roles:A');
+    }
+
     /**
      * Display a listing of the resource.
      */

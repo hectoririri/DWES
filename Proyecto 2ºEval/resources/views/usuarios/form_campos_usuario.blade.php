@@ -22,7 +22,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="password" class="form-control" name="password" id="password" value="{{ old('password', $usuario->password) }}">
+    <input type="password" class="form-control" name="password" id="password" value="{{ old('password') }}">
 </div>
 
 <div class="form-group">

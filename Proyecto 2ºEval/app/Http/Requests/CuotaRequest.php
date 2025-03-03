@@ -2,11 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Cliente;
-use App\Rules\DniNifValidationRule;
-use App\Rules\TelefonoValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CuotaRequest extends FormRequest
 {
@@ -25,17 +21,19 @@ class CuotaRequest extends FormRequest
      */
     public function rules(): array
     {
-        $cliente = request()->route('cliente');
+        $cuota = request()->route('cuota');
         $isCreating = $this->route()->getName() == 'cuotas.store';
-        return [
+        $reglas = [
             'concepto' => ['required', 'string', 'max:150'],
             'fecha_emision' => ['required', 'date'],
-            'importe' => ['required', 'string', 'decimal:2'],
-            'notas' => ['required', 'string', 'max:150'],
+            'importe' => ['required', 'numeric', 'decimal:0,2'],
+            'notas' => ['nullable', 'string', 'max:150'],
             'cliente_id' => ['required','integer','exists:clientes,id'],
-            'moneda' => ['required', 'string', 'size:3', 'exists:paises,iso_moneda'],
-            'importe_mensual' => ['required', 'numeric', 'between:0,9999.99'],
         ];
+        if (!$isCreating) {
+            $reglas['fecha_pago'] = ['required', 'date', 'after_or_equal:'. $cuota->fecha_emision];
+        }
+        return $reglas;
     }
 
     public function messages()

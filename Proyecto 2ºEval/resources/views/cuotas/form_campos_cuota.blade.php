@@ -22,11 +22,11 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="importe" id="importe" value="{{ old('importe', $cuota->importe) }}">
+    <input type="text" placeholder="Importe permitido máximo dos decimales..." class="form-control" name="importe" id="importe" value="{{ old('importe', $cuota->importe) }}">
 </div>
 
 <div class="form-group">
-    <label for="cliente">Cliente que encarga el trabajo*</label>
+    <label for="cliente">Cliente al que se aplica la cuota*</label>
     @error('cliente_id')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
@@ -34,16 +34,16 @@
     <select class="form-control" name="cliente_id" id="cliente">
         <option value="" hidden selected>Seleccione a un cliente</option>
         @foreach ($clientes as $cliente)
-                    <option value="{{$cliente->id}}" {{ old('cliente_id', $tarea->cliente_id) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
+                    <option value="{{$cliente->id}}" {{ old('cliente_id', $cuota->cliente_id) == $cliente->id ? 'selected' : '' }} >{{$cliente->nombre." ".$cliente->apellidos}}</option>
         @endforeach
     </select>
 </div>
 
-<div class="form-group">
-    <label for="notas">Notas</label>
+<div class="form-group text-center">
+    <p for="notas">Notas</p>
     @error('notas')
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <textarea name="notas" id="notas" cols="30" rows="2">{{ old('notas', $cuota->notas) }}</textarea>
+    <textarea name="notas" id="notas" cols="50" rows="2">{{ old('notas', $cuota->notas) }}</textarea>
 </div>

@@ -56,5 +56,8 @@ Route::resources([
     'cuotas' => CuotaCtrl::class
 ]);
 
+// Ruta para crear pdf de cuota
+Route::get('/cuotas/{cuota}/pdf', [CuotaCtrl::class, 'crearPdf'])->name('cuotas.pdf');
+
 // Rutas de autorización
 Auth::routes();
