@@ -14,6 +14,42 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Volcando estructura para tabla albanileria_prueba.users
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `dni` varchar(9) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `telefono` varchar(16) NOT NULL,
+  `direccion` varchar(100) NOT NULL,
+  `rol` enum('A','O') NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla albanileria_prueba.users: ~11 rows (aproximadamente)
+DELETE FROM `users`;
+INSERT INTO `users` (`id`, `dni`, `name`, `email`, `telefono`, `direccion`, `rol`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, '12345678A', 'Juan Pérez', 'juan.perez@example.com', '600123456', 'Calle Mayor 12, Madrid', 'O', NULL, 'hashed_password_1', NULL, '2025-01-01 09:00:00', '2025-01-31 07:24:39', '2025-01-31 07:24:39'),
+	(2, '87654321B', 'María López', 'maria.lopez@example.com', '610987654', 'Av. Andalucía 45, Sevilla', 'O', NULL, 'hashed_password_2', NULL, '2025-01-02 10:15:00', '2025-01-30 21:43:56', '2025-01-30 21:43:56'),
+	(3, '11223344C', 'Carlos Sánchez', 'carlos.sanchez@example.com', '620345678', 'Calle Gran Vía 30, Barcelona', 'O', NULL, 'hashed_password_3', NULL, '2025-01-03 08:45:00', '2025-01-04 14:00:00', NULL),
+	(4, '44332211D', 'Lucía Fernández', 'lucia.fernandez@example.com', '630456789', 'Calle Serrano 8, Madrid', 'O', NULL, 'hashed_password_4', NULL, '2025-01-04 13:20:00', '2025-01-05 16:10:00', NULL),
+	(5, '55667788E', 'David Martínez', 'david.martinez@example.com', '640567890', 'Calle Alcazaba 7, Málaga', 'O', NULL, 'hashed_password_5', NULL, '2025-01-05 07:30:00', '2025-01-06 18:30:00', NULL),
+	(6, '99887766F', 'Ana Torres', 'ana.torres@example.com', '650678901', 'Av. Libertad 32, Valencia', 'O', NULL, 'hashed_password_6', NULL, '2025-01-06 09:45:00', '2025-01-07 13:55:00', NULL),
+	(7, '33445566G', 'Miguel Romero', 'miguel.romero@example.com', '660789012', 'Calle Río Ebro 5, Zaragoza', 'O', NULL, 'hashed_password_7', NULL, '2025-01-07 11:10:00', '2025-01-08 17:20:00', NULL),
+	(8, '77665544H', 'Isabel Navarro', 'isabel.navarro@example.com', '670890123', 'Calle Real 20, Granada', 'O', NULL, 'hashed_password_8', NULL, '2025-01-08 15:25:00', '2025-01-09 19:40:00', NULL),
+	(9, '22334455I', 'Pablo Domínguez', 'pablo.dominguez@example.com', '680901234', 'Av. Castilla 14, Valladolid', 'O', NULL, 'hashed_password_9', NULL, '2025-01-09 08:00:00', '2025-01-10 21:15:00', NULL),
+	(10, '88990011J', 'Elena Ruiz', 'elena.ruiz@example.com', '690123456', 'Calle Sol 3, Alicante', 'A', NULL, 'hashed_password_10', NULL, '2025-01-10 06:55:00', '2025-01-11 22:30:00', NULL),
+	(14, '54794584M', 'Hector', 'hecnugar@gmail.com', '+34 123-45-67-89', 'Calle Falsa 123', 'A', NULL, '$2y$12$4XdjiLUMcTNJeW6eAEjhBui0/Qw/l7EvHYqRGX/VCWxGdESbmQQK2', NULL, '2025-02-06 07:15:12', '2025-02-19 08:18:28', NULL);
+
+
 -- Volcando estructura para tabla albanileria_prueba.cache
 CREATE TABLE IF NOT EXISTS `cache` (
   `key` varchar(255) NOT NULL,
@@ -36,63 +72,6 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
 -- Volcando datos para la tabla albanileria_prueba.cache_locks: ~0 rows (aproximadamente)
 DELETE FROM `cache_locks`;
 
--- Volcando estructura para tabla albanileria_prueba.clientes
-CREATE TABLE IF NOT EXISTS `clientes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cif` varchar(9) DEFAULT NULL,
-  `nombre` varchar(30) DEFAULT NULL,
-  `telefono` varchar(16) DEFAULT NULL,
-  `correo` varchar(50) DEFAULT NULL,
-  `pais` smallint(3) unsigned zerofill NOT NULL DEFAULT 000,
-  `cuenta_corriente` varchar(100) DEFAULT NULL,
-  `moneda` varchar(50) DEFAULT NULL,
-  `importe_mensual` decimal(19,2) DEFAULT NULL,
-  `fecha_alta` timestamp NULL DEFAULT NULL,
-  `fecha_actualizado` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `clientes_pais_foreign` (`pais`),
-  CONSTRAINT `clientes_pais_foreign` FOREIGN KEY (`pais`) REFERENCES `paises` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla albanileria_prueba.clientes: ~8 rows (aproximadamente)
-DELETE FROM `clientes`;
-INSERT INTO `clientes` (`id`, `cif`, `nombre`, `telefono`, `correo`, `pais`, `cuenta_corriente`, `moneda`, `importe_mensual`, `fecha_alta`, `fecha_actualizado`, `deleted_at`) VALUES
-	(1, '54794584M', 'Empresa S.A.', '+34 123-45-67-89', 'contacto@empresa.com', 008, 'ES7620770024003102575766', 'EUR', 1000.00, '2022-12-31 23:00:00', '2025-02-12 16:06:30', '2025-02-12 16:06:30'),
-	(2, '12345678Z', 'Compañía SL', '+34-113-23-64-89', 'hecnugar@gmail.com', 724, 'ES9121000418450200051332', 'EUR', 3400.00, '2023-01-31 23:00:00', '2025-02-18 07:53:23', NULL),
-	(3, 'C34567890', 'Negocio SL', '900345678', 'contacto@negocio.com', 010, 'ES7620770024003102575767', 'EUR', 1500.00, '2023-02-28 23:00:00', '2025-02-18 08:02:17', '2025-02-18 08:02:17'),
-	(4, 'D45678901', 'Industria SA', '900456789', 'info@industria.com', 016, 'ES9121000418450200051333', 'EUR', 2500.00, '2023-03-31 22:00:00', NULL, NULL),
-	(5, 'E56789012', 'Servicios SL', '900567890', 'contacto@servicios.com', 012, 'ES7620770024003102575768', 'EUR', 3000.00, '2023-04-30 22:00:00', NULL, NULL),
-	(6, 'F67890123', 'Comercio SA', '900678901', 'info@comercio.com', 020, 'ES9121000418450200051334', 'EUR', 3500.00, '2023-05-31 22:00:00', NULL, NULL),
-	(7, 'G78901234', 'Consultoria SL', '900789012', 'contacto@consultoria.com', 032, 'ES7620770024003102575769', 'EUR', 4000.00, '2023-06-30 22:00:00', NULL, NULL),
-	(8, 'H89012345', 'Tecnologia SA', '900890123', 'info@tecnologia.com', 036, 'ES9121000418450200051335', 'EUR', 4500.00, '2023-07-31 22:00:00', NULL, NULL);
-
--- Volcando estructura para tabla albanileria_prueba.cuotas
-CREATE TABLE IF NOT EXISTS `cuotas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `concepto` varchar(150) DEFAULT NULL,
-  `fecha_emision` date DEFAULT NULL,
-  `importe` decimal(19,4) DEFAULT NULL,
-  `pagada` tinyint(1) DEFAULT 0,
-  `fecha_pago` date DEFAULT NULL,
-  `notas` varchar(150) DEFAULT NULL,
-  `cliente_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cliente_id` (`cliente_id`),
-  CONSTRAINT `cuotas_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Volcando datos para la tabla albanileria_prueba.cuotas: ~8 rows (aproximadamente)
-DELETE FROM `cuotas`;
-INSERT INTO `cuotas` (`id`, `concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `cliente_id`) VALUES
-	(1, 'Cuota Enero', '2023-01-01', 500.0000, 0, '2023-01-15', 'Pago pendiente', 1),
-	(2, 'Cuota Febrero', '2023-02-01', 600.0000, 1, '2023-02-15', 'Pago realizado', 2),
-	(3, 'Cuota Marzo', '2023-03-01', 700.0000, 0, '2023-03-15', 'Pago pendiente', 3),
-	(4, 'Cuota Abril', '2023-04-01', 800.0000, 1, '2023-04-15', 'Pago realizado', 4),
-	(5, 'Cuota Mayo', '2023-05-01', 900.0000, 0, '2023-05-15', 'Pago pendiente', 5),
-	(6, 'Cuota Junio', '2023-06-01', 1000.0000, 1, '2023-06-15', 'Pago realizado', 6),
-	(7, 'Cuota Julio', '2023-07-01', 1100.0000, 0, '2023-07-15', 'Pago pendiente', 7),
-	(8, 'Cuota Agosto', '2023-08-01', 1200.0000, 1, '2023-08-15', 'Pago realizado', 1);
 
 -- Volcando estructura para tabla albanileria_prueba.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -470,6 +449,66 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Volcando datos para la tabla albanileria_prueba.sessions: ~0 rows (aproximadamente)
 DELETE FROM `sessions`;
 
+
+
+-- Volcando estructura para tabla albanileria_prueba.clientes
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cif` varchar(9) DEFAULT NULL,
+  `nombre` varchar(30) DEFAULT NULL,
+  `telefono` varchar(16) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `pais` smallint(3) unsigned zerofill NOT NULL DEFAULT 000,
+  `cuenta_corriente` varchar(100) DEFAULT NULL,
+  `moneda` varchar(50) DEFAULT NULL,
+  `importe_mensual` decimal(19,2) DEFAULT NULL,
+  `fecha_alta` timestamp NULL DEFAULT NULL,
+  `fecha_actualizado` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clientes_pais_foreign` (`pais`),
+  CONSTRAINT `clientes_pais_foreign` FOREIGN KEY (`pais`) REFERENCES `paises` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla albanileria_prueba.clientes: ~8 rows (aproximadamente)
+DELETE FROM `clientes`;
+INSERT INTO `clientes` (`id`, `cif`, `nombre`, `telefono`, `correo`, `pais`, `cuenta_corriente`, `moneda`, `importe_mensual`, `fecha_alta`, `fecha_actualizado`, `deleted_at`) VALUES
+	(1, '54794584M', 'Empresa S.A.', '+34 123-45-67-89', 'contacto@empresa.com', 008, 'ES7620770024003102575766', 'EUR', 1000.00, '2022-12-31 23:00:00', '2025-02-12 16:06:30', '2025-02-12 16:06:30'),
+	(2, '12345678Z', 'Compañía SL', '+34-113-23-64-89', 'hecnugar@gmail.com', 724, 'ES9121000418450200051332', 'EUR', 3400.00, '2023-01-31 23:00:00', '2025-02-18 07:53:23', NULL),
+	(3, 'C34567890', 'Negocio SL', '900345678', 'contacto@negocio.com', 010, 'ES7620770024003102575767', 'EUR', 1500.00, '2023-02-28 23:00:00', '2025-02-18 08:02:17', '2025-02-18 08:02:17'),
+	(4, 'D45678901', 'Industria SA', '900456789', 'info@industria.com', 016, 'ES9121000418450200051333', 'EUR', 2500.00, '2023-03-31 22:00:00', NULL, NULL),
+	(5, 'E56789012', 'Servicios SL', '900567890', 'contacto@servicios.com', 012, 'ES7620770024003102575768', 'EUR', 3000.00, '2023-04-30 22:00:00', NULL, NULL),
+	(6, 'F67890123', 'Comercio SA', '900678901', 'info@comercio.com', 020, 'ES9121000418450200051334', 'EUR', 3500.00, '2023-05-31 22:00:00', NULL, NULL),
+	(7, 'G78901234', 'Consultoria SL', '900789012', 'contacto@consultoria.com', 032, 'ES7620770024003102575769', 'EUR', 4000.00, '2023-06-30 22:00:00', NULL, NULL),
+	(8, 'H89012345', 'Tecnologia SA', '900890123', 'info@tecnologia.com', 036, 'ES9121000418450200051335', 'EUR', 4500.00, '2023-07-31 22:00:00', NULL, NULL);
+
+-- Volcando estructura para tabla albanileria_prueba.cuotas
+CREATE TABLE IF NOT EXISTS `cuotas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `concepto` varchar(150) DEFAULT NULL,
+  `fecha_emision` date DEFAULT NULL,
+  `importe` decimal(19,4) DEFAULT NULL,
+  `pagada` tinyint(1) DEFAULT 0,
+  `fecha_pago` date DEFAULT NULL,
+  `notas` varchar(150) DEFAULT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cliente_id` (`cliente_id`),
+  CONSTRAINT `cuotas_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Volcando datos para la tabla albanileria_prueba.cuotas: ~8 rows (aproximadamente)
+DELETE FROM `cuotas`;
+INSERT INTO `cuotas` (`id`, `concepto`, `fecha_emision`, `importe`, `pagada`, `fecha_pago`, `notas`, `cliente_id`) VALUES
+	(1, 'Cuota Enero', '2023-01-01', 500.0000, 0, '2023-01-15', 'Pago pendiente', 1),
+	(2, 'Cuota Febrero', '2023-02-01', 600.0000, 1, '2023-02-15', 'Pago realizado', 2),
+	(3, 'Cuota Marzo', '2023-03-01', 700.0000, 0, '2023-03-15', 'Pago pendiente', 3),
+	(4, 'Cuota Abril', '2023-04-01', 800.0000, 1, '2023-04-15', 'Pago realizado', 4),
+	(5, 'Cuota Mayo', '2023-05-01', 900.0000, 0, '2023-05-15', 'Pago pendiente', 5),
+	(6, 'Cuota Junio', '2023-06-01', 1000.0000, 1, '2023-06-15', 'Pago realizado', 6),
+	(7, 'Cuota Julio', '2023-07-01', 1100.0000, 0, '2023-07-15', 'Pago pendiente', 7),
+	(8, 'Cuota Agosto', '2023-08-01', 1200.0000, 1, '2023-08-15', 'Pago realizado', 1);
+
 -- Volcando estructura para tabla albanileria_prueba.tareas
 CREATE TABLE IF NOT EXISTS `tareas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -518,41 +557,8 @@ INSERT INTO `tareas` (`id`, `telefono_contacto`, `persona_contacto`, `descripcio
     (55, NULL, NULL, 'tarea', NULL, NULL, '21006', '10', 'P', '2025-02-06 00:00:00', '2025-03-02 00:00:00', '2025-02-06 00:00:00', 9, 6, NULL, NULL, NULL, NULL),
     (56, NULL, NULL, 'nueva tarea con fechas', 'Avenida Siempre Viva 456', 'Barcelona', '52002', '01', 'R', '2025-02-06 09:01:00', '2025-02-28 10:01:00', '2025-02-13 08:07:22', 14, 3, 'anterior', 'posterior', 'BP9pdI4VC9aMTRPwcZlzyXA56N9Ahnzdn2RevvJ9.pdf', 'cItxEZtKlOhIUv9ZcUhgQlRaPCRE52ghnRDJwRlV.png'),
     (57, NULL, NULL, 'Tarea sin operario', 'Avenida Siempre Viva 456', 'Huelva', '52002', '01', 'R', '2025-02-11 08:22:00', '2025-02-28 09:22:00', '2025-02-11 08:22:41', NULL, 1, 'anotacion anterior', NULL, NULL, NULL);
--- Volcando estructura para tabla albanileria_prueba.users
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `dni` varchar(9) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `telefono` varchar(16) NOT NULL,
-  `direccion` varchar(100) NOT NULL,
-  `rol` enum('A','O') NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Volcando datos para la tabla albanileria_prueba.users: ~11 rows (aproximadamente)
-DELETE FROM `users`;
-INSERT INTO `users` (`id`, `dni`, `name`, `email`, `telefono`, `direccion`, `rol`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, '12345678A', 'Juan Pérez', 'juan.perez@example.com', '600123456', 'Calle Mayor 12, Madrid', 'O', NULL, 'hashed_password_1', NULL, '2025-01-01 09:00:00', '2025-01-31 07:24:39', '2025-01-31 07:24:39'),
-	(2, '87654321B', 'María López', 'maria.lopez@example.com', '610987654', 'Av. Andalucía 45, Sevilla', 'O', NULL, 'hashed_password_2', NULL, '2025-01-02 10:15:00', '2025-01-30 21:43:56', '2025-01-30 21:43:56'),
-	(3, '11223344C', 'Carlos Sánchez', 'carlos.sanchez@example.com', '620345678', 'Calle Gran Vía 30, Barcelona', 'O', NULL, 'hashed_password_3', NULL, '2025-01-03 08:45:00', '2025-01-04 14:00:00', NULL),
-	(4, '44332211D', 'Lucía Fernández', 'lucia.fernandez@example.com', '630456789', 'Calle Serrano 8, Madrid', 'O', NULL, 'hashed_password_4', NULL, '2025-01-04 13:20:00', '2025-01-05 16:10:00', NULL),
-	(5, '55667788E', 'David Martínez', 'david.martinez@example.com', '640567890', 'Calle Alcazaba 7, Málaga', 'O', NULL, 'hashed_password_5', NULL, '2025-01-05 07:30:00', '2025-01-06 18:30:00', NULL),
-	(6, '99887766F', 'Ana Torres', 'ana.torres@example.com', '650678901', 'Av. Libertad 32, Valencia', 'O', NULL, 'hashed_password_6', NULL, '2025-01-06 09:45:00', '2025-01-07 13:55:00', NULL),
-	(7, '33445566G', 'Miguel Romero', 'miguel.romero@example.com', '660789012', 'Calle Río Ebro 5, Zaragoza', 'O', NULL, 'hashed_password_7', NULL, '2025-01-07 11:10:00', '2025-01-08 17:20:00', NULL),
-	(8, '77665544H', 'Isabel Navarro', 'isabel.navarro@example.com', '670890123', 'Calle Real 20, Granada', 'O', NULL, 'hashed_password_8', NULL, '2025-01-08 15:25:00', '2025-01-09 19:40:00', NULL),
-	(9, '22334455I', 'Pablo Domínguez', 'pablo.dominguez@example.com', '680901234', 'Av. Castilla 14, Valladolid', 'O', NULL, 'hashed_password_9', NULL, '2025-01-09 08:00:00', '2025-01-10 21:15:00', NULL),
-	(10, '88990011J', 'Elena Ruiz', 'elena.ruiz@example.com', '690123456', 'Calle Sol 3, Alicante', 'A', NULL, 'hashed_password_10', NULL, '2025-01-10 06:55:00', '2025-01-11 22:30:00', NULL),
-	(14, '54794584M', 'Hector', 'hecnugar@gmail.com', '+34 123-45-67-89', 'Calle Falsa 123', 'A', NULL, '$2y$12$4XdjiLUMcTNJeW6eAEjhBui0/Qw/l7EvHYqRGX/VCWxGdESbmQQK2', NULL, '2025-02-06 07:15:12', '2025-02-19 08:18:28', NULL);
-
+    
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
