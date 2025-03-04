@@ -29,6 +29,9 @@ class TareaRequestCreate extends FormRequest
     public function rules(): array
     {
         $reglas = [
+            'telefono_contacto' => ['required','string','size:16', new TelefonoValidationRule],
+            'persona_contacto' => ['required','string','max:100'],
+            'correo_contacto' => ['required', 'string', 'max:255', 'email:rfc,dns'],
             'descripcion' => ['required', 'string', 'max:500'],
             'direccion' => ['nullable', 'string', 'max:100'],
             'poblacion' => ['nullable', 'string', 'max:100'],
@@ -41,8 +44,6 @@ class TareaRequestCreate extends FormRequest
             'anotaciones_posteriores' => ['nullable', 'string', 'max:500'],
         ];
 
-        // Usamos la clase User porque si lo llamamos comprobando al usuario de la sesión actual no funciona.
-        // Si lo hacemos de esta manera dará error porque no nos hemos logeado con ningún usuario
         if (User::isAdmin()) {
             $reglas['operario_id'] = ['required', 'integer', 'exists:users,id'];
             $reglas['cliente_id'] = ['required', 'integer', 'exists:clientes,id'];

@@ -126,7 +126,6 @@ class TareasCtrl extends Controller
             $fichero_name = $requestTarea->file('fichero')->store('/', 'tareas');
             // Sobreescribimos el nombre del fichero que se almacenará por el hasheado
             $validated['fichero'] = $fichero_name;
-            // return dd($validated);
         }
 
         if ($requestTarea->hasFile('foto')) {

@@ -1,3 +1,32 @@
+
+
+<div class="form-group">
+    <label for="telefono_contacto">Teléfono de contacto*</label>
+    @error('telefono_contacto')
+        <br>
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <input type="text" class="form-control" name="telefono_contacto" id="telefono_contacto" value="{{ old('telefono_contacto', $tarea->telefono_contacto) }}">
+</div>
+
+<div class="form-group">
+    <label for="persona_contacto">Persona de contacto*</label>
+    @error('persona_contacto')
+        <br>
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <input type="text" class="form-control" name="persona_contacto" id="persona_contacto" value="{{ old('persona_contacto', $tarea->persona_contacto) }}">
+</div>
+
+<div class="form-group">
+    <label for="correo_contacto">Correo de contacto*</label>
+    @error('correo_contacto')
+        <br>
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <input type="text" class="form-control" name="correo_contacto" id="correo_contacto" value="{{ old('correo_contacto', $tarea->correo_contacto) }}">
+</div>
+
 <div class="form-group">
     <label for="descripcion">Descripción identificativa de la tarea*</label>
     @error('descripcion')

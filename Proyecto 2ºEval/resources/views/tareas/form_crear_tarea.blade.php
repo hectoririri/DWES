@@ -5,24 +5,29 @@
     <h1 class="text-primary text-center mb-5">Creando tarea</h1>
 
     @if (!auth()->check())
-        <h3 class="text-secondary">Validese con una cuenta cliente registrada en nuestro sistema</h3>
-
-        <div class="form-group">
-            <label for="nif_cif">NIF o CIF*</label>
-            @error('nif_cif')
-                <br>
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <input type="text" class="form-control" name="nif_cif" id="nif_cif" value="{{ old('nif_cif', $tarea->nif_cif) }}">
-        </div>
-        
-        <div class="form-group">
-            <label for="telefono_contacto">Teléfono de contacto*</label>
-            @error('telefono')
-                <br>
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="text-secondary mb-0">Validese con una cuenta cliente registrada en nuestro sistema</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="nif_cif">NIF o CIF*</label>
+                    @error('nif_cif')
+                        <br>
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <input type="text" class="form-control" name="nif_cif" id="nif_cif" value="{{ old('nif_cif', $tarea->nif_cif) }}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono_contacto">Teléfono de contacto*</label>
+                    @error('telefono')
+                        <br>
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
+                </div>
+            </div>
         </div>
     @endif
 

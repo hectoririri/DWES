@@ -18,10 +18,10 @@
                     </p>
                     <div id="app">
                         <div class="button-container mt-4">
-                            <button class="btn btn-primary me-2" @click="showAlert">Show Alert</button>
-                            <button class="btn btn-success me-2" @click="counter++">Count: @{{ counter }}</button>
-                            <button class="btn btn-info me-2" @click="toggleText">Toggle Text</button>
-                            <button class="btn btn-warning me-2" @click="getCurrentTime">Show Time</button>
+                            <button class="btn btn-primary me-2" @click="showAlert">Mostrar alert</button>
+                            <button class="btn btn-success me-2" @click="counter++">Contador: @{{ counter }}</button>
+                            <button class="btn btn-info me-2" @click="toggleText">Texto toogle</button>
+                            <button class="btn btn-warning me-2" @click="getCurrentTime">Mostrar hora actual</button>
                         </div>
                         
                         <div class="mt-3" v-if="showMessage">
@@ -45,15 +45,15 @@
                             },
                             methods: {
                                 showAlert() {
-                                    this.message = 'Hello ' + '{{ auth()->user()->name }}' + '!';
+                                    this.message = 'Hola ' + '{{ auth()->user()->name }}' + '!';
                                     this.showMessage = true;
                                 },
                                 toggleText() {
-                                    this.message = this.showMessage ? '' : 'Text toggled!';
+                                    this.message = this.showMessage ? '' : 'Texto toogle!';
                                     this.showMessage = !this.showMessage;
                                 },
                                 getCurrentTime() {
-                                    this.message = 'Current time: ' + new Date().toLocaleTimeString();
+                                    this.message = 'Hora actual: ' + new Date().toLocaleTimeString();
                                     this.showMessage = true;
                                 }
                             }

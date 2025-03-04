@@ -35,13 +35,13 @@
                         Tareas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="tareasDropdown">
-                        @if(Auth::user()->isAdmin())
+                        @if(Auth::check() && Auth::user()->isAdmin())
                         <a class="dropdown-item" href="{!! route('tareas.create') !!}">Añadir Tarea</a>
                         @endif
                         <a class="dropdown-item" href="{!! route('tareas.index') !!}">Mostrar Tareas</a>
                     </div>
                 </li>
-                @if(Auth::user()->isAdmin())
+                @if(Auth::check() && Auth::user()->isAdmin())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="usuariosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Usuarios
@@ -72,10 +72,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{!! route('remesas.index') !!}">Remesas</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{!! route('payment.form') !!}">Paypal</a>
-                </li>
                 @endif
+                @if(Auth::check())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Perfil
@@ -92,6 +90,11 @@
                         </form>
                     </div>
                 </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{!! route('login')!!}">Iniciar Sesión</a>
+                </li>
+                @endif
             </ul>
         </div>
     </nav>
@@ -121,6 +124,7 @@
                 }
             </style>
 
+            {{-- Animación de fade-in y fade-out alerta de acción --}}
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     const alert = document.getElementById('alert-message');
