@@ -56,6 +56,10 @@ Route::resources([
     'remesas' => RemesaCtrl::class
 ]);
 
-
 // Rutas de autorización
 Auth::routes();
+
+// Rutas de Paypal
+Route::get('/payment', [PaymentController::class, 'payWithPayPal'])->name('payment');
+Route::get('/payment/status', [PaymentController::class, 'payPalStatus'])->name('payment.status');
+Route::get('/payment/form', [PaymentController::class, 'index'])->name('payment.form');

@@ -73,6 +73,12 @@
                         Generar PDF
                     </a>
                 </td>
+                <td>
+                    <a href="{{ route('payment', ['cantidad' => $cuota->importe]) }}" class="btn btn-primary">
+                        Pagar con PayPal
+                        <i class="fab fa-paypal ms-2"></i>
+                    </a>
+                </td>
             </tr>
             <div class="modal fade" id="cuotaModal{{ $cuota->id }}" tabindex="-1" aria-labelledby="cuotaModalLabel{{ $cuota->id }}" aria-hidden="true">
                 <div class="modal-dialog">

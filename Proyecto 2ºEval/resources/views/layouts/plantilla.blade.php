@@ -14,6 +14,8 @@
     {{-- Bootstrap Javascript --}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    {{-- Jquery 3 --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 </head>
 <body>
     <header class="text-center my-4">
@@ -69,6 +71,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{!! route('remesas.index') !!}">Remesas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{!! route('payment.form') !!}">Paypal</a>
                 </li>
                 @endif
                 <li class="nav-item dropdown">
