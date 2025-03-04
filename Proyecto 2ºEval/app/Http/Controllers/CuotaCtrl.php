@@ -8,10 +8,10 @@ use App\Models\Cuota;
 use Pdf;
 class CuotaCtrl extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('roles:A');
-    // }
+    public function __construct()
+    {
+        $this->middleware('roles:A');
+    }
 
     /**
      * Display a listing of the resource.

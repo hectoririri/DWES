@@ -67,6 +67,9 @@
                         <a class="dropdown-item" href="{!! route('cuotas.index') !!}">Mostrar cuotas</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{!! route('remesas.index') !!}">Remesas</a>
+                </li>
                 @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

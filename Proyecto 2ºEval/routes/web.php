@@ -47,17 +47,21 @@ Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confi
     ->where('cliente', '[0-9]+')
     ->name('confirmar.eliminar.cliente');
 
+// RUTA DE CUOTAS a parte de las CRUD
+Route::get('/cuotas/{cuota}/pdf', [CuotaCtrl::class, 'crearPdf'])->name('cuotas.pdf');
+// ruta para formulario remesa
+
+
 
 // Los resources CRUD para cada controlador 
 Route::resources([
     'tareas' => TareasCtrl::class,
     'usuarios' => UsuariosCtrl::class,
     'clientes' => ClientesCtrl::class,
-    'cuotas' => CuotaCtrl::class
+    'cuotas' => CuotaCtrl::class,
+    'remesas' => RemesaCtrl::class
 ]);
 
-// Ruta para crear pdf de cuota
-Route::get('/cuotas/{cuota}/pdf', [CuotaCtrl::class, 'crearPdf'])->name('cuotas.pdf');
 
 // Rutas de autorización
 Auth::routes();

@@ -2,9 +2,6 @@
 @section('title', 'Listado de Cuotas')
 @section('cuerpo')
 <h1 class="text-center">Lista Cuotas</h1>
-
-
-
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;

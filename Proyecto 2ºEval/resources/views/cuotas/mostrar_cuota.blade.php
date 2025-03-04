@@ -46,11 +46,21 @@
         </tr>
         <tr>
             <th class="text-center">Fecha de Pago</th>
-            <td class="text-center" colspan="2">{{ $cuota->fecha_pago }}</td>
+            <td class="text-center">
+                @if ($cuota->fecha_pago != null)
+                    Pagada el <span class="text-success"><b>{{$cuota->fecha_pago}}</b></span>
+                @else
+                    <span class="text-danger">No pagada</span>
+                @endif
+            </td>
         </tr>
         <tr>
             <th class="text-center">Notas</th>
-            <td class="text-center" colspan="2">{{ $cuota->notas }}</td>
+            @if ($cuota->notas == null)
+                <td class="text-center" colspan="2">Sin notas</td>
+            @else
+                <td class="text-center" colspan="2">{{ $cuota->notas }}</td>
+            @endif
         </tr>
         <tr>
             <th class="text-center">Cliente</th>
