@@ -6,12 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
-// API
-Route::apiResource('moneda', MonedaCtrl::class);
-
-// PDF
-// https://www.nigmacode.com/laravel/generar-pdf-dompdf-laravel
-
 // Rutas home
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');

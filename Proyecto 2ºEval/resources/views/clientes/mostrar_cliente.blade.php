@@ -5,6 +5,8 @@
     use App\Models\Usuario;
     use App\Models\Cliente;
     use App\Models\Pais;
+    use App\Models\Cambio;
+    $cambio = Cambio::getInstance();
 @endphp
 <h1 class="text-center">Detalles del cliente {{$cliente->name}}</h1>
 @if (session('mensaje'))
@@ -33,7 +35,6 @@
         <tr>
             <th class="text-center">Pais</th>
             <td class="text-center">{{ $cliente->getPais->nombre }}</td>
-            {{-- <td class="text-center">{{ Pais::find($cliente->pais)->nombre }}</td> --}}
         </tr>
         <tr>
             <th class="text-center">Cuenta Corriente</th>
@@ -44,12 +45,20 @@
             <td class="text-center">{{ $cliente->moneda }}</td>
         </tr>
         <tr>
-            <th class="text-center">Importe Mensual</th>
+            <th class="text-center">Importe Mensual en euros</th>
             <td class="text-center">{{ $cliente->importe_mensual }}</td>
         </tr>
         <tr>
-            <th class="text-center">Cambio a euros</th>
-            <td class="text-center"></td>
+            <th class="text-center">Cambio a {{$cliente->moneda}}</th>
+            <td class="text-center">
+                @if ($cambio->hayError())
+                <div class="alert alert-danger">
+                   {{ $cambio->getError() }}
+                </div>
+                @else
+                    {{$cambio->conversion($cliente->importe_mensual, $cliente->moneda)}}
+                @endif
+            </td>
         </tr>
         <tr>
             <th class="text-center">Fecha alta</th>

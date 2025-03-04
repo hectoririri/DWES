@@ -48,7 +48,7 @@ class ClienteRequest extends FormRequest
             $isCreating ? 'unique:clientes,cuenta_corriente' : Rule::unique('clientes', 'cuenta_corriente')->ignore($cliente)
             ],
             'moneda' => ['required', 'string', 'size:3', 'exists:paises,iso_moneda'],
-            'importe_mensual' => ['required', 'numeric', 'between:0,9999.99'],
+            'importe_mensual' => ['required', 'numeric', 'between:0,9999.99', 'decimal:0,2'],
         ];
     }
 

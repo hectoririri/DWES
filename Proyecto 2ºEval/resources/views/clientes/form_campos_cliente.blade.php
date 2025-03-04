@@ -80,5 +80,5 @@
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
     
-    <input type="text" class="form-control" name="importe_mensual" id="ImporteMensual" value="{{ old('importe_mensual', $cliente->importe_mensual) }}">
+    <input type="text" placeholder="Introduzca el importe en euros" class="form-control" name="importe_mensual" id="ImporteMensual" value="{{ old('importe_mensual', $cliente->importe_mensual) }}">
 </div>
