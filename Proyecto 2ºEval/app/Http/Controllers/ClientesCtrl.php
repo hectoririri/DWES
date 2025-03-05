@@ -15,7 +15,9 @@ class ClientesCtrl extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Muestra la vista con todos los clientes
+     *
+     * @return void
      */
     public function index()
     {
@@ -24,7 +26,9 @@ class ClientesCtrl extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la vista para crear un nuevo cliente
+     *
+     * @return void
      */
     public function create()
     {
@@ -34,7 +38,10 @@ class ClientesCtrl extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda un nuevo cliente en la base de datos
+     *
+     * @param ClienteRequest $request
+     * @return void
      */
     public function store(ClienteRequest $request)
     {
@@ -50,7 +57,10 @@ class ClientesCtrl extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la vista de un cliente
+     *
+     * @param Cliente $cliente
+     * @return void
      */
     public function show(Cliente $cliente)
     {
@@ -58,7 +68,10 @@ class ClientesCtrl extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra la vista para actualizar un cliente
+     *
+     * @param Cliente $cliente
+     * @return void
      */
     public function edit(Cliente $cliente)
     {
@@ -66,9 +79,13 @@ class ClientesCtrl extends Controller
         return view('clientes.form_actualizar_cliente', compact('cliente', 'paises'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   /**
+    * Actualiza un cliente en la base de datos
+    *
+    * @param ClienteRequest $request
+    * @param Cliente $cliente
+    * @return void
+    */
     public function update(ClienteRequest $request, Cliente $cliente)
     {
         // Validamos el formulario y lo guardamos en $validado
@@ -83,7 +100,10 @@ class ClientesCtrl extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un cliente de la base de datos
+     *
+     * @param Cliente $cliente
+     * @return void
      */
     public function destroy(Cliente $cliente)
     {
@@ -92,6 +112,12 @@ class ClientesCtrl extends Controller
         return redirect()->route('clientes.index')->with('success', 'Cliente '.$nombre.' eliminada correctamente');
     }
 
+    /**
+     * Muestra la pantalla de confirmación de eliminación de un cliente
+     *
+     * @param Cliente $cliente
+     * @return void
+     */
     public function confirmarEliminarCliente(Cliente $cliente)
     {
         return view('clientes.borrar_cliente', compact('cliente'));

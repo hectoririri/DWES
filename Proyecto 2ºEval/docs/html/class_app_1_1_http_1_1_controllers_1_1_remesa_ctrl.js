@@ -1,5 +1,6 @@
 var class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl =
 [
+    [ "__construct", "class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#afea3cebeaac0f2b334b7429cee2cee4e", null ],
     [ "create", "class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#abf1d7e4f75d33f8abb27feba3980b492", null ],
     [ "destroy", "class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#ae0a16dfb389b4fa4eb27ab496384feed", null ],
     [ "edit", "class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#a71140a35c2e61705e37f741f98c76d17", null ],

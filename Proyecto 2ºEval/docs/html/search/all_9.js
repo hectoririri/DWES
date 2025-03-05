@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['paymentcontroller_0',['PaymentController',['../class_app_1_1_http_1_1_controllers_1_1_payment_controller.html',1,'App::Http::Controllers']]]
+  ['index_0',['index',['../class_app_1_1_http_1_1_controllers_1_1_clientes_ctrl.html#a3cab5d9afc211d0c6e022210eb64cc08',1,'App\Http\Controllers\ClientesCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_cuota_ctrl.html#ae0c2bef85bc81a17072f730a5875cc67',1,'App\Http\Controllers\CuotaCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_home_controller.html#aa9fbb4fb13a33b3b92c73dc527ff603a',1,'App\Http\Controllers\HomeController\index()'],['../class_app_1_1_http_1_1_controllers_1_1_payment_controller.html#a4b5fe8bd8a24ae1babae3c4f7118534d',1,'App\Http\Controllers\PaymentController\index()'],['../class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#a950a404a75964ed90b93bab40f240b18',1,'App\Http\Controllers\RemesaCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#a5d01814ccd73eae02531a9cbdb6f756a',1,'App\Http\Controllers\TareasCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a5583d391d180c32d77e795565ade4ba3',1,'App\Http\Controllers\UsuariosCtrl\index()']]],
+  ['isadmin_1',['isAdmin',['../class_app_1_1_models_1_1_user.html#a618771e65cf9c560e913bfd71872ee29',1,'App::Models::User']]],
+  ['isclienteregistered_2',['isClienteRegistered',['../class_app_1_1_models_1_1_cliente.html#ab6a3669a976ce1b75ab2d4e0fc5a65fa',1,'App::Models::Cliente']]],
+  ['isoperario_3',['isOperario',['../class_app_1_1_models_1_1_user.html#a6149644d56a7044c858bebc49558bc1c',1,'App::Models::User']]]
 ];

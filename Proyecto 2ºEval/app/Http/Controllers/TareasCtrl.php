@@ -27,6 +27,8 @@ class TareasCtrl extends Controller
 
     /**
      * Muestra una vista con todas las tareas
+     *
+     * @return void
      */
     public function index()
     {
@@ -54,6 +56,11 @@ class TareasCtrl extends Controller
         return view('tareas.mostrar_tareas', compact('tareas'));
     }
 
+    /**
+     * Muestra una vista con las tareas sin operario asignado
+     *
+     * @return void
+     */
     public function mostrarTareasSinOperario()
     {
         $tareas = Tarea::getTareasSinOperario();
@@ -62,6 +69,8 @@ class TareasCtrl extends Controller
 
     /**
      * Muestra el formulario para crear una nueva tarea
+     *
+     * @return void
      */
     public function create()
     {
@@ -74,6 +83,9 @@ class TareasCtrl extends Controller
 
     /**
      * Guarda una nueva tarea en la base de datos
+     *
+     * @param TareaRequestCreate $requestTarea
+     * @return void
      */
     public function store(TareaRequestCreate $requestTarea)
     {
@@ -102,7 +114,10 @@ class TareasCtrl extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para actualizar una tarea
+     *
+     * @param Tarea $tarea
+     * @return void
      */
     public function edit(Tarea $tarea)
     {
@@ -113,7 +128,11 @@ class TareasCtrl extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una tarea en la base de datos
+     *
+     * @param TareaRequestUpdate $requestTarea
+     * @param Tarea $tarea
+     * @return void
      */
     public function update(TareaRequestUpdate $requestTarea, Tarea $tarea)
     {
@@ -139,7 +158,10 @@ class TareasCtrl extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una tarea de la base de datos
+     *
+     * @param Tarea $tarea
+     * @return void
      */
     public function destroy(Tarea $tarea)
     {
@@ -167,9 +189,11 @@ class TareasCtrl extends Controller
     }
 
     /**
-     * Validamos el formulario de confirmación de tarea
-     * 
-     * 
+     * Confirma la tarea completada
+     *
+     * @param Request $request
+     * @param Tarea $tarea
+     * @return void
      */
     public function confirmarTarea(Request $request, Tarea $tarea)
     {

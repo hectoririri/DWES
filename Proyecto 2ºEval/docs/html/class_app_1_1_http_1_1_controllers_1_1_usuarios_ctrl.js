@@ -1,5 +1,6 @@
 var class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl =
 [
+    [ "__construct", "class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#adad93f8d27e5a2f87a3991637960fcd7", null ],
     [ "confirmarBorrarUsuario", "class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a5d133a8d5ceaaf5cedd5a43206c107ee", null ],
     [ "create", "class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a51a07bf55190ac06d40e801552cfa15a", null ],
     [ "destroy", "class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a7f5b059147fdfc4a9974644d9f1be318", null ],

@@ -1,4 +1,23 @@
 var searchData=
 [
-  ['index_0',['index',['../class_app_1_1_http_1_1_controllers_1_1_clientes_ctrl.html#a3cab5d9afc211d0c6e022210eb64cc08',1,'App\Http\Controllers\ClientesCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_cuota_ctrl.html#ae0c2bef85bc81a17072f730a5875cc67',1,'App\Http\Controllers\CuotaCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_home_controller.html#aa9fbb4fb13a33b3b92c73dc527ff603a',1,'App\Http\Controllers\HomeController\index()'],['../class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#a950a404a75964ed90b93bab40f240b18',1,'App\Http\Controllers\RemesaCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#a5d01814ccd73eae02531a9cbdb6f756a',1,'App\Http\Controllers\TareasCtrl\index()'],['../class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a5583d391d180c32d77e795565ade4ba3',1,'App\Http\Controllers\UsuariosCtrl\index()']]]
+  ['getclientes_0',['getClientes',['../class_app_1_1_models_1_1_cliente.html#a198be5c3e2a008562cca4fa5a9dd5a4e',1,'App::Models::Cliente']]],
+  ['getcuotas_1',['getCuotas',['../class_app_1_1_models_1_1_cuota.html#a158cfa6db3ea8aede09b4939f102e9f2',1,'App::Models::Cuota']]],
+  ['geterror_2',['getError',['../class_app_1_1_models_1_1_cambio.html#abc8fc2f987ad265aa91f3a80b2b4e0b0',1,'App::Models::Cambio']]],
+  ['getfotourlattribute_3',['getFotoUrlAttribute',['../class_app_1_1_models_1_1_tarea.html#acf173e574fc4e1930c1d08d6fea92550',1,'App::Models::Tarea']]],
+  ['getidfromniftelephone_4',['getIdFromNifTelephone',['../class_app_1_1_models_1_1_cliente.html#a52625d9ef9d873675d11cef12c4952f8',1,'App::Models::Cliente']]],
+  ['getinstance_5',['getInstance',['../class_app_1_1_models_1_1_cambio.html#a4c910966c5711cb0076fdcef812ac601',1,'App::Models::Cambio']]],
+  ['getoperarios_6',['getOperarios',['../class_app_1_1_models_1_1_usuario.html#a5b00a529548ff56ef69d33e484d8676d',1,'App::Models::Usuario']]],
+  ['getpais_7',['getPais',['../class_app_1_1_models_1_1_cliente.html#a800de6f2e0ea41dafb8bab7f6afa75a6',1,'App::Models::Cliente']]],
+  ['getpaises_8',['getPaises',['../class_app_1_1_models_1_1_pais.html#a661cdbf95cda7c0746058bfbd060bc9a',1,'App::Models::Pais']]],
+  ['getprovincia_9',['getProvincia',['../class_app_1_1_models_1_1_tarea.html#af8f2b3862a4731e67dfde56a55831fc0',1,'App::Models::Tarea']]],
+  ['getprovincias_10',['getProvincias',['../class_app_1_1_models_1_1_provincia.html#a5c114216b788cafe77d791cafa0dfd80',1,'App::Models::Provincia']]],
+  ['gettarea_11',['getTarea',['../class_app_1_1_models_1_1_tarea.html#a6991834cae61179c0280a678398f115f',1,'App::Models::Tarea']]],
+  ['gettareas_12',['getTareas',['../class_app_1_1_models_1_1_tarea.html#a52e67b18e31294d52550585018070e9d',1,'App::Models::Tarea']]],
+  ['gettareasoperario_13',['getTareasOperario',['../class_app_1_1_models_1_1_tarea.html#ae741f0bc65f56a904ee27e0c112b2706',1,'App::Models::Tarea']]],
+  ['gettareaspendientes_14',['getTareasPendientes',['../class_app_1_1_models_1_1_tarea.html#a9480c094f31a2aed07b35a651b2f44b3',1,'App::Models::Tarea']]],
+  ['gettareaspendientesoperario_15',['getTareasPendientesOperario',['../class_app_1_1_models_1_1_tarea.html#a2b21435db1245e5769d6d318504a7f70',1,'App::Models::Tarea']]],
+  ['gettareassinoperario_16',['getTareasSinOperario',['../class_app_1_1_models_1_1_tarea.html#ac098193c17090ab7b7b8fdd0b1df1fc2',1,'App::Models::Tarea']]],
+  ['gettareaurlattribute_17',['getTareaUrlAttribute',['../class_app_1_1_models_1_1_tarea.html#aa7b97500908841a67624234ebc83e300',1,'App::Models::Tarea']]],
+  ['getusuario_18',['getUsuario',['../class_app_1_1_models_1_1_usuario.html#afa319ff2658ddb9252fe18779cdbead5',1,'App::Models::Usuario']]],
+  ['getusuarios_19',['getUsuarios',['../class_app_1_1_models_1_1_usuario.html#afea45b40d320bafdb6351f090b9428b8',1,'App::Models::Usuario']]]
 ];

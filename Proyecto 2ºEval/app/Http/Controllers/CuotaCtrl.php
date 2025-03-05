@@ -15,7 +15,9 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Muestra la vista con todas las cuotas
+     *
+     * @return void
      */
     public function index()
     {
@@ -25,7 +27,9 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la vista para crear una nueva cuota
+     *
+     * @return void
      */
     public function create()
     {
@@ -35,7 +39,10 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una nueva cuota en la base de datos
+     *
+     * @param CuotaRequest $request
+     * @return void
      */
     public function store(CuotaRequest $request)
     {
@@ -51,7 +58,10 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra la vista de una cuota
+     *
+     * @param Cuota $cuota
+     * @return void
      */
     public function show(Cuota $cuota)
     {
@@ -59,7 +69,10 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra la vista para actualizar una cuota
+     *
+     * @param Cuota $cuota
+     * @return void
      */
     public function edit(Cuota $cuota)
     {
@@ -68,7 +81,11 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una cuota en la base de datos
+     *
+     * @param CuotaRequest $request
+     * @param Cuota $cuota
+     * @return void
      */
     public function update(CuotaRequest $request, Cuota $cuota)
     {
@@ -84,7 +101,10 @@ class CuotaCtrl extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una cuota de la base de datos
+     *
+     * @param Cuota $cuota
+     * @return void
      */
     public function destroy(Cuota $cuota)
     {
@@ -113,11 +133,23 @@ class CuotaCtrl extends Controller
         return $pdf->download('cuota_' . $cuota->id . '' . $cuota->concepto . '.pdf');
     }
 
+    /**
+     * Muestra las cuotas de un cliente
+     *
+     * @param Cliente $cliente
+     * @return void
+     */
     public function mostrarCuotasCliente(Cliente $cliente){
         $cuotas = $cliente->cuotas()->paginate(5);
         return view('cuotas.mostrar_cuotas', compact('cuotas'));
     }
 
+    /**
+     * Muestra las cuotas de una remesa
+     *
+     * @param Remesa $remesa
+     * @return void
+     */
     public function mostrarCuotasRemesa(Remesa $remesa){
         $cuotas = Cuota::where('concepto', $remesa->motivo)->paginate(5);
         return view('cuotas.mostrar_cuotas', compact('cuotas'));

@@ -1,4 +1,29 @@
 var searchData=
 [
-  ['edit_0',['edit',['../class_app_1_1_http_1_1_controllers_1_1_clientes_ctrl.html#a7e656fb8a6327602349a0cd7b94727bf',1,'App\Http\Controllers\ClientesCtrl\edit()'],['../class_app_1_1_http_1_1_controllers_1_1_cuota_ctrl.html#ad2810f6d7bf2cdd132cf7146b5f32c90',1,'App\Http\Controllers\CuotaCtrl\edit()'],['../class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#a71140a35c2e61705e37f741f98c76d17',1,'App\Http\Controllers\RemesaCtrl\edit()'],['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#aaca6e6f09d8084a26c4b236e24052119',1,'App\Http\Controllers\TareasCtrl\edit()'],['../class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a1de4b7cd2128e9e3cb235658a4433d5e',1,'App\Http\Controllers\UsuariosCtrl\edit()']]]
+  ['cambio_0',['Cambio',['../class_app_1_1_models_1_1_cambio.html',1,'App::Models']]],
+  ['cambio_2ephp_1',['Cambio.php',['../_cambio_8php.html',1,'']]],
+  ['casts_2',['casts',['../class_app_1_1_models_1_1_user.html#afc845f919d34d162c4500b1942d322d7',1,'App::Models::User']]],
+  ['cliente_3',['Cliente',['../class_app_1_1_models_1_1_cliente.html',1,'App\Models\Cliente'],['../class_app_1_1_models_1_1_pais.html#a14c50475af58d9c4b6bd2fb91ce52292',1,'App\Models\Pais\Cliente()']]],
+  ['cliente_4',['cliente',['../class_app_1_1_models_1_1_cuota.html#ad122c2f450031460985951db78e0f8c8',1,'App\Models\Cuota\cliente()'],['../class_app_1_1_models_1_1_tarea.html#a8b2b8e92ee5cc30316d439c16845c033',1,'App\Models\Tarea\cliente()']]],
+  ['cliente_2ephp_5',['Cliente.php',['../_cliente_8php.html',1,'']]],
+  ['clientesctrl_6',['ClientesCtrl',['../class_app_1_1_http_1_1_controllers_1_1_clientes_ctrl.html',1,'App::Http::Controllers']]],
+  ['clientesctrl_2ephp_7',['ClientesCtrl.php',['../_clientes_ctrl_8php.html',1,'']]],
+  ['completartarea_8',['completarTarea',['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#a5f45ffed964f9efceb5037df913d9b3f',1,'App::Http::Controllers::TareasCtrl']]],
+  ['confirmarborrartarea_9',['confirmarBorrarTarea',['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#a07d099a73baa7422e40b142ff12fcacc',1,'App::Http::Controllers::TareasCtrl']]],
+  ['confirmarborrarusuario_10',['confirmarBorrarUsuario',['../class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a5d133a8d5ceaaf5cedd5a43206c107ee',1,'App::Http::Controllers::UsuariosCtrl']]],
+  ['confirmareliminarcliente_11',['confirmarEliminarCliente',['../class_app_1_1_http_1_1_controllers_1_1_clientes_ctrl.html#a4aa2e3d5ae148e3f7077b23586bb5e44',1,'App::Http::Controllers::ClientesCtrl']]],
+  ['confirmartarea_12',['confirmarTarea',['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#adaa5ca462d269212e852ca04e53c1967',1,'App::Http::Controllers::TareasCtrl']]],
+  ['confirmpasswordcontroller_13',['ConfirmPasswordController',['../class_app_1_1_http_1_1_controllers_1_1_auth_1_1_confirm_password_controller.html',1,'App::Http::Controllers::Auth']]],
+  ['confirmpasswordcontroller_2ephp_14',['ConfirmPasswordController.php',['../_confirm_password_controller_8php.html',1,'']]],
+  ['controller_15',['Controller',['../class_app_1_1_http_1_1_controllers_1_1_controller.html',1,'App::Http::Controllers']]],
+  ['controller_2ephp_16',['Controller.php',['../_controller_8php.html',1,'']]],
+  ['conversion_17',['conversion',['../class_app_1_1_models_1_1_cambio.html#a2cb6147d3c2458d7a3b4d1df6eedd4a3',1,'App::Models::Cambio']]],
+  ['crearpdf_18',['crearPdf',['../class_app_1_1_http_1_1_controllers_1_1_cuota_ctrl.html#a173a6362a96aba8cda2c7a55695199e8',1,'App::Http::Controllers::CuotaCtrl']]],
+  ['create_19',['create',['../class_app_1_1_http_1_1_controllers_1_1_auth_1_1_register_controller.html#af969cbad0c184d760c5e7ba80099abda',1,'App\Http\Controllers\Auth\RegisterController\create()'],['../class_app_1_1_http_1_1_controllers_1_1_clientes_ctrl.html#a2ffae8468c3e12242352d375cb75cc15',1,'App\Http\Controllers\ClientesCtrl\create()'],['../class_app_1_1_http_1_1_controllers_1_1_cuota_ctrl.html#a09a09495ec4657373073264e7a22c216',1,'App\Http\Controllers\CuotaCtrl\create()'],['../class_app_1_1_http_1_1_controllers_1_1_remesa_ctrl.html#abf1d7e4f75d33f8abb27feba3980b492',1,'App\Http\Controllers\RemesaCtrl\create()'],['../class_app_1_1_http_1_1_controllers_1_1_tareas_ctrl.html#a2374bc1be65c4ccea66330f9db303640',1,'App\Http\Controllers\TareasCtrl\create()'],['../class_app_1_1_http_1_1_controllers_1_1_usuarios_ctrl.html#a51a07bf55190ac06d40e801552cfa15a',1,'App\Http\Controllers\UsuariosCtrl\create()']]],
+  ['created_5fat_20',['CREATED_AT',['../class_app_1_1_models_1_1_cliente.html#a0fc0473786d00582813cc2fa6e5af0a9',1,'App\Models\Cliente\CREATED_AT'],['../class_app_1_1_models_1_1_tarea.html#a5c2fefbded08108528e90c2ddc3c734b',1,'App\Models\Tarea\CREATED_AT']]],
+  ['cuota_21',['Cuota',['../class_app_1_1_models_1_1_cuota.html',1,'App::Models']]],
+  ['cuota_2ephp_22',['Cuota.php',['../_cuota_8php.html',1,'']]],
+  ['cuotactrl_23',['CuotaCtrl',['../class_app_1_1_http_1_1_controllers_1_1_cuota_ctrl.html',1,'App::Http::Controllers']]],
+  ['cuotactrl_2ephp_24',['CuotaCtrl.php',['../_cuota_ctrl_8php.html',1,'']]],
+  ['cuotas_25',['cuotas',['../class_app_1_1_models_1_1_cliente.html#ac0dd1b0241722711680cde2d18b67333',1,'App::Models::Cliente']]]
 ];
