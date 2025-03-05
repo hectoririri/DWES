@@ -38,8 +38,15 @@ class RutasTest extends TestCase
     /** @test */
     public function test_usuarios_route(): void
     {
+        // Test unauthenticated user
         $response = $this->get('/usuarios');
-        $response->assertStatus(302); // Redirije porque no esta autenticado
+        $response->assertStatus(302); // Redirects because not authenticated
+
+        // Test authenticated admin user
+        $admin = \App\Models\User::factory()->create(['role' => 'admin']);
+        $this->actingAs($admin);
+        $response = $this->get('/usuarios');
+        $response->assertStatus(200); // Admin should see the page
     }
 
     /** @test */
