@@ -3,17 +3,12 @@
 @section('cuerpo')
 <h1>Lista Clientes</h1>
 
-@if (session('mensaje'))
-<div class="alert alert-success">
-    {{ session('mensaje') }}
-</div>
-@endif
-
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;
     use App\Models\Pais;
-    use App\Http\Controllers\Cambio;
+    use App\Models\Cambio;
+    $cambio = Cambio::getInstance();
 @endphp
 
 <table class="table table-striped table-bordered">
@@ -24,7 +19,7 @@
             <th>Telefono</th>
             <th>Correo</th>
             <th>Moneda</th>
-            <th>Importe Mensual</th>
+            <th>Importe Mensual en euros</th>
             <th>Conversión a Moneda Cliente</th>
             <th>Ver más</th>
             <th>Editar</th>
@@ -39,8 +34,16 @@
                 <td>{{ $cliente->telefono }}</td>
                 <td>{{ $cliente->correo }}</td>
                 <td>{{ $cliente->moneda }}</td>
-                <td>{{ $cliente->importe_mensual }}</td>
-                <td>importe mensual a moneda del cliente (conversion)</td>
+                <td>{{ $cliente->importe_mensual }}€</td>
+                <td class="text-center">
+                    @if ($cambio->hayError())
+                    <div class="alert alert-danger">
+                       {{ $cambio->getError() }}
+                    </div>
+                    @else
+                        {{$cambio->conversion($cliente->importe_mensual, $cliente->moneda)}} {{$cliente->moneda}}
+                    @endif
+                </td>
                 <td>
                     <a href="{!! route("clientes.show", ['cliente' => $cliente]) !!}" class="btn btn-outline-primary w-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">

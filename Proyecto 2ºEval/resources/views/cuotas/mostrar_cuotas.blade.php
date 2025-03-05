@@ -8,6 +8,32 @@
 @endphp
 
 @if ($cuotas->isNotEmpty())
+<div class="mb-3">
+    <form action="{{ route('cuotas.index') }}" method="GET" class="d-flex align-items-center" id="clienteFilterForm">
+        <label for="cliente_id" class="mr-2">Filtrar por cliente:</label>
+        <select name="cliente_id" id="cliente_id" class="form-select me-2" style="width: auto;" onchange="submitForm(this.value)">
+            <option value="" selected>Todos los clientes</option>
+            @foreach(Cliente::all() as $cliente)
+                <option value="{{ $cliente->id }}" {{ request('cliente_id') == $cliente->id ? 'selected' : '' }}>
+                    {{ $cliente->nombre }}
+                </option>
+            @endforeach
+        </select>
+    </form>
+</div>
+
+<script>
+function submitForm(clienteId) {
+    const form = document.getElementById('clienteFilterForm');
+    if (clienteId) {
+        form.action = "{{ url('/cuotas/cliente') }}/" + clienteId;
+    } else {
+        form.action = "{{ route('cuotas.index') }}";
+    }
+    form.submit();
+}
+</script>
+
 <table class="table table-striped table-bordered">
     <thead class="thead-dark">
         <tr class="text-center">
@@ -136,6 +162,4 @@
 <div class="d-flex justify-content-center mt-4">
     <p>Página {{ $cuotas->currentPage() }} de {{ $cuotas->lastPage() }}</p>
 </div>
-
-<a href="{!! route('cuotas.index') !!}" class="btn btn-outline-secondary d-inline-flex align-items-center">Mostrar por defecto</a>
 @endsection

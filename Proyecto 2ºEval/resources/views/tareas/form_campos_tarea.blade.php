@@ -6,7 +6,7 @@
         <br>
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <input type="text" class="form-control" name="telefono_contacto" id="telefono_contacto" value="{{ old('telefono_contacto', $tarea->telefono_contacto) }}">
+    <input type="text" placeholder="+34-XXX-XX-XX-XX" class="form-control" name="telefono_contacto" id="telefono_contacto" value="{{ old('telefono_contacto', $tarea->telefono_contacto) }}">
 </div>
 
 <div class="form-group">

@@ -94,6 +94,12 @@ class CuotaCtrl extends Controller
         return redirect()->route('cuotas.index')->with('error', 'Cuota not found');
     }
 
+    /**
+     * Crea el pdf con el contenido de la cuota
+     *
+     * @param Cuota $cuota
+     * @return void
+     */
     public function crearPdf(Cuota $cuota){
 
         // Instancia de domPDF cargando la vista blade del pdf
@@ -104,5 +110,10 @@ class CuotaCtrl extends Controller
         
         // Descargamos el pdf con el id de la cuota
         return $pdf->download('cuota_' . $cuota->id . '.pdf');
+    }
+
+    public function mostrarCuotasCliente(Cliente $cliente){
+        $cuotas = $cliente->cuotas()->paginate(5);
+        return view('cuotas.mostrar_cuotas', compact('cuotas'));
     }
 }

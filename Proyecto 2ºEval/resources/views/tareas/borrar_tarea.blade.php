@@ -11,12 +11,16 @@
                 <td class="text-center">{!!$tarea->id!!}</td>
             </tr>
             <tr class="table-secondary">
-                <th class="text-center">Nombre</th>
-                <td class="text-center">{!!$tarea->nombre!!}</td>
-            </tr>
-            <tr class="table-secondary">
-                <th class="text-center">Apellidos</th>
-                <td class="text-center">{!!$tarea->apellidos!!}</td>
+                <th class="text-center">Estado</th>
+                @if ($tarea->estado == 'R')
+                    <td><span class="bg-success text-white p-2 rounded text-center">Realizado</span></td>
+                @elseif ($tarea->estado == 'C')
+                    <td><span class="bg-danger text-white p-2 rounded text-center">Cancelado</span></td>
+                @elseif ($tarea->estado == 'P')
+                    <td><span class="bg-warning text-white p-2 rounded text-center">Pendiente</span></td>
+                @elseif ($tarea->estado == 'B')
+                    <td><span class="bg-primary text-white p-2 rounded text-center">Por aprobar</span></td>
+                @endif
             </tr>
             <tr class="table-secondary">
                 <th class="text-center">Provincia</th>

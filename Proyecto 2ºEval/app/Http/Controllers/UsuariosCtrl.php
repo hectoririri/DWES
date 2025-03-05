@@ -87,11 +87,7 @@ class UsuariosCtrl extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
         $usuario->update($validated);
-        if (Auth::user()->isAdmin()){
-            return redirect()->route('usuarios.show', compact('usuario'))->with('success', 'Usuario'. $usuario->name .'actualizado correctamente');
-        } else {
-            return redirect()->route('usuarios.show', compact('usuario'))->with('success', 'Usuario'. $usuario->name .'actualizado correctamente');
-        }
+        return redirect()->route('usuarios.show', compact('usuario'))->with('success', 'Usuario '. $usuario->name .' actualizado correctamente');
     }
 
     /**

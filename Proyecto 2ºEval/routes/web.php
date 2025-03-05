@@ -43,9 +43,7 @@ Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confi
 
 // RUTA DE CUOTAS a parte de las CRUD
 Route::get('/cuotas/{cuota}/pdf', [CuotaCtrl::class, 'crearPdf'])->name('cuotas.pdf');
-// ruta para formulario remesa
-
-
+Route::get('/cuotas/cliente/{cliente}', [CuotaCtrl::class, 'mostrarCuotasCliente'])->name('cuotas.cliente');
 
 // Los resources CRUD para cada controlador 
 Route::resources([
@@ -63,3 +61,7 @@ Auth::routes();
 Route::get('/payment', [PaymentController::class, 'payWithPayPal'])->name('payment');
 Route::get('/payment/status', [PaymentController::class, 'payPalStatus'])->name('payment.status');
 Route::get('/payment/form', [PaymentController::class, 'index'])->name('payment.form');
+
+// Rutas de google
+Route::get('/google/redirect', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');

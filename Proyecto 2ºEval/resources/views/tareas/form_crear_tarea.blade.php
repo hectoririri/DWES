@@ -25,7 +25,7 @@
                         <br>
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                    <input type="text" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
+                    <input type="text" placeholder="+34-XXX-XX-XX-XX" class="form-control" name="telefono" id="telefono_contacto" value="{{ old('telefono', $tarea->telefono) }}">
                 </div>
             </div>
         </div>

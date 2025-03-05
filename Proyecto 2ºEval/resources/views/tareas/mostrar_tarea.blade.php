@@ -7,11 +7,6 @@
     use App\Models\Provincia;
 @endphp
 <h1 class="text-center">Detalles de la tarea Nº{{$tarea->id}}</h1>
-@if (session('mensaje'))
-    <div class="alert alert-success">
-        {{ session('mensaje') }}
-    </div>
-@endif
 <table class="table table-striped table-bordered text-center">
     <tbody>
         <tr>
@@ -128,25 +123,40 @@
           </button>
         </div>
         <div class="modal-body">
-          <table>
-            <thead>
-                <th>Descripción</th>
-                <th>Dirección</th>
-                <th>Estado</th>
-                <th>Operario</th>
-                <th>Cliente</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{$tarea->descripcion}}</td>
-                </tr>
-            </tbody>
-          </table>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Descripción:</strong> {{$tarea->descripcion}}
+            </li>
+            <li class="list-group-item">
+              <strong>Dirección:</strong> {{$tarea->direccion}}
+            </li>
+            <li class="list-group-item">
+              <strong>Estado:</strong>
+              @if ($tarea->estado == 'R')
+                  <span class="bg-success text-white p-2 rounded">Realizado</span>
+              @elseif ($tarea->estado == 'C')
+                  <span class="bg-danger text-white p-2 rounded">Cancelado</span>
+              @elseif ($tarea->estado == 'P')
+                  <span class="bg-warning text-white p-2 rounded">Pendiente</span>
+              @elseif ($tarea->estado == 'B')
+                  <span class="bg-primary text-white p-2 rounded">Por aprobar</span>
+              @endif
+            </li>
+            <li class="list-group-item">
+              <strong>Operario:</strong> {{ $tarea->usuario == null ? 'Sin asignar' : $tarea->usuario->name }}
+            </li>
+            <li class="list-group-item">
+              <strong>Cliente:</strong> {{ $tarea->cliente == null ? 'Sin asignar' : $tarea->cliente->nombre }}
+            </li>
+          </ul>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <a href="{{route('tareas.index')}}" class="btn btn-danger">Borrar</a>
-        </div>
+        <form method="POST" action="{{ route('tareas.destroy', ['tarea' => $tarea]) }}">
+            @method('DELETE')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                <button type="submit" name="boton" class="btn btn-danger d-inline-flex align-items-center">Eliminar</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>

@@ -46,7 +46,9 @@ class UsuarioRequest extends FormRequest
             ],
                 'name' => ['required', 'string', 'max:50'],
                 'password' => ['required', Password::min(8)->letters()->mixedCase()->numbers()->symbols(), 'string', 'min:8'],
-                'telefono' => ['required', 'string', 'size:16', new TelefonoValidationRule],
+                'telefono' => ['required', 'string', 'size:16', new TelefonoValidationRule,
+                $isCreating ? 'unique:users,telefono' : Rule::unique('users', 'telefono')->ignore($id_usuario),
+            ],
                 'direccion' => ['required', 'string', 'max:150'],
                 'rol' => ['required', 'string', 'size:1', 'in:A,O'],
             ];

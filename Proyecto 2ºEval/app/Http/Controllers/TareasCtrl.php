@@ -86,7 +86,7 @@ class TareasCtrl extends Controller
         }
 
         // Creamos la tarea y redirijimos
-        $tarea = Tarea::create($validated);
+        $tarea = Tarea::create(collect($validated)->except(['telefono', 'nif_cif'])->toArray());
         return redirect()->route('tareas.show', $tarea)
             ->with('success', 'Tarea creada correctamente');
     }

@@ -42,10 +42,11 @@ class PaymentController extends Controller
     
         $amount = new Amount();
         // Get the amount from the request
-        $itemPrice = $request->input('cantidad', 100.00);
+        $itemPrice = $request->input('cantidad', 1009.00);
         $itemQuantity = 1;
         $total = number_format($itemPrice * $itemQuantity, 2);
-        $amount->setTotal($total);
+        // Ensure total is a valid numeric string with 2 decimal places
+        $amount->setTotal((float)number_format((float)$total, 2, '.', ''));
         $amount->setCurrency('EUR');
     
         // Create item list and add an item
