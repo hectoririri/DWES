@@ -42,6 +42,8 @@ return [
             'root' => storage_path('app/ficheros'),
             'url' => env('APP_URL').'/ficheros',
             'visibility' => 'public',
+            'serve' => true, // ADDED: Enable file serving
+            'throw' => false, // ADDED: Better error handling
         ],
 
         'fotos' => [
@@ -85,8 +87,9 @@ return [
     */
 
     'links' => [
-        public_path('/fotos') => storage_path('app/fichero_fotos'),
-        public_path('/ficheros') => storage_path('app/fichero_ficheros'),
+        public_path('/fotos') => storage_path('app/fotos'),
+        public_path('/ficheros') => storage_path('app/ficheros'),
+        public_path('/storage') => storage_path('app/public'), // ADDED: Ensure default link exists
     ],
 
 ];

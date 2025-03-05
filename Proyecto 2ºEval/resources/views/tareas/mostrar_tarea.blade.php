@@ -103,7 +103,9 @@
             <th class="text-center align-middle">Foto</th>
             <td class="text-center align-middle">
                 @if ($tarea->foto)
-                    <img class="img-fluid sm" src="{{ $tarea->getFotoUrlAttribute() }}" alt="{{ $tarea->foto }}" />
+                    <img class="img-fluid sm" src="{{ asset('fichero_fotos/' . $tarea->foto) }}" alt="Foto de la tarea" style="max-height: 550px; object-fit: cover;">
+                    <br>
+                    <a href="{{ asset('fichero_fotos/' . $tarea->foto) }}" download>Descargar foto</a>
                 @else
                     No hay foto disponible
                 @endif
