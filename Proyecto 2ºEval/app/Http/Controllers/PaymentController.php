@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cuota;
 use Illuminate\Http\Request;
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
@@ -41,8 +42,10 @@ class PaymentController extends Controller
         $payer->setPaymentMethod('paypal');
     
         $amount = new Amount();
-        // Get the amount from the request
+        // Get the amount and cuota ID from the request
         $itemPrice = $request->input('cantidad', 1009.00);
+        $cuotaId = $request->input('cuota_id');  // Get cuota ID from request
+        
         $itemQuantity = 1;
         $total = number_format($itemPrice * $itemQuantity, 2);
         // Ensure total is a valid numeric string with 2 decimal places
@@ -62,8 +65,8 @@ class PaymentController extends Controller
         $transaction->setAmount($amount)
             ->setItemList($itemList)
             ->setDescription('Descripción Paypal')
-            ->setInvoiceNumber(uniqid());
-    
+            ->setInvoiceNumber($cuotaId);  // Use actual cuota ID instead of uniqid()
+
         $callbackUrl = url('/payment/status');
     
         $redirectUrls = new RedirectUrls();
@@ -76,6 +79,9 @@ class PaymentController extends Controller
             ->setRedirectUrls($redirectUrls)
             ->setTransactions(array($transaction));  // Use array() instead of []
     
+        $cuotaId = $request->input('cuota_id');
+        $transaction->setInvoiceNumber($cuotaId);
+
         try {
             $payment->create($this->apiContext);
             return redirect()->away($payment->getApprovalLink());
@@ -94,7 +100,7 @@ class PaymentController extends Controller
         if (!$paymentId || !$payerId || !$token) {
             return redirect()
                 ->route('home')
-                ->with('error', 'Payment failed');
+                ->with('error', 'Pago fallido');
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -106,9 +112,18 @@ class PaymentController extends Controller
             $result = $payment->execute($execution, $this->apiContext);
             
             if ($result->getState() === 'approved') {
+                // Get cuota ID from transaction details
+                $transaction = $payment->getTransactions()[0];
+                $cuotaId = $transaction->getInvoiceNumber();
+                
+                // Update the correct cuota
+                Cuota::where('id', $cuotaId)->update([
+                    'fecha_pago' => now(),
+                ]);
+                
                 return redirect()
                     ->route('home')
-                    ->with('success', 'Payment successful');
+                    ->with('success', 'Pago completado');
             }
         } catch (PayPalConnectionException $ex) {
             return redirect()

@@ -123,7 +123,7 @@ class TareasCtrl extends Controller
         // Comprobamos si se han subido los ficheros al formulario y procesamos cada uno por separado
         if ($requestTarea->hasFile('fichero')) {
             // Guardamos el fichero en su carpeta correspondiente
-            $fichero_name = $requestTarea->file('fichero')->store('/', 'tareas');
+            $fichero_name = $requestTarea->file('fichero')->store('/', 'ficheros');
             // Sobreescribimos el nombre del fichero que se almacenará por el hasheado
             $validated['fichero'] = $fichero_name;
         }

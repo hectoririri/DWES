@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CuotaRequest;
 use App\Models\Cliente;
 use App\Models\Cuota;
+use App\Models\Remesa;
 use Pdf;
 class CuotaCtrl extends Controller
 {
@@ -89,9 +90,9 @@ class CuotaCtrl extends Controller
     {
         if ($cuota) {
             $cuota->delete();
-            return redirect()->route('cuotas.index')->with('success', 'Cuota deleted successfully');
+            return redirect()->route('cuotas.index')->with('success', 'Cuota eliminada correctamente');
         }
-        return redirect()->route('cuotas.index')->with('error', 'Cuota not found');
+        return redirect()->route('cuotas.index')->with('error', 'Cuota no encontrada');
     }
 
     /**
@@ -108,12 +109,17 @@ class CuotaCtrl extends Controller
         // Tamaño de la hoja
         $pdf->setPaper('a4');
         
-        // Descargamos el pdf con el id de la cuota
-        return $pdf->download('cuota_' . $cuota->id . '.pdf');
+        // Descargamos el pdf con el id y concepto de la cuota
+        return $pdf->download('cuota_' . $cuota->id . '' . $cuota->concepto . '.pdf');
     }
 
     public function mostrarCuotasCliente(Cliente $cliente){
         $cuotas = $cliente->cuotas()->paginate(5);
+        return view('cuotas.mostrar_cuotas', compact('cuotas'));
+    }
+
+    public function mostrarCuotasRemesa(Remesa $remesa){
+        $cuotas = Cuota::where('concepto', $remesa->motivo)->paginate(5);
         return view('cuotas.mostrar_cuotas', compact('cuotas'));
     }
 }

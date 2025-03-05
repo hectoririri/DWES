@@ -44,6 +44,7 @@ Route::get('clientes/confirmar_eliminar/{cliente}', [ClientesCtrl::class, 'confi
 // RUTA DE CUOTAS a parte de las CRUD
 Route::get('/cuotas/{cuota}/pdf', [CuotaCtrl::class, 'crearPdf'])->name('cuotas.pdf');
 Route::get('/cuotas/cliente/{cliente}', [CuotaCtrl::class, 'mostrarCuotasCliente'])->name('cuotas.cliente');
+Route::match(['get', 'post'], '/cuotas/remesa/{remesa}', [CuotaCtrl::class, 'mostrarCuotasRemesa'])->name('cuotas.remesa');
 
 // Los resources CRUD para cada controlador 
 Route::resources([

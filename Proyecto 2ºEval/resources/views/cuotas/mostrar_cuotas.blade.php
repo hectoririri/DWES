@@ -5,9 +5,10 @@
 @php
     use App\Models\Usuario;
     use App\Models\Cliente;
+    use App\Models\Remesa;
 @endphp
 
-@if ($cuotas->isNotEmpty())
+{{-- Cuotas por clientes --}}
 <div class="mb-3">
     <form action="{{ route('cuotas.index') }}" method="GET" class="d-flex align-items-center" id="clienteFilterForm">
         <label for="cliente_id" class="mr-2">Filtrar por cliente:</label>
@@ -21,7 +22,20 @@
         </select>
     </form>
 </div>
-
+{{-- Remesas --}}
+<div class="mb-3">
+    <form action="{{ route('cuotas.index') }}" method="GET" class="d-flex align-items-center" id="remesaFilterForm">
+        <label for="remesa_id" class="mr-2">Filtrar por remesa:</label>
+        <select name="remesa_id" id="remesa_id" class="form-select me-2" style="width: auto;" onchange="submitRemesaForm(this.value)">
+            <option value="">Todas las remesas</option>
+            @foreach(Remesa::all() as $remesa)
+                <option value="{{ $remesa->id }}" {{ request('remesa_id') == $remesa->id ? 'selected' : '' }}>
+                    {{ $remesa->motivo }}
+                </option>
+            @endforeach
+        </select>
+    </form>
+</div>
 <script>
 function submitForm(clienteId) {
     const form = document.getElementById('clienteFilterForm');
@@ -32,7 +46,19 @@ function submitForm(clienteId) {
     }
     form.submit();
 }
+function submitRemesaForm(remesaId) {
+    const form = document.getElementById('remesaFilterForm');
+    if (remesaId) {
+        form.action = "{{ url('/cuotas/remesa') }}/" + remesaId;
+    } else {
+        form.action = "{{ route('cuotas.index') }}";
+    }
+    form.submit();
+}
+
 </script>
+@if ($cuotas->isNotEmpty())
+
 
 <table class="table table-striped table-bordered">
     <thead class="thead-dark">
@@ -101,7 +127,7 @@ function submitForm(clienteId) {
                 </td>
                 @if($cuota->fecha_pago == null)
                 <td>
-                    <a href="{{ route('payment', ['cantidad' => $cuota->importe]) }}" class="btn btn-outline-info">
+                    <a href="{{ route('payment', ['cantidad' => $cuota->importe, 'cuota_id' => $cuota->id]) }}" class="btn btn-outline-info">
                         Pagar con PayPal
                         <i class="fab fa-paypal ms-2"></i>
                     </a>

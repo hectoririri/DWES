@@ -21,8 +21,6 @@ class CuotaRequest extends FormRequest
      */
     public function rules(): array
     {
-        $cuota = request()->route('cuota');
-        $isCreating = $this->route()->getName() == 'cuotas.store';
         $reglas = [
             'concepto' => ['required', 'string', 'max:150'],
             'fecha_emision' => ['required', 'date'],
@@ -30,9 +28,6 @@ class CuotaRequest extends FormRequest
             'notas' => ['nullable', 'string', 'max:150'],
             'cliente_id' => ['required','integer','exists:clientes,id'],
         ];
-        if (!$isCreating) {
-            $reglas['fecha_pago'] = ['required', 'date', 'after_or_equal:'. $cuota->fecha_emision];
-        }
         return $reglas;
     }
 

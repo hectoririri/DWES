@@ -68,9 +68,15 @@
         </tr>
         <tr>
             <td class="text-center" colspan="2">
-                <a href="{{ route('cuotas.index') }}" class="btn btn-outline-primary text-center w-50">
+                <a href="{{ route('cuotas.index') }}" class="btn btn-outline-primary text-center w-10">
                     Volver Atrás
                 </a>
+                @if($cuota->fecha_pago == null)
+                <a href="{{ route('payment', ['cantidad' => $cuota->importe, 'cuota_id' => $cuota->id]) }}" class="btn btn-outline-info">
+                    Pagar con PayPal
+                    <i class="fab fa-paypal ms-2 w-25"></i>
+                </a>
+                @endif
             </td>
         </tr>
     </tbody>
